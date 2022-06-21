@@ -1,0 +1,11 @@
+@use '../../scss/' as *;
+
+.header{
+    height: $height-header;
+    width: calc(100% - $sidebar-width);
+    background-color: $layout-bg;
+    
+    position: fixed;
+    top: 0;
+    right: 0;
+}

@@ -1,0 +1,17 @@
+@use '../scss/' as *;
+
+.container{
+    display: flex;
+}
+.wrapper{ 
+    flex: 1;
+    position: absolute;
+    width: calc(100% - $sidebar-width);
+    margin-left: $sidebar-width;
+}
+
+.content{
+    height: 1000px;
+    margin-top: $height-header;
+    margin-bottom: $height-player-control;
+}

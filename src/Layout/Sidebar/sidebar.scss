@@ -1,0 +1,10 @@
+@use '../../scss/' as *;
+
+.sidebar{
+    width: 230px;
+    height: calc(100vh - $height-player-control);
+    background-color: $sidebar-popup-bg;
+    position: fixed;
+    top: 0;
+    left: 0;
+}

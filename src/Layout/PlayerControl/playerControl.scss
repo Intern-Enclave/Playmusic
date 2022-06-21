@@ -1,0 +1,10 @@
+@use '../../scss/' as*;
+
+.player-controls{
+    width: 100%;
+    height: $height-player-control;
+    background-color: $player-bg;
+
+    position: fixed;
+    bottom: 0;
+}
