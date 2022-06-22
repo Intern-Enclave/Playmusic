@@ -16,10 +16,15 @@
     border-bottom: 1px solid $purple-primary;
 }
 
+.user-link{
+    display: block !important;
+}
+
 .user-avatar{
     width: 65px;
     height: 65px;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 .user-login{
@@ -43,13 +48,20 @@
     padding-left: 24px;
     
     &:hover {
-        background-color: $bg-hover;
+        background-color: $alpha-bg;
     }
+}
 
-    &.active::after{
+.active{
+    background-color: $alpha-bg;
+    display: flex;
+    position: relative;
+
+    &::after{
         content: '';
         background-color: $purple-primary;
-        width: 2px;
+        width: 4px;
+        height: 100%;
         position: absolute;
         left: 0;
     }
@@ -57,6 +69,8 @@
 
 .wrapper-sidebar-item{
     display: flex;
+    cursor: pointer;
+    width: 100%;
 }
 
 .sidebar-item-icon{
