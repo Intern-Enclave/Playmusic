@@ -1,7 +1,68 @@
 @use '../../scss/' as *;
 
 .search{
-    background-color:  $alpha-bg;
-    border-radius: 100px;
+    --search-height: 46px;
+
+    position: relative;
+    height: var(--search-height);
+    width: 60%;
+    padding-left: 16px;
+    // margin: 0 20%;
+    background-color: $alpha-bg;
+    border-radius: 92px;
+    display: flex;
+    overflow: hidden;
+    left: 50%;
+    transform: translateX(-50%);
     
+
+    input {
+        color: $text-primary;
+        flex: 1;
+        font-size: 1.6rem;
+        background-color: transparent;
+        height: 100%;
+    }
+
+    &::after{
+        content: '';
+        position: absolute;
+        width: 1px;
+        height:calc(var(--search-height) - 18px);
+        top: 9px;
+        right: 50px;
+        background-color: $text-primary;
+    }
+
+    &:focus-within{
+        border: 1.5px solid rgba(22, 24, 35,0.2);
+    }
 }
+
+.clear{
+    background-color: transparent;
+    color: $text-primary;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    margin-right: 12px;
+}
+
+.search-btn{
+    width: 50px;
+    height: 100%;
+    background-color: transparent;
+    font-size: 2rem;
+    color: $text-primary;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+
+    &:hover{
+        cursor: pointer;
+        background-color: $bg-hover;
+    }
+}
+
+
+

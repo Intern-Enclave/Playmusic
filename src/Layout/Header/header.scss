@@ -4,7 +4,9 @@
     height: $height-header;
     width: calc(100% - $sidebar-width);
     background-color: $layout-bg;
-    
+    display: flex;
+    align-items: center;
+    box-shadow: 0 3px 5px $sticky-header-box-shadow;
     position: fixed;
     top: 0;
     right: 0;

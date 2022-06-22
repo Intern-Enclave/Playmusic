@@ -1,0 +1,86 @@
+@use '../../scss/' as *;
+
+.wraper-button{
+    font-size: 1.8rem;
+    font-weight: 700;
+    min-width: 70px;
+    color: $text-primary;
+    padding: 9px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: $text-primary;
+    border: 1px solid transparent;
+    margin-left: 8px;
+    display: flex;
+    align-items: center;
+    
+    &.disabled{
+        pointer-events: none;
+        opacity: 0.5;
+        user-select: none;   
+    }
+}
+
+//type
+.rounded{
+    border-radius: 999px;
+    box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+    border: 2px solid rgba(22, 24, 35, 0.12);
+
+    &:hover{
+        border: 2px solid rgba(22, 24, 35, 0.3);
+        background-color: rgba(22, 24, 35, 0.05);
+    }
+}
+
+.primary{
+    background-color: $text-primary;
+    color: $primary-bg;
+
+    &:hover{
+        background-color: $button-hover;
+    }
+}
+
+.outline{
+    border-color: var(--primary);
+    color: var(--primary);
+
+    &:hover{
+        background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+
+
+//button size
+.small{
+    min-width: 88px;
+    padding: 4px 16px;
+}
+
+.large{
+    min-width: 148px;
+    padding: 14px 16px;
+}
+
+.text{
+    &:hover{
+        text-decoration: underline;
+    }
+}
+
+
+/////////@at-root
+.icon + .title, .title + .icon{
+    margin-left: 8px;
+}
+
+.icon{
+    display: flex;
+    width: 24px;
+    align-items: center;
+}
+
+
+
+

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useEffect, useState } from "react";
-import { FaBeer } from 'react-icons/fa';
-
+import { MdClear } from "react-icons/md";
+import { BiSearchAlt2 } from "react-icons/bi";
 
 import './search.scss';
 
@@ -71,15 +71,13 @@ function Search() {
                     onChange = {handleChange}
                     onFocus = {() => setShowResult(true)}
                 />
-                {!!searchValue && !loadding &&  (
-                    <button className="clear" onClick={handleClear}>
-                        Lets go for a <FaBeer />
-                    </button>
-                )}
-                {/* {loadding && <FontAwesomeIcon icon={faSpinner} className='loading'/>}
+                <button className="clear" onClick={handleClear}>
+                    <MdClear />
+                </button>
                 <button className="search-btn">
-                    <FontAwesomeIcon icon={faSearch} onMouseDown={(e)=> e.preventDefault()} />
-                </button> */}
+                    <BiSearchAlt2 onMouseDown={(e)=> e.preventDefault()} />
+                </button>
+                
             </div>
         );
 }

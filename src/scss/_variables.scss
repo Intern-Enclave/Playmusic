@@ -8,13 +8,15 @@ $primary-bg: #432275;
 $sidebar-popup-bg: #2a213a;
 $alpha-layout-bg: rgba(41,21,71,0.8);
 $queue-player-popup-bg: #120822;
-$blur-queue-bg: rgba(30,21,47,0.9019607843137255);
-$chart-bg-img-alpha: rgba(32,19,53,0.9);
 $layout-bg: #170f23;
 $player-bg: rgb(18 12 28);
 
+$button-hover: rgb(178 155 218);
+$bg-hover:hsl(262deg 16% 26%);
 
 $height-player-control: 90px;
 $height-header: 70px;
 
-$sidebar-width: 230px;
+$sidebar-width: 200px;
+
+$sticky-header-box-shadow: rgba(0,0,0,0.1);

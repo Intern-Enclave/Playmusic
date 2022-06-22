@@ -4,6 +4,8 @@ import { publicRoute } from "./routes";
 
 import Layout from "./Layout";
 
+import './App.css'
+
 function App() {
   
   return (
