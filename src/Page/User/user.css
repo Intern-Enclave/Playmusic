@@ -1,0 +1,60 @@
+.input-ds {
+    margin-top: 10px;
+    font-size: 17px;
+    border: none;
+    background-color: transparent;
+    resize: none;
+    outline: none;
+    border-bottom: 1px solid #000;
+  }
+
+  .login-table {
+
+    width: 380px;
+    height: 550px;
+    background-color: #fff;
+    border: solid rgba(184, 162, 203, 0.67) ;
+    border-radius: 12px;
+
+  }
+  .login-title {
+    text-align: center;
+    font-size: 35px;
+    margin-top: 40px;
+    font-family: "Times New Roman", Times, serif;
+  }
+  .loginbox {
+    width: 350px;
+    margin-top: 50px;
+  }
+
+  .box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 15px;
+    font-size: 17px;
+  }
+  .point {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .login-button {
+      padding: 8px 140px;
+      border-radius: 20px;
+      border: 1px solid rgba(136, 57, 200, 0.67);
+      font-size: 21px;
+      color: #fff;
+      background-color: rgba(136, 57, 200, 0.67);
+  }
+
+  .cr_acount-button {
+    margin-top: 50px;
+    color: rgba(68, 149, 141, 0.67);
+  }
+
+  .login-button:hover {
+    opacity: 0.8;
+    color: #000;
+    cursor: pointer;
+  } 
