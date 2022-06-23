@@ -4,7 +4,44 @@
     width: 100%;
     height: $height-player-control;
     background-color: $player-bg;
-
+    display: flex;
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 50px;
     position: fixed;
     bottom: 0;
+}
+
+.control-right{
+    display: flex;
+    align-items: center;
+    // margin-right: 30px;
+    padding-left: 70px;
+}
+
+.control-micro,
+.control-restore,
+.control-volume{
+    display: block;
+    position: relative;
+    width: 34px;
+    height: 34px;
+    font-size: 2rem;
+    color: $text-primary;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 10px;
+    transition: background-color linear 0.1s;
+
+    &:hover{
+        background-color: $bg-hover;
+        color: $purple-primary;
+    }
+
+    & svg{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }

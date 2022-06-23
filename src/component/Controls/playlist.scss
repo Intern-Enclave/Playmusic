@@ -1,0 +1,65 @@
+@use '../../scss/' as*;
+
+.Controls{
+    width: 350px;
+    height: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .Control-Button-Group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+  
+    > * {
+      cursor: pointer;
+    }
+  }
+  
+  .Prev-Button,
+  .Next-Button {
+    color: $text-primary;
+    font-size: 2rem;
+    margin-top: 4px;
+    &:hover{
+      color: $purple-primary;
+    }
+  }
+  
+  .Pause-Play-Button {
+    display: flex;
+    justify-content: center;  
+    font-size: 3rem;  
+    margin: 0 32px;
+    color: $text-primary;
+
+    &:hover{
+      color: $purple-primary;
+    }
+  }
+  
+  .timeSlide{
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px !important;
+    margin-top: 20px;
+    cursor: pointer !important ; 
+  }
+
+  .css-3uoig3-Slider{
+    background-color: $purple-primary !important;
+    height: 8px !important;
+    width: 8px !important;
+    border-radius: 50% !important;
+    margin-top: 1px !important;
+  }
+
+  .css-6nna9v-Slider{
+    background-color: $purple-primary !important;
+    cursor: pointer !important;
+  }

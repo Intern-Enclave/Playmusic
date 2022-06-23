@@ -45,7 +45,7 @@
     color: $text-primary;
     display: flex;
     align-items: center;
-    padding-left: 24px;
+    padding-left: 10px;
     
     &:hover {
         background-color: $alpha-bg;
@@ -90,6 +90,11 @@
     bottom: 0;
     width: 100%;
     border-top: 1px solid $purple-primary;
+    padding-left: 10px;
+
+    &:hover {
+        background-color: $alpha-bg;
+    }
 }
 
 
