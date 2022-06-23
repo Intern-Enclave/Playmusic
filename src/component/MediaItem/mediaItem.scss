@@ -1,0 +1,54 @@
+@use  '../../scss/' as *;
+
+.mediaItem{
+    height: 100%;
+    width: 320px;
+    display: flex;
+    align-items: center;
+    padding: 9px 16px;
+    cursor: pointer;
+    margin-left: 10px;
+    overflow: hidden;
+
+    &:hover{
+        background-color: rgba(22,24,35, .05);
+    }
+}
+
+
+.mediaItem-img{
+    width: 60px;
+    height: 60px;
+    border-radius: 3px;
+    object-fit: cover;
+}
+
+.mediaItem-info-name{
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: $text-primary;
+    line-height: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+.mediaItem-info{
+    flex: 1;
+    margin-left: 14px;
+}
+.mediaItem-info-singer{
+    font-size: 1.4rem;
+    font-weight: 400;
+    color: $text-secondary;
+    display: block;
+    line-height: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

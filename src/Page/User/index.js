@@ -1,9 +1,11 @@
 import React from 'react';
-import './user.css'
+import style from './user.css'
+import classNames from 'classnames';
 
+const cx = classNames.bind(style)
 const User = () => {
     return (
-        <div className="login-modal">
+        <div className={cx('login-modal')}>
         <div className="login-table">
             <h2 className="login-title">Login</h2>
             <div className="loginbox">
