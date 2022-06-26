@@ -1,26 +1,22 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
+import axios from 'axios';
+
 import TimeSlider from "react-input-slider";
+import { TbPlayerTrackNext, TbPlayerTrackPrev, TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
+import './playlist.scss';
 
-import SvgPauseIcon from "./icons/PauseIcon";
-import SvgPlayIcon from "./icons/PlayIcon";
-import SvgPrevIcon from "./icons/PrevIcon";
-import SvgNextIcon from "./icons/NextIcon";
-import { dataMusic } from "./data";
+// import { dataMusic as data } from "../../component/Controls/data";
 
-const audios = dataMusic.reduce((course, val) => (
-  course.concat({title:val.title, src:val.preview, artist: val.artist})
-),[])
+const PlayList = () => {
 
-// console.log(data)
-
-
-const Controls = () => {
   const audioRef = useRef();
-  const [audioIndex, setAudioIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [isPlay, setPlay] = useState(false);
+  const [data, setData] = useState([]); 
+  const [audioIndex, setAudioIndex] = useState(0);
 
+  
   const handleLoadedData = () => {
     setDuration(audioRef.current.duration);
     if (isPlay) audioRef.current.play();
@@ -34,71 +30,98 @@ const Controls = () => {
     }
     setPlay(!isPlay);
   };
-
+    
   const handleTimeSliderChange = ({ x }) => {
-    audioRef.current.currentTime = x;
-    setCurrentTime(x);
+      audioRef.current.currentTime = x;
+      setCurrentTime(x);
+    
+      if (!isPlay) {
+          setPlay(true);
+          audioRef.current.play();
+        }
+      };
 
-    if (!isPlay) {
-      setPlay(true);
-      audioRef.current.play();
-    }
-  };
+    const getData = () => {
+      axios
+        .get("http://localhost:3000/data")
+        .then(function (response) {
+          setData(response.data);
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    };
+    
+    useEffect(() => {
+      getData()
+    }, [] )
 
-  return (
-    <div className="Controls">
-      {/* <img className="Song-Thumbnail" src={TetImg} alt="tet" /> */}
-      <h2 className="Song-Title">{audios[audioIndex].title}</h2>
-      <p className="Singer">{audios[audioIndex].artist}</p>
+  return ( 
+    <div className="PlayList">
+      <h2>akjsbhb</h2>
+      {/* <img className="Song-Thumbnail" src='https://anhdep123.com/wp-content/uploads/2021/01/nhung-hinh-anh-hoang-hon-buon.jpg' alt="tet" /> */}
       <div className="Control-Button-Group">
-        <div
+        <div 
           className="Prev-Button"
-          onClick={() => setAudioIndex((audioIndex - 1) % audios.length)}
+          onClick={() => setAudioIndex((audioIndex - 1) % data?.length)}
         >
-          <SvgPrevIcon />
+          <TbPlayerTrackPrev />
         </div>
         <div className="Pause-Play-Button" onClick={handlePausePlayClick}>
-          {isPlay ? <SvgPauseIcon /> : <SvgPlayIcon />}
+          {isPlay ? <TbPlayerPause /> : <TbPlayerPlay />}
         </div>
         <div
           className="Next-Button"
-          onClick={() => setAudioIndex((audioIndex + 1) % audios.length)}
+          onClick={() => setAudioIndex((audioIndex + 1) % data?.length)}
         >
-          <SvgNextIcon />
+          <TbPlayerTrackNext />
         </div>
       </div>
-      <TimeSlider
-        axis="x"
-        xmax={duration}
-        x={currentTime}
-        onChange={handleTimeSliderChange}
-        styles={{
-          track: {
-            backgroundColor: "#e3e3e3",
-            height: "2px",
-          },
-          active: {
-            backgroundColor: "#333",
-            height: "2px",
-          },
-          thumb: {
-            marginTop: "-3px",
-            width: "8px",
-            height: "8px",
-            backgroundColor: "#333",
-            borderRadius: 0,
-          },
-        }}
-      />
-      <audio
-        ref={audioRef}
-        src={audios[audioIndex].src}
-        onLoadedData={handleLoadedData}
-        onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
-        onEnded={() => setPlay(false)}
-      />
+
+           <TimeSlider
+            axis="x"
+            xmax={duration}
+            x={currentTime}
+            onChange={handleTimeSliderChange}
+            className= 'timeSlide'
+            styles={{
+              track: {
+                backgroundColor: "#e3e3e3",
+                height: "2px",
+              },
+              active: {
+                backgroundColor: "#333",
+                height: "2px",
+              },
+              thumb: {
+                marginTop: "-3px",
+                width: "8px",
+                height: "8px",
+                backgroundColor: "#333",
+                borderRadius: 0,
+              },
+            }}
+          />
+          <audio
+            ref={audioRef}
+            src={data[audioIndex]?.preview}
+            onLoadedData={handleLoadedData}
+            onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
+            onEnded={() => setPlay(false)}
+          />
+  
     </div>
   );
 };
+    
+export default PlayList;
+        
+        
+  
+  
+    
 
-export default Controls;
+  
+
+
+   

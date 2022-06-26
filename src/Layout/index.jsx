@@ -9,7 +9,7 @@ import './layout.scss'
 function Layout({children}) {
     return (
         <div>
-            <div className="container">
+            <div className="main">
                 <Sidebar />
                 
                 <div className='wrapper'>

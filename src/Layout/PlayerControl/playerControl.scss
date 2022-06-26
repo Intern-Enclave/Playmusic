@@ -12,11 +12,21 @@
     bottom: 0;
 }
 
+.control-left{
+    width: 25%;
+    height: 100%;
+}
+
+.control-center{
+    width: 40%;
+    height: 100%;
+}
+
 .control-right{
     display: flex;
     align-items: center;
     // margin-right: 30px;
-    padding-left: 70px;
+    // padding-left: 70px;
 }
 
 .control-micro,

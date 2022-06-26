@@ -1,7 +1,7 @@
 @use '../../scss/' as*;
 
 .Controls{
-    width: 350px;
+    width: 100%;
     height: 100%;
     border-radius: 100%;
     object-fit: cover;
@@ -37,6 +37,12 @@
     font-size: 3rem;  
     margin: 0 32px;
     color: $text-primary;
+    width: unset;
+    height: unset;
+
+    & svg{ 
+      height: unset;
+    }
 
     &:hover{
       color: $purple-primary;
@@ -46,8 +52,8 @@
   .timeSlide{
     left: 50%;
     transform: translateX(-50%);
-    width: 400px !important;
-    margin-top: 20px;
+    width: 100% !important;
+    margin-top: 10px;
     cursor: pointer !important ; 
   }
 

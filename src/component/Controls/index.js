@@ -2,16 +2,9 @@ import React, { useState, useRef } from "react";
 import TimeSlider from "react-input-slider";
 
 import { TbPlayerTrackNext, TbPlayerTrackPrev, TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
-
-import { dataMusic } from "./data";
+import { dataMusic  } from "./data";
 
 import './playlist.scss'
-
-const audios = dataMusic.reduce((course, val) => (
-  course.concat({title:val.title, src:val.preview, artist: val.artist})
-),[])
-
-// console.log(data)
 
 
 const Controls = () => {
@@ -53,7 +46,7 @@ const Controls = () => {
       <div className="Control-Button-Group">
         <div
           className="Prev-Button"
-          onClick={() => setAudioIndex((audioIndex - 1) % audios.length)}
+          onClick={() => setAudioIndex((audioIndex - 1) % dataMusic.length)}
         >
           <TbPlayerTrackPrev />
         </div>
@@ -62,7 +55,7 @@ const Controls = () => {
         </div>
         <div
           className="Next-Button"
-          onClick={() => setAudioIndex((audioIndex + 1) % audios.length)}
+          onClick={() => setAudioIndex((audioIndex + 1) % dataMusic.length)}
         >
           <TbPlayerTrackNext />
         </div>
@@ -93,7 +86,7 @@ const Controls = () => {
       />
       <audio
         ref={audioRef}
-        src={audios[audioIndex].src}
+        src={dataMusic[audioIndex].preview}
         onLoadedData={handleLoadedData}
         onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
         onEnded={() => setPlay(false)}

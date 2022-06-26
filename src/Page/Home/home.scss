@@ -1,0 +1,23 @@
+@use '../../scss/' as *;
+
+.home{
+    background-color: $layout-bg;
+    min-height: 100%;
+}
+
+.carousel-item{
+   padding: 8px 4px;
+   overflow: hidden;
+   border-radius: 3px;
+   object-fit: cover;
+   transition: hover linear 3s;
+
+   & img{
+    border-radius: 10px;
+    object-fit: cover;
+   }
+
+   &:hover{
+    padding: 4px 2px;
+   }
+}

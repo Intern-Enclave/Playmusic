@@ -7,16 +7,16 @@ import {useLocation} from 'react-router'
 import './sidebar.scss'
 
 import { BiLogIn, BiLogOut } from 'react-icons/bi';
-import { FaUserEdit } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
 import { TbPlaylist } from 'react-icons/tb';
 
 function Sidebar() {
     const currentUser = true
     const sidebar = [
         {
-            title: 'User',
-            icon: <FaUserEdit />,
-            path: '/User'
+            title: 'Home',
+            icon: <FaHome />,
+            path: '/'
         },
         {
             title: 'Playlist',
