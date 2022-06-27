@@ -6,7 +6,7 @@ import PlayerControl from './PlayerControl';
 
 import './layout.scss'
 
-function Layout({children}) {
+function Layout({children, data}) {
     return (
         <div>
             <div className="main">
@@ -20,7 +20,7 @@ function Layout({children}) {
                 </div>
 
             </div>
-            <PlayerControl />
+            <PlayerControl data={data} />
         </div>
     );
 }

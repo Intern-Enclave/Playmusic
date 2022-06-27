@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const UseApi = {
     getAllTracks: (params) => {
-        const url = 'track';
+        const url = 'data';
         return axiosClient.get(url, {params})
     }, 
     get: (id) => {

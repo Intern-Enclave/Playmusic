@@ -1,39 +1,43 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import TimeSlider from "react-input-slider";
 
 import { TbPlayerTrackNext, TbPlayerTrackPrev, TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
 import { dataMusic  } from "./data";
 
 import './playlist.scss'
+import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
+const Controls = ({data}) => {
 
-const Controls = () => {
   const audioRef = useRef();
   const [audioIndex, setAudioIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const [isPlay, setPlay] = useState(false);
+  const context = useContext(PlayingMusicContext)
+  // const trackContexts = useContext(trackContext)
+
+  // console.log(trackContexts)
 
   const handleLoadedData = () => {
     setDuration(audioRef.current.duration);
-    if (isPlay) audioRef.current.play();
+    if (context.isPlay) audioRef.current.play();
   };
 
   const handlePausePlayClick = () => {
-    if (isPlay) {
+    if (context.isPlay) {
       audioRef.current.pause();
     } else {
       audioRef.current.play();
     }
-    setPlay(!isPlay);
+    context.togglePlay()
   };
 
   const handleTimeSliderChange = ({ x }) => {
     audioRef.current.currentTime = x;
     setCurrentTime(x);
 
-    if (!isPlay) {
-      setPlay(true);
+    if (!context.isPlay) {
+      context.togglePlay()
       audioRef.current.play();
     }
   };
@@ -46,16 +50,16 @@ const Controls = () => {
       <div className="Control-Button-Group">
         <div
           className="Prev-Button"
-          onClick={() => setAudioIndex((audioIndex - 1) % dataMusic.length)}
+          onClick={() => setAudioIndex((audioIndex - 1) % dataMusic?.length)}
         >
           <TbPlayerTrackPrev />
         </div>
         <div className="Pause-Play-Button" onClick={handlePausePlayClick}>
-          {isPlay ? <TbPlayerPause /> : <TbPlayerPlay />}
+          {context.isPlay ? <TbPlayerPause /> : <TbPlayerPlay />}
         </div>
         <div
           className="Next-Button"
-          onClick={() => setAudioIndex((audioIndex + 1) % dataMusic.length)}
+          onClick={() => setAudioIndex((audioIndex + 1) % dataMusic?.length)}
         >
           <TbPlayerTrackNext />
         </div>
@@ -86,10 +90,10 @@ const Controls = () => {
       />
       <audio
         ref={audioRef}
-        src={dataMusic[audioIndex].preview}
+        src={dataMusic[audioIndex]?.preview}
         onLoadedData={handleLoadedData}
         onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
-        onEnded={() => setPlay(false)}
+        onEnded={() => context.togglePlay()}
       />
     </div>
   );
