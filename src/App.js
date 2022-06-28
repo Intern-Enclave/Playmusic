@@ -1,15 +1,17 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState, useContext } from "react";
+// import { StoreContext } from "./Store";
+
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { publicRoute } from "./routes";
 import UseApi from "./API/UseApi";
+// import {StoreProvider} from "./Store";
 
 import Layout from "./Layout";
 import './App.css'
 
 
 
-// const trackContext = createContext()
-// console.log(trackContext)
+export const trackContext = createContext()
 
 function App() {
   const [listTracks,setListTracks] = useState([])
@@ -29,20 +31,22 @@ function App() {
 
   return (
   
-    <Router>
-      <div className="App">
-        <Routes>
-          {publicRoute.map((route, index) => {
-            const Page = route.component
-            return (
-              // <trackContext.Provider>
-                <Route key={index} path={route.path} element={<Layout data={listTracks}><Page data={listTracks}/></Layout>} />
-              // </trackContext.Provider>
-            )
-          })}
-        </Routes>
-      </div>
-    </Router>
+      <trackContext.Provider value={listTracks}>
+        <Router>
+          <div className="App">
+            <Routes>
+              {publicRoute.map((route, index) => {
+                const Page = route.component
+                return (
+                  // <trackContext.Provider>
+                    <Route key={index} path={route.path} element={<Layout><Page /></Layout>} />
+                  // </trackContext.Provider>
+                )
+              })}
+            </Routes>
+          </div>
+        </Router>
+      </trackContext.Provider>
   
   );
 }

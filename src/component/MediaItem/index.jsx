@@ -9,7 +9,7 @@ function MediaItem({singer, SongName, img, className,...props}) {
             <img className='mediaItem-img' src={img} alt='' />
             <div className="mediaItem-info">
                 <h4 className="mediaItem-info-name">
-                    <marquee>{SongName}</marquee>
+                    <div>{SongName}</div>
                 </h4>
                 <span className="mediaItem-info-singer">{singer}</span>
             </div>
@@ -19,10 +19,10 @@ function MediaItem({singer, SongName, img, className,...props}) {
     );
 }
 
-MediaItem.propTypes = {
-    singer: PropTypes.string.isRequired,
-    SongName: PropTypes.string.isRequired,
-    img: PropTypes.string.isRequired,
-    className: PropTypes.string,
-};
+// MediaItem.propTypes = {
+//     singer: PropTypes.string.isRequired,
+//     SongName: PropTypes.string.isRequired,
+//     img: PropTypes.string.isRequired,
+//     className: PropTypes.string,
+// };
 export default MediaItem;

@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from "react";
-import axios from 'axios';
+import React, { useContext } from "react";
+import { trackContext } from "../../App";
 
 import MediaItem from '../../component/MediaItem';
 import Controls from '../../component/Controls';
@@ -12,18 +12,22 @@ import './playerControl.scss'
 
 
 
-function PlayerControl({data}) {
+function PlayerControl() {
+
+    const tracks = useContext(trackContext)
+    // console.log(tracks)
+
     return (
         <div className='player-controls'>
             <div className='control-left'>
                 <MediaItem 
                     // img='https://anhdep123.com/wp-content/uploads/2021/01/nhung-hinh-anh-hoang-hon-buon.jpg' 
-                    img='https://anhdep123.com/wp-content/uploads/2021/01/nhung-hinh-anh-hoang-hon-buon.jpg'                    
-                    SongName='data'
-                    singer = 'ashjagsja'
+                    img= {tracks[0]?.artist.picture}                   
+                    SongName={tracks[0]?.title}
+                    singer = {tracks[0]?.artist.name}
                 />
             </div>
-            <div className='control-center'><Controls data={data} /></div>
+            <div className='control-center'><Controls/></div>
             <div className='control-right'>
                 <span className='control-volume'>
                     <TbVolume />

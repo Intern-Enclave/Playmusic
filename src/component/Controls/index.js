@@ -7,13 +7,13 @@ import { dataMusic  } from "./data";
 import './playlist.scss'
 import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
-const Controls = ({data}) => {
+const Controls = () => {
 
   const audioRef = useRef();
   const [audioIndex, setAudioIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-  const context = useContext(PlayingMusicContext)
+  const context = useContext(PlayingMusicContext);
   // const trackContexts = useContext(trackContext)
 
   // console.log(trackContexts)

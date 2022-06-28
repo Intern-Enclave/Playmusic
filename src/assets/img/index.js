@@ -1,5 +1,5 @@
 const images = {
-    logo: 'https://cdn.nguyenkimmall.com/images/companies/_1/tin-tuc/kinh-nghiem-meo-hay/TikTok/huong-dan-kiem-tien-titok-logo.jpg',
+    logo: require('./MP5_Logo_image.png'),
     noImage: require('./no_img.png')
 }
 

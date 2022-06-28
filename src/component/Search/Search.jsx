@@ -1,5 +1,16 @@
 import React, { useRef } from 'react';
 import { useEffect, useState } from "react";
+import useDebounce from '../../hooks/useDebounce';
+// import {Link} from 'react-router-dom'
+// import images from '../../assets/img';
+
+import MediaItem from '../MediaItem'
+import * as searchServices from '../../services/searchService';
+
+import HeadlessTippy from '@tippyjs/react/headless';
+import Wraper from '../Popper/Wraper';
+
+import { VscLoading } from "react-icons/vsc";
 import { MdClear } from "react-icons/md";
 import { BiSearchAlt2 } from "react-icons/bi";
 
@@ -12,37 +23,31 @@ function Search() {
     const [showResult, setShowResult] = useState(true)
     const [loadding, setLoading] = useState(false)
 
+    const debounce = useDebounce(searchValue, 700)
+
     const inputRef = useRef()
 
-    // useEffect(() => {
-    //     if(!debounce.trim()){
-    //         setSearchResult([])
-    //         return;
-    //     }
+    useEffect(() => {
+        if(!debounce.trim()){
+            setSearchResult([])
+            return;
+        }
         
-    //     // fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(debounce) }&type=less`)
-    //     //     .then(res => res.json())
-    //     //     .then(res => {
-    //     //         setSearchResult(res.data)
-    //     //         setLoading(false)
-    //     //     })
-    //     //     .catch(() =>{
-    //     //         setLoading(false)
-    //     //     })
-
-    //     const fetchApi = async () => {
-    //         setLoading(true)
+        const fetchApi = async () => {
+            setLoading(true)
             
-    //         const result = await searchServices.search(debounce)
-    //         setSearchResult(result)
+            const result = await searchServices.search(debounce)
+            setSearchResult(result)
             
-    //         setLoading(false)
-    //     }
+            setLoading(false)
+        }
 
-    //     fetchApi();
+        fetchApi();
 
-       
-    // },[debounce])
+
+    },[debounce])
+
+
 
     const handleClear = () => {
         setSearchValue('');
@@ -62,24 +67,55 @@ function Search() {
     }
 
     return (
-            <div className="search">
-                <input 
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Search music" 
-                    spellCheck={false}
-                    onChange = {handleChange}
-                    onFocus = {() => setShowResult(true)}
-                />
-                <button className="clear" onClick={handleClear}>
-                    <MdClear />
-                </button>
-                <button className="search-btn">
-                    <BiSearchAlt2 onMouseDown={(e)=> e.preventDefault()} />
-                </button>
-                
-            </div>
-        );
+        <div className='search-wrap'> 
+            {/* <div className='logo'>
+                <Link>
+                    <img src={images.logo} alt="" />
+                </Link>
+            </div> */}
+            <HeadlessTippy 
+                interactive
+                visible = {showResult && searchResult.length>0}
+                // visible
+                render={attrs => (
+                    <div className='search-result' tabIndex= '-1' {...attrs}>
+                        <Wraper>
+                            <h4 className="search-title">
+                                Offer
+                            </h4>
+                            {searchResult?.map((result) => (
+                                <MediaItem key={result.id} singer={result?.artist.name} SongName={result?.title} img={result?.artist.picture} className={'result-item'}/>
+                            ))}
+                        
+                        </Wraper>
+                    </div>
+                )}
+                onClickOutside = {handleHideResult}
+            >
+                <div className="search">
+                    <input 
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="In put name song" 
+                        spellCheck={false}
+                        onChange = {handleChange}
+                        onFocus = {() => setShowResult(true)}
+                    />
+                    {!!searchValue && !loadding &&  (
+                        <button className="clear" onClick={handleClear}>
+                            <MdClear />
+                        </button>
+                    )}
+
+                    {loadding && <VscLoading className='loading'/>}
+
+                    <button className="search-btn">
+                        <BiSearchAlt2 onMouseDown={(e)=> e.preventDefault()} />
+                    </button>
+                </div>
+            </HeadlessTippy>
+         </div>
+    );
 }
 
 export default Search;
