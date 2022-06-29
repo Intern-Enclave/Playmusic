@@ -15,8 +15,7 @@ import './playerControl.scss'
 function PlayerControl() {
 
     const tracks = useContext(trackContext)
-    // console.log(tracks)
-
+    
     return (
         <div className='player-controls'>
             <div className='control-left'>

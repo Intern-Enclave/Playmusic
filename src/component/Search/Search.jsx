@@ -37,7 +37,7 @@ function Search() {
             setLoading(true)
             
             const result = await searchServices.search(debounce)
-            setSearchResult(result)
+            result ? setSearchResult(result) : setSearchResult([])
             
             setLoading(false)
         }
@@ -83,9 +83,9 @@ function Search() {
                             <h4 className="search-title">
                                 Offer
                             </h4>
-                            {searchResult?.map((result) => (
+                            {searchResult.length>0 ? (searchResult.map((result) => (
                                 <MediaItem key={result.id} singer={result?.artist.name} SongName={result?.title} img={result?.artist.picture} className={'result-item'}/>
-                            ))}
+                            ))) : <div></div>}
                         
                         </Wraper>
                     </div>

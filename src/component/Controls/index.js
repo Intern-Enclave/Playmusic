@@ -2,10 +2,9 @@ import React, { useState, useRef, useContext } from "react";
 import TimeSlider from "react-input-slider";
 
 import { TbPlayerTrackNext, TbPlayerTrackPrev, TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
-import { dataMusic  } from "./data";
-
-import './playlist.scss'
 import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
+import { trackContext } from "../../App";
+import './playlist.scss'
 
 const Controls = () => {
 
@@ -14,9 +13,8 @@ const Controls = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const context = useContext(PlayingMusicContext);
-  // const trackContexts = useContext(trackContext)
 
-  // console.log(trackContexts)
+  const trackContexts = useContext(trackContext);
 
   const handleLoadedData = () => {
     setDuration(audioRef.current.duration);
@@ -42,15 +40,14 @@ const Controls = () => {
     }
   };
 
+ 
+
   return (
     <div className="Controls">
-      {/* <img className="Song-Thumbnail" src={TetImg} alt="tet" /> */}
-      {/* <h2 className="Song-Title">{audios[audioIndex].title}</h2> */}
-      {/* <p className="Singer">{audios[audioIndex].artist}</p> */}
       <div className="Control-Button-Group">
         <div
           className="Prev-Button"
-          onClick={() => setAudioIndex((audioIndex - 1) % dataMusic?.length)}
+          onClick={() => setAudioIndex((audioIndex - 1) % trackContexts?.length)}
         >
           <TbPlayerTrackPrev />
         </div>
@@ -59,7 +56,8 @@ const Controls = () => {
         </div>
         <div
           className="Next-Button"
-          onClick={() => setAudioIndex((audioIndex + 1) % dataMusic?.length)}
+          onClick={() => 
+            setAudioIndex((audioIndex + 1) % trackContexts?.length)}
         >
           <TbPlayerTrackNext />
         </div>
@@ -90,7 +88,7 @@ const Controls = () => {
       />
       <audio
         ref={audioRef}
-        src={dataMusic[audioIndex]?.preview}
+        src={trackContexts[audioIndex]?.preview}
         onLoadedData={handleLoadedData}
         onTimeUpdate={() => setCurrentTime(audioRef.current.currentTime)}
         onEnded={() => context.togglePlay()}

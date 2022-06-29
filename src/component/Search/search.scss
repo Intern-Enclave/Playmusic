@@ -12,7 +12,7 @@
     width: 60%;
     padding-left: 16px;
     // margin: 0 20%;
-    background-color: $alpha-bg;
+    background-color: $sidebar-popup-bg;
     border-radius: 92px;
     display: flex;
     overflow: hidden;
@@ -44,7 +44,7 @@
 }
 
 .search-result{ 
-    width: 500px;
+    width: 100%;
 
 }
 
@@ -101,6 +101,10 @@
     &:hover{
         background-color: $alpha-bg;
     }
+}
+
+#tippy-2{
+    width: 60%;
 }
 
 

@@ -1,29 +1,85 @@
 @use '../../scss/' as *;
 
 
-.PlayList{
+.playlist{
   background-color: $layout-bg;
   min-height: 100%;
+
+  &-title{
+    display: flex;
+    color: $text-secondary;
+    font-size: 1.6rem;
+    justify-content: space-between;
+    padding:0 40px 20px 55px;
+    border-bottom: 1px solid $text-secondary;
+
+
+    &-song{
+      width: 40%;
+    }
+  }
+
 }
 
 .playlist-item{
   display: flex;
   justify-content: space-between;
-  
+  padding: 0 40px;
+  position: relative;
+  // border-top: 1px solid $text-secondary;
+
+
+  &-icon{
+    color: $text-primary;
+    margin: auto;
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 30px;
+  }
+
+
   &-album{
     font-size: 1.4rem;
     color: $text-secondary;
     cursor: pointer;
     width: 30%;
-    display: flex;
     text-align: left;
+    margin: auto;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    -webkit-line-clamp: 2;
+    line-height: 1.6rem;
+    max-height: 3.2rem;
+  }
+
+  &-time{
+    font-size: 1.4rem;
+    color: $text-secondary;
+    cursor: pointer;
+    display: flex;
     align-items: center;
+    margin-left: 80px;
+
   }
 
   &:hover{
     background-color: $alpha-bg;
   }
+
+  &:hover > .playlist-item-icon{
+    display: block;
+  }
 }
+
+.active > .playlist-item-icon{
+  display: block;
+}
+
 .Song-Thumbnail {
     width: 150px;
     height: 150px;
