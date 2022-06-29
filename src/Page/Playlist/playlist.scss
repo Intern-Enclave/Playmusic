@@ -141,3 +141,104 @@
     }
   }
   
+
+//music
+
+.playlist-music-cd{
+  display: flex;
+  align-items: center;
+}
+
+.playlist-music-img{
+  width: 20vw;
+  height: 20vw;
+  border-radius: 20px;
+  object-fit: cover;
+  transition: border-radius linear .5s;
+  border: 1px solid $alpha-bg;
+  
+  // animation: abc linear 10s infinite;
+}
+
+.play{
+  border-radius: 50%;
+  animation: abc linear 15s infinite;
+}
+
+@keyframes abc{
+    from{
+        transform:rotate(0);
+    }
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+.playlist-music{
+  display: flex;
+  color: $text-primary;
+  width: 100%;
+  margin: 40px 0;
+  font-size: 2rem;
+  // justify-content: center;
+
+  &-cd{
+    margin:0 10%;
+  }
+
+  &-info{
+    padding-top: 30px;
+    position: relative;
+
+    &-singer,
+    &-time,
+    &-album{
+      color: $text-secondary;
+      font-size: 1.6rem;
+      font-weight: 400;
+      padding: 5px 0;
+    }
+
+    &::before{
+      content: '';
+      height: 100%;
+      width: 1px;
+      background-color: $alpha-bg;
+      position: absolute;
+      top: 0;
+      left: -20px;
+    }
+  }
+
+  &-control{
+    margin-top: 20px;
+    margin-left: 0;
+  }
+}
+
+.playlist-music-control{
+  display: flex;
+
+  &-icon{
+    width: 40px;
+    height: 40px;
+    font-size: 2rem;
+    display: flex;
+    align-items: center;
+    margin: auto;
+    position: relative;
+    margin-left: 20px;
+    background-color: $alpha-bg;
+    border-radius: 50%;
+
+    &:hover{
+      background-color: $alpha-layout-bg;
+    }
+
+    & svg{
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+}

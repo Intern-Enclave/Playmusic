@@ -7,7 +7,7 @@ export const search = async (title) => {
                 title,
             }
         })
-        return res.data;
+        return res;
     } catch (error) {
         console.log(error);
     }

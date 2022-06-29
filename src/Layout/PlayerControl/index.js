@@ -9,21 +9,22 @@ import { GiMicrophone } from 'react-icons/gi';
 import { FaWindowRestore } from 'react-icons/fa';
 
 import './playerControl.scss'
+import { useMusic } from "../../hooks/useMusic";
 
 
 
 function PlayerControl() {
 
-    const tracks = useContext(trackContext)
+    const {currentSong} = useMusic()
     
     return (
         <div className='player-controls'>
             <div className='control-left'>
                 <MediaItem 
                     // img='https://anhdep123.com/wp-content/uploads/2021/01/nhung-hinh-anh-hoang-hon-buon.jpg' 
-                    img= {tracks[0]?.artist.picture}                   
-                    SongName={tracks[0]?.title}
-                    singer = {tracks[0]?.artist.name}
+                    img= {currentSong?.artist?.picture}                   
+                    SongName={currentSong?.title}
+                    singer = {currentSong?.artist?.name}
                 />
             </div>
             <div className='control-center'><Controls/></div>

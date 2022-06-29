@@ -9,7 +9,7 @@ import classNames from 'classnames/bind';
 const cx = classNames.bind(styles)
 
 function Button({to, href, primary = false, outline = false, small = false, large = false, transparent = false,
-                rounded=false, disabled=false, text = false, children, className, leftIcon, rightIcon, onClick, ...passProps}) {
+                rounded=false, disabled=false, text = false, children, className, leftIcon, rightIcon,onClick, ...passProps}) {
 
     let Comp = 'button';
     const props = {

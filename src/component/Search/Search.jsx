@@ -4,7 +4,7 @@ import useDebounce from '../../hooks/useDebounce';
 // import {Link} from 'react-router-dom'
 // import images from '../../assets/img';
 
-import MediaItem from '../MediaItem'
+import MediaItem from '../MediaItem';
 import * as searchServices from '../../services/searchService';
 
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -75,6 +75,7 @@ function Search() {
             </div> */}
             <HeadlessTippy 
                 interactive
+                // visible = {showResult}
                 visible = {showResult && searchResult.length>0}
                 // visible
                 render={attrs => (
@@ -85,7 +86,7 @@ function Search() {
                             </h4>
                             {searchResult.length>0 ? (searchResult.map((result) => (
                                 <MediaItem key={result.id} singer={result?.artist.name} SongName={result?.title} img={result?.artist.picture} className={'result-item'}/>
-                            ))) : <div></div>}
+                            ))) : <div>Can not find</div>}
                         
                         </Wraper>
                     </div>
@@ -96,7 +97,7 @@ function Search() {
                     <input 
                         ref={inputRef}
                         value={searchValue}
-                        placeholder="In put name song" 
+                        placeholder="Input name song" 
                         spellCheck={false}
                         onChange = {handleChange}
                         onFocus = {() => setShowResult(true)}
