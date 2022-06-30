@@ -13,6 +13,7 @@ const PlayingMusicProvider = ({ children }) => {
     setIsPlay(true);
     songRef.current.play();
   };
+  
   const togglePlay = () => {
     if (isPlay) {
       songRef.current.pause();
@@ -21,6 +22,7 @@ const PlayingMusicProvider = ({ children }) => {
     }
     setIsPlay(!isPlay);
   };
+  
   const handleChangeSong = (way) => {
     if (
       (currentSong.id == listTrack[0].id && way == "prev") ||
@@ -47,6 +49,7 @@ const PlayingMusicProvider = ({ children }) => {
     setCurrentSong(song);
     localStorage.setItem("songId", song.id);
   };
+  
   const getAll = async () => {
     try {
       const response = await UseApi.getAllTracks();
@@ -65,6 +68,7 @@ const PlayingMusicProvider = ({ children }) => {
       console.log("error get list tracks: ", error);
     }
   };
+  
   useEffect(() => {
     getAll();
   }, []);

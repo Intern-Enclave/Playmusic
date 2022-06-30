@@ -1,22 +1,19 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useState } from "react";
 import TimeSlider from "react-input-slider";
 
 import { TbPlayerTrackNext, TbPlayerTrackPrev, TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
-import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
-
+// import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
 import './playlist.scss'
 import { useMusic } from "../../hooks/useMusic";
 
 const Controls = () => {
-  const { listTrack, isPlay, togglePlay, currentSong, songRef,handleChangeSong} = useMusic()
+  const { isPlay, togglePlay, currentSong, songRef,handleChangeSong} = useMusic()
   
-  const [audioIndex, setAudioIndex] = useState(0);
+  // const [audioIndex, setAudioIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
-
- 
 
   const handleLoadedData = () => {
     setDuration(songRef.current.duration);
@@ -24,7 +21,6 @@ const Controls = () => {
   };
 
   const handlePausePlayClick = () => {
-
    togglePlay()
   };
 

@@ -1,10 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import MediaItem from "../../component/MediaItem";
 import { ImMusic } from "react-icons/im";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
 import { AiTwotoneHeart } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
-import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
+// import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
 import "./playlist.scss";
 import Button from "../../component/Button/Button";
@@ -52,7 +52,7 @@ function PlayList() {
             Album: {currentSong?.album?.title}
           </h3>
           <h3 className="playlist-music-info-time">
-            Time: {currentSong?.duration}
+            Time: {convertHMS(currentSong?.duration)}
           </h3>
 
           <div className="playlist-music-control">
@@ -81,13 +81,13 @@ function PlayList() {
       {listTrack ? (
         listTrack.map((val, index) => (
           <div
-            className={`playlist-item ${index === active || currentSong?.id == val.id ? "active" : ""}`}
-            key={val.id}
-            onClick={() => {
-              setActive(index);
-              handleChooseSong(val);
-              handlePlayAnotherSong()
-            }}
+          className={`playlist-item ${index === active || currentSong?.id == val.id ? "active" : ""}`}
+          key={val.id}
+          onClick={() => {
+            setActive(index);
+            handleChooseSong(val);
+            handlePlayAnotherSong()
+          }}
           >
             <div className="playlist-item-icon">
               <ImMusic />
