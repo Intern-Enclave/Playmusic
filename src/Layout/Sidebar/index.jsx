@@ -35,19 +35,23 @@ function Sidebar() {
             icon:<FaMusic/>,
             path: '/newsong'
         },
+        {
+            title: 'Playlist',
+            icon:<TbPlaylist/>,
+            path: '/playlist'
+        },
 
     ]
 
     const {pathname} = useLocation()
     const active = sidebar.findIndex(e=> e.path === pathname);
 
-    const img = currentUser?.image
-
+   
     return (
         <div className='sidebar'>
             <div className="user">
                 <Link to='/user' className='user-link'>
-                    <Image className='user-avatar' src = {currentUser ? img : ''} />
+                    <Image className='user-avatar' src = {currentUser?.image ? currentUser?.image : 'https://www.y8.edu.vn/wp-content/themes/myarcadetheme/images/noimg.png'} />
                 </Link>
             <div className="user-name-sidebar">{currentUser ? currentUser.username : 'Username'}</div>
             </div>

@@ -38,8 +38,20 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    left: 30px;
-  }
+    left: 15px;
+    background-color: $alpha-bg;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+  
+    & svg{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+}
 
 
   &-album{

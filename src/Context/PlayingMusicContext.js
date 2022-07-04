@@ -108,6 +108,7 @@ const PlayingMusicProvider = ({ children }) => {
 
 
   const handleLogin = (name, pass)=>{
+
     listUser.map(user => {
       if(user.username == name && user.password == pass) {
         setCurrentUser(user)

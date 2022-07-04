@@ -1,11 +1,13 @@
 import React from 'react';
 import Carousel from '../../component/carousel/Carousel';
+import Login from '../../component/Login2/LoginForm';
 import './home.scss'
 
 const Home = () => {
     return (
         <div className='home'>
-            <div className='carousel'>
+            <Login />
+            {/* <div className='carousel'>
                 <Carousel
                 show = {4}
                 >
@@ -42,7 +44,7 @@ const Home = () => {
                             
                             
                             </Carousel>
-                        </div>
+                        </div> */}
 
         </div>
     );

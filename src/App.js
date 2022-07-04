@@ -9,10 +9,8 @@ import './App.css'
 
 
 function App() {
-
-  return (
-  
-  
+  // đối tượng validate
+  return ( 
         <Router>
           <div className="App">
             <Routes>
@@ -30,6 +28,9 @@ function App() {
 
   
   );
+  
+
+ 
 }
 
 export default App;

@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import MediaItem from "../../component/MediaItem";
 import { ImMusic } from "react-icons/im";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
-import { AiTwotoneHeart,AiOutlinePlus } from "react-icons/ai";
+import { AiTwotoneHeart, AiFillDelete } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 // import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
-import "./newsong.scss";
+import "./playlist.scss";
 import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
 
@@ -15,7 +15,7 @@ import 'tippy.js/dist/tippy.css';
 
 
 
-function NewSong() {
+function Playlist() {
   const { listTrack, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong} =
     useMusic();
   const [active, setActive] = useState("");
@@ -97,9 +97,9 @@ function NewSong() {
             handlePlayAnotherSong()
           }}
           >
-            <Tippy delay={[0,200]} content='Add Playlist'>
+            <Tippy delay={[0,200]} content='delete'>
               <button className="playlist-item-icon">
-                <AiOutlinePlus />
+                <AiFillDelete />
               </button>
             </Tippy>
 
@@ -119,4 +119,4 @@ function NewSong() {
   );
 }
 
-export default NewSong;
+export default Playlist;
