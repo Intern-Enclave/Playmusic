@@ -7,11 +7,23 @@ import {useLocation} from 'react-router'
 import './sidebar.scss'
 
 import { BiLogIn, BiLogOut } from 'react-icons/bi';
-import { FaHome } from 'react-icons/fa';
+import { FaHome,FaMusic } from 'react-icons/fa';
 import { TbPlaylist } from 'react-icons/tb';
 
+import { useMusic } from '../../hooks/useMusic';
+
 function Sidebar() {
-    const currentUser = true
+
+
+    const {currentUser, loginRequest, logoutRequest} = useMusic()
+
+    const login = () =>{
+        loginRequest()
+    }
+    const logout = () =>{
+        logoutRequest()
+    }
+
     const sidebar = [
         {
             title: 'Home',
@@ -19,9 +31,9 @@ function Sidebar() {
             path: '/'
         },
         {
-            title: 'Playlist',
-            icon:<TbPlaylist/>,
-            path: '/playlist'
+            title: 'New Song',
+            icon:<FaMusic/>,
+            path: '/newsong'
         },
 
     ]
@@ -29,12 +41,15 @@ function Sidebar() {
     const {pathname} = useLocation()
     const active = sidebar.findIndex(e=> e.path === pathname);
 
+    const img = currentUser?.image
+
     return (
         <div className='sidebar'>
             <div className="user">
                 <Link to='/user' className='user-link'>
-                    <Image className='user-avatar' src = '' />
+                    <Image className='user-avatar' src = {currentUser ? img : ''} />
                 </Link>
+            <div className="user-name-sidebar">{currentUser ? currentUser.username : 'Username'}</div>
             </div>
             <ul className='bar'>
                 {sidebar.map((item,index) => (
@@ -43,8 +58,8 @@ function Sidebar() {
                     </li>
                 ))}
             </ul>
-            <div className='logout'>{ currentUser ? (<Button transparent leftIcon={<BiLogOut/> } className='logout-item' >Log out</Button>) :
-                (<Button transparent leftIcon={<BiLogIn/>} primary className={'user-login'}>Login</Button>)
+            <div className='logout'>{ currentUser ? (<Button transparent leftIcon={<BiLogOut/> } className='logout-item' onClick={logout} >Log out</Button>) :
+                (<Button transparent leftIcon={<BiLogIn/>} className={'login-item'} onClick={login}>Login</Button>)
             }</div>
         </div>
     );

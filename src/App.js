@@ -1,22 +1,14 @@
 import React, { createContext, useEffect, useState } from "react";
-// import { StoreContext } from "./Store";
 
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { publicRoute } from "./routes";
 import UseApi from "./API/UseApi";
-// import {StoreProvider} from "./Store";
 
 import Layout from "./Layout";
 import './App.css'
 
 
-
-
-
 function App() {
-
-
-
 
   return (
   

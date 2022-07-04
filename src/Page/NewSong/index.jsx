@@ -10,7 +10,7 @@ import "./playlist.scss";
 import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
 
-function PlayList() {
+function NewSong() {
   const { listTrack, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong} =
     useMusic();
   const [active, setActive] = useState("");
@@ -36,9 +36,12 @@ function PlayList() {
   return (
     <div className="playlist container">
       <div className="playlist-music">
+
         <div className="playlist-music-cd">
+          {/* {console.log(currentSong?.artist.picture)} */}
           <img
-            src="https://api.deezer.com/artist/13/image"
+            src={currentSong.artist?.picture}
+            // src="https://api.deezer.com/artist/13/image"
             alt=""
             className={`playlist-music-img ${isPlay ? "play" : ""}`}
           />
@@ -108,4 +111,4 @@ function PlayList() {
   );
 }
 
-export default PlayList;
+export default NewSong;

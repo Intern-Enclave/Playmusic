@@ -1,144 +1,181 @@
+@use '../../scss/' as *;
 
-  .kkk {
-    background-color: #000;
-    padding: 20px 20px;
-  }
-  .login-modal.open {
-    display: flex;
-  }
-  
-  .login-modal {
+.modal {
     position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(57, 50, 53, 0.8);
-     
-    justify-content: center;
-    align-items: center;
-    display: none;
+    display: flex;
+    animation: fadein linear 0.1s;
+    z-index: 100;
+}
+
+.modal__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.modal__body {
     
-  }
-  
-  .login-table {
-    width: 380px;
-    height: 550px;
-    background-color: #fff;
-    border: solid rgba(184, 162, 203, 0.67) ;
-    border-radius: 20px;
-    animation: growth ease-in 0.3s;
-  }
-  
-  @keyframes growth {
+    margin: auto;
+    position: relative;
+    z-index: 1;
+    animation: growth linear 0.1s;
+}
+
+@keyframes growth {
     from {
-        opacity: 0;
-        height: 50%
+        transform: scale(0.7);
     }
     to {
-        opacity: 1;
-        height: 100%
+        transform: scale(1);
     }
-  }
-  
-  .login_header {
-      padding: 20px;
-      padding-bottom: 30px;
-      background-image: linear-gradient(to right, #8458B3, rgb(18, 12, 28));
-      border-top-right-radius: 19px;
-      border-top-left-radius: 19px;
-  
-  }
-  
-  .login-title {
-    text-align: center;
-    font-size: 35px;
-    color: #e5eaf5;
-    font-family: Tahoma, Verdana, Segoe, sans-serif; 
-    font-size: 24px; 
-    font-style: normal; 
-    font-variant: normal; 
-    font-weight: 700; 
-    line-height: 26.4px;
-  
-  }
-  
-  .close-button {
-      float: right;
-      font-size: 20px;
-      font-style: Arial,sans-serif;
-      border: none;
-      background-color: #e5eaf5;
-      resize: none;
-      outline: none;
-      color: #5e6063;
-      margin-top: -10px;
-      margin-right: -10px;
-      padding: 4px 10px;
-      border-radius: 50px;
-  
-  }
-  
-  .Hello {
-    justify-content: center;
-      display: flex;
-      font-size: 26px;
-      margin-top: 10px;
-  }
-  
-  .loginbox {
-    width: 350px;
-    margin-top: 0px;
+}
+
+.register {
+    width: 400px;
+    background-color: $text-primary;
+    border-radius: 5px;
+    overflow: hidden;
+    color: $purple-primary;
+}
+
+.register__container {
+    padding: 16px 32px;
+}
+
+.register__header {
     display: flex;
-    flex-direction: column;
-  }
-  
-  .input-ds {
-    margin-top: 40px;
-    margin-left: 10px;
-    font-size: 17px;
-    border: none;
-    background-color: transparent;
-    resize: none;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8px;
+    margin-bottom: 30px;
+}
+
+.register__heading {
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+.register__switch {
+    font-size: 1.6rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+.invalid .register__input {
+    border-color: #888;
+}
+
+.invalid .form__message {
+    color: #888;
+}
+
+.register__input {
+    width: 100%;
+    height: 40px;
+    margin-top: 24px;
+    padding: 0 12px;
+    font-size: 1.4rem;
+    border: 1px solid $purple-primary;
+    border-radius: 5px;
     outline: none;
-    border-bottom: 1px solid #000;
-    flex: 1;
-  }
-  
-  .box {
+}
+
+.register__input:focus {
+    border: 2px solid $purple-primary;
+}
+
+.form__message {
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    margin-left: 10px;
+    color: $purple-primary;
+}
+
+.register__aside {
+    margin-top: 18px;
+}
+
+.register__asdie-text {
+    padding: 0 12px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.register__text-link {
+    text-decoration: none;
+    color: $purple-primary;
+}
+
+.register__controls {
+    margin-top: 80px;
     display: flex;
-  }
-  
-  .point {
-  text-align: center;
-  margin-top: 50px;
-  }
-  
-  .login-button {
-    margin-top: 30px;
-    padding: 8px 140px;
-    border-radius: 20px;
-    border: 1px solid rgba(136, 57, 200, 0.67);
-    font-size: 21px;
-    color: #fff;
-    background-color: #494d5f;
-  }
-  
-  .cr_acount-button {
-    margin-left: 20px;
-    margin-top: 50px;
-    color: rgba(68, 149, 141, 0.67);
-  }
-  
-  .login-button:hover {
-    background-color: hsl(262deg, 16%, 26%);
-    color: #fff;
-    cursor: pointer;
-  
-  }
-  
-  .close-button:hover {
-    opacity: 0.8;
-    color: #000;
-    cursor: pointer;
-  }
+    justify-content: flex-end;
+}
+
+.register__controls-back {
+    margin-right: 8px;
+}
+
+.register__socals {
+    background-color: #e5e2e2;
+    padding: 12px 36px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn--with-icon {}
+
+.register__socals-icon {
+    font-size: 1.8rem;
+}
+
+.register__socal-lable {
+    margin: 0 30px;
+}
+
+.register__socals--facebook .register__socals-icon {
+    color: var(--white-color);
+}
+
+/* login */
+
+.register__help {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.register__help-link {
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: #939393;
+}
+
+.register__help-separate {
+    display: block;
+    height: 20px;
+    margin: 0 16px 0;
+    border-left: 1px solid var(--border-color);
+}
+
+.login-button{
+    border-radius: 100px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    background-color: $purple-primary;
+}
+
+.login-button .login-button-btn{
+    background-color: transparent;
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;    
+}
+
+
