@@ -11,6 +11,7 @@ import { FaHome,FaMusic } from 'react-icons/fa';
 import { TbPlaylist } from 'react-icons/tb';
 
 import { useMusic } from '../../hooks/useMusic';
+import Playlist from '../../Page/Playlist';
 
 function Sidebar() {
 
@@ -28,17 +29,20 @@ function Sidebar() {
         {
             title: 'Home',
             icon: <FaHome />,
-            path: '/'
+            path: '/',
+            current: false,
         },
         {
             title: 'New Song',
             icon:<FaMusic/>,
-            path: '/newsong'
+            path: '/newsong',
+            current: false
         },
         {
             title: 'Playlist',
             icon:<TbPlaylist/>,
-            path: '/playlist'
+            path: '/playlist',
+            current: true,
         },
 
     ]
@@ -56,13 +60,25 @@ function Sidebar() {
             <div className="user-name-sidebar">{currentUser ? currentUser.username : 'Username'}</div>
             </div>
             <ul className='bar'>
-                {sidebar.map((item,index) => (
-                    <li key={index} className={`sidebar-item ${index===active ? 'active' : ''}`}>
-                        <Button transparent leftIcon={item.icon} to ={item.path} >{item.title}</Button>
-                    </li>
-                ))}
+                {!currentUser ? 
+                    (
+                        sidebar.map((item,index) => 
+                            ( !item.current &&
+                                (<li key={index} className={`sidebar-item ${index===active ? 'active' : ''}`}>
+                                    <Button transparent leftIcon={item.icon} to ={item.path} >{item.title}</Button>
+                                </li>)                 
+                            ))
+                    ) : (
+                        sidebar.map((item,index) =>                     
+                            <li key={index} className={`sidebar-item ${index===active ? 'active' : ''}`}>
+                                <Button transparent leftIcon={item.icon} to ={item.path} >{item.title}</Button>
+                            </li>             
+                        )
+                    )               
+                }
+
             </ul>
-            <div className='logout'>{ currentUser ? (<Button transparent leftIcon={<BiLogOut/> } className='logout-item' onClick={logout} >Log out</Button>) :
+            <div className='logout'>{ currentUser ? (<Button transparent leftIcon={<BiLogOut/> } className='logout-item' onClick={logout} to={'/'} >Log out</Button>) :
                 (<Button transparent leftIcon={<BiLogIn/>} className={'login-item'} onClick={login}>Login</Button>)
             }</div>
         </div>

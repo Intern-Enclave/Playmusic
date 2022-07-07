@@ -4,17 +4,16 @@ import './login.scss'
 
 import { useMusic } from '../../hooks/useMusic';
 import { useEffect, useState } from 'react';
+import { AiFillCloseCircle } from 'react-icons/ai';
+
 
 function Login() {
 //login
-    const {handleLogin} = useMusic()
-
-    const [nameValue, setNameValue] = useState('')
-    const [passValue, setPassValue] = useState('')
+    const {handleLogin, unLoginRequest} = useMusic()
 
     
     const login = () =>{
-        handleLogin(nameValue, passValue)
+        handleLogin(formValues.username, formValues.password)
     }
 
 
@@ -27,7 +26,6 @@ function Login() {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
-        setPassValue(e.target.value);
     };
 
     const handleSubmit = (e) => {
@@ -37,7 +35,6 @@ function Login() {
     };
 
     useEffect(() => {
-        console.log(formErrors);
         if (Object.keys(formErrors).length === 0 && isSubmit) {
         console.log(formValues);
         }
@@ -72,8 +69,16 @@ function Login() {
 
             <div className="modal__body">
 
-                <form action="" className="register" id="form-register">
+            {/* {Object.keys(formErrors).length === 0 && isSubmit ? (
+                <div className="ui message success">Signed in successfully</div>
+            ) : (
+                <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
+            )}
+ */}
+
+                <form action="" className="register" id="form-register" onSubmit={handleSubmit}>
                 <div className="register">
+                    <AiFillCloseCircle onClick={unLoginRequest}/>
                     <div className="register__container">
                         <div className="register__header">
                             <h3 className="register__heading">Login</h3>
@@ -84,23 +89,27 @@ function Login() {
                             <div className="register__group">
                                 <input 
                                     type="text" 
+                                    name='username'
                                     className="register__input" 
                                     placeholder="Input your username"                                    
                                     onChange = {handleChange}
                                     value = {formValues.username}
                                 />
                             </div>
+                            <p>{formErrors.username}</p>
                            
                             <div className="register__group">
                                 <input 
                                     type="password" 
+                                    name='password'
                                     className="register__input" 
                                     placeholder="Input your password"
                                     // value={password}
                                     onChange = {handleChange}
-                                    // value = {formValues.password}
+                                    value = {formValues.password}
                                 />
                             </div>
+                            <p>{formErrors.password}</p>
                         </div>
 
                         <div className="register__aside">
@@ -116,8 +125,8 @@ function Login() {
                 </div>
                 </form> 
             </div>
-            
         </div>
+        // <></>
     );
 }
 

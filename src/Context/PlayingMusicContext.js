@@ -8,12 +8,15 @@ const PlayingMusicProvider = ({ children }) => {
   const [listTrack, setListTrack] = useState([]);
   const [currentSong, setCurrentSong] = useState({});
   const songRef = useRef(null);
+  const [usingTracks, setUsingTracks] = useState([]); 
   //login
   const [currentUser, setCurrentUser] = useState(null);
   const [login, setLogin] = useState(false);
-  const [listUser, setListUser] = useState([])
-  const [username, setUsername ] =useState('')
-  const [password, setPassword] = useState('')
+  const [listUser, setListUser] = useState([]);
+  const [username, setUsername ] =useState('');
+  const [password, setPassword] = useState('');
+  //playlistid
+  const [playlist_Id, setPlaylist_Id] = useState(0);
 
 
   //control music
@@ -31,19 +34,19 @@ const PlayingMusicProvider = ({ children }) => {
     setIsPlay(!isPlay);
   };
   
-  const handleChangeSong = (way) => {
+  const handleChangeSong = (way, list) => {
     if (
-      (currentSong.id == listTrack[0].id && way == "prev") ||
-      (currentSong.id == listTrack[listTrack.length - 1].id && way == "next")
+      (currentSong.id == list[0].id && way == "prev") ||
+      (currentSong.id == list[listTrack.length - 1].id && way == "next")
     )
       return;
-    for (let i = 0; i < listTrack.length; i++) {
-      if (currentSong.id == listTrack[i].id) {
+    for (let i = 0; i < list.length; i++) {
+      if (currentSong.id == list[i].id) {
         if (way == "prev") {
-          setCurrentSong(listTrack[i - 1]);
+          setCurrentSong(list[i - 1]);
         }
         if (way == "next") {
-          setCurrentSong(listTrack[i + 1]);
+          setCurrentSong(list[i + 1]);
         }
         if (isPlay) {
           handlePlayAnotherSong();
@@ -130,12 +133,25 @@ const PlayingMusicProvider = ({ children }) => {
   const loginRequest = () =>{
     setLogin(true)
   }
+  
+  const unLoginRequest = () =>{
+    setLogin(false)
+  }
+
 
   const logoutRequest = () =>{
     setLogin(false)
     setCurrentUser(false)
     localStorage.setItem("currentUser", null);
   }
+
+  //////playlistid
+  const setPlaylist = (id) =>{
+    setPlaylist_Id(id);
+    localStorage.setItem('playlistId', id)
+  }
+
+ 
 
   const value = {
     isPlay,
@@ -156,6 +172,11 @@ const PlayingMusicProvider = ({ children }) => {
     handleLogin,
     loginRequest,
     logoutRequest,
+    unLoginRequest,
+    // playlist,
+    setPlaylist,
+    // listTrackId,
+    playlist_Id,
   };
 
   return (

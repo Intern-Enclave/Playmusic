@@ -41,7 +41,25 @@
     border-radius: 5px;
     overflow: hidden;
     color: $purple-primary;
+    position: relative;
+
+    & svg {
+        font-size: 2.5rem;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+
 }
+
+// .register__form > p{
+//     color: red;
+// }
 
 .register__container {
     padding: 16px 32px;
@@ -51,8 +69,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 8px;
-    margin-bottom: 30px;
+    padding: 20px 8px;
+    margin-bottom: 0px;
 }
 
 .register__heading {

@@ -1,0 +1,17 @@
+@use '../../scss/' as *;
+
+.songitem-img{
+    display: flex;
+    align-items: center;
+
+    & img {
+        width: 20vw;
+        height: 20vw;
+        border-radius: 20px;
+        object-fit: cover;
+        transition: border-radius linear .5s;
+        border: 1px solid $alpha-bg;
+  
+    }
+}
+

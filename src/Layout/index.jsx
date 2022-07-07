@@ -4,6 +4,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import PlayerControl from './PlayerControl';
 import LoginForm from '../component/Login/LoginForm';
+import Login from '../component/Login2/LoginForm';
 
 import { useMusic } from '../hooks/useMusic';
 
@@ -14,7 +15,7 @@ function Layout({children, data}) {
     return (
         <div>
             
-                {(!currentUser && login) && <LoginForm />} 
+                {(!currentUser && login) && <Login />} 
                 <div className="main">
                     <Sidebar />
                     

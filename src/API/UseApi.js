@@ -6,6 +6,11 @@ const UseApi = {
         const url = 'track';
         return axiosClient.get(url, {params})
     }, 
+    getTracksId: (params) => {
+        const url = 'playlist_has_track/getByPlaylistId';
+        // const url = 'playlist_has_track/getByPlaylistId?playlistId=2';
+        return axiosClient.get(url, params)
+    }, 
     getAllUser: () => {
         const url = 'user';
         // const url = 'data';
@@ -14,7 +19,11 @@ const UseApi = {
     search: (params) => {
         const url = 'track/search'
         return axiosClient.get(url,params)
-    }
+    },
+    getPlaylist: (params) => {
+        const url = 'playlist/getByUsername'
+        return axiosClient.get(url, params)
+    },
 
 }
 

@@ -8,7 +8,7 @@ import './playlist.scss'
 import { useMusic } from "../../hooks/useMusic";
 
 const Controls = () => {
-  const { isPlay, togglePlay, currentSong, songRef,handleChangeSong} = useMusic()
+  const { isPlay, togglePlay, currentSong, songRef,handleChangeSong,listTrack,listTrackId} = useMusic()
   
   // const [audioIndex, setAudioIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
@@ -41,7 +41,7 @@ const Controls = () => {
       <div className="Control-Button-Group">
         <div
           className="Prev-Button"
-          onClick={() => handleChangeSong('prev')}
+          onClick={() => handleChangeSong('prev', listTrack)}
         >
           <TbPlayerTrackPrev />
         </div>
@@ -51,7 +51,7 @@ const Controls = () => {
         <div
           className="Next-Button"
           onClick={() => 
-            handleChangeSong('next')}
+            handleChangeSong('next', listTrack)}
         >
           <TbPlayerTrackNext />
         </div>
