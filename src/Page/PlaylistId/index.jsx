@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MediaItem from "../../component/MediaItem";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
 import { AiTwotoneHeart, AiFillDelete } from "react-icons/ai";
-import { BsThreeDots } from "react-icons/bs";
+import { BsThreeDots,BsFillPlusCircleFill } from "react-icons/bs";
 // import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
 import "./playlist.scss";
@@ -23,6 +23,8 @@ function PlaylistId() {
   const [active, setActive] = useState("");
   const [listTrackId, setListTrackId] =useState([]);
 
+
+
   // console.log(localStorage.getItem('playlistId'))
   const getPlaylistId = async () => {
     try {
@@ -38,6 +40,21 @@ function PlaylistId() {
   useEffect(() => {
     getPlaylistId();
   }, [playlist_Id]);
+
+
+  const delSong = async (i) => {
+    try{ 
+      const resp = await UseApi.deletePlaylist({trackId:i, playlistId: playlist_Id})
+      console.log(resp)
+    }catch (error) {
+      console.log("error post playlist: ", error);
+    }
+  }
+
+
+
+
+
 
   function convertHMS(value) {
     const sec = parseInt(value, 10); // convert value to number if it's string
@@ -56,6 +73,10 @@ function PlaylistId() {
     }
     return minutes + ":" + seconds; // Return is HH : MM : SS
   }
+
+
+
+
 
   return (
     <div className="playlist container">
@@ -116,7 +137,7 @@ function PlaylistId() {
           }}
           >
             <Tippy delay={[0,200]} content='delete'>
-              <button className="playlist-item-icon">
+              <button className="playlist-item-icon" onClick={() => delSong(val.id)}>
                 <AiFillDelete />
               </button>
             </Tippy>

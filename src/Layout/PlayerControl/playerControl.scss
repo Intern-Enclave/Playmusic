@@ -15,6 +15,145 @@
 .control-left{
     width: 25%;
     height: 100%;
+    display: flex;
+}
+.control-left-add,
+.control-left-more {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: none;
+}
+
+.overlay.open {
+    display: flex;
+}
+.control-left-more-menu {
+    transform: translate(280px,250px);
+    width: 265px;
+    height: 380px;
+    background-color: #fff;
+    position: absolute;
+    border-radius: 5%;
+    background-color: #432275;
+    bottom: 55vh;
+    left: 0;
+    // display: flex;
+}
+
+.more-menu {
+    margin-top: 15px;
+}
+
+.more-menu-song-info {
+    display: grid;
+    grid-template-columns: 75px 1fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "ig na"
+    "ig st";
+}
+
+.more-menu img {
+    width: 40px;
+    height: 40px;
+    grid-area: ig;
+    transform: translateX(195%);
+    margin-left: -61px;
+    border-radius: 15%;
+}
+
+.song-tittle {
+    grid-area: na;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    font-style: bold;
+    
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+}
+
+.song-status {
+    grid-area: st;
+    width: 120px;
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    justify-content: space-between;
+    opacity: 0.4;
+}
+
+.menu-button-list {
+    display: flex;
+    justify-content: space-around;
+    background-color: rgba(225, 225, 225, 0.174);
+    
+    color: rgb(255, 255, 255);
+    margin: 0 12px;
+    border-radius: 10px;
+    margin-top: 20px;
+    height: 55px;
+}
+
+.bt-list-one {
+    height: 100%;
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bt-list-one:hover {
+    opacity: 0.5;
+    border-radius: 10%;
+    border: 2px solid #fff;
+}
+
+.bt-list-one span {
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+}
+
+.bt-list-one p {
+    display: flex;
+    justify-content: center;
+}
+
+.menu-options {
+    // border: 1px solid #fff;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.menu-optin-one {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    padding: 5px 0;
+    font-size: 17px;
+}
+.menu-optin-one span {
+    margin-left: 12px;
+}
+.menu-optin-one:hover {
+    background-color: rgba(255, 255, 255, 0.216);  
+    cursor: pointer;
+}
+
+.menu-optin-one p {
+    margin-left: 15px;
 }
 
 .control-center{
@@ -28,7 +167,8 @@
     // margin-right: 30px;
     // padding-left: 70px;
 }
-
+.control-left-addToPl,
+.control-left-3point,
 .control-micro,
 .control-restore,
 .control-volume{
