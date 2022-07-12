@@ -16,6 +16,10 @@ const UseApi = {
         // const url = 'data';
         return axiosClient.get(url)
     }, 
+    postUser: (ob) => {
+        const url = 'user/register';
+        return axiosClient.post(url,ob)
+    },
     search: (params) => {
         const url = 'track/search';
         return axiosClient.get(url,params)
@@ -28,13 +32,19 @@ const UseApi = {
         const url = 'playlist'
         return axiosClient.post(url, params)
     },
+
+    postSong: (params) => {
+        const url = 'playlist_has_track/addNew'
+        return axiosClient.post(url, params)
+    },
+
     deletePlaylist: (params) => {
         const url = 'playlist'
         return axiosClient.delete(url, {params});
     },
     deleteSong: (params) => {
         const url = 'playlist_has_track/deleteByTrackIdInPlaylist'
-        return axiosClient.delete(url, params);
+        return axiosClient.delete(url, {params});
     },
 }
 

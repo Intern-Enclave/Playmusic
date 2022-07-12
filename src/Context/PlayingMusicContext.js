@@ -8,16 +8,18 @@ const PlayingMusicProvider = ({ children }) => {
   const [listTrack, setListTrack] = useState([]);
   const [currentSong, setCurrentSong] = useState({});
   const songRef = useRef(null);
-  const [usingTracks, setUsingTracks] = useState([]); 
   //login
   const [currentUser, setCurrentUser] = useState(null);
   const [login, setLogin] = useState(false);
+  const [registerRq,setRegisterRq] = useState(false);
   const [listUser, setListUser] = useState([]);
-  const [username, setUsername ] =useState('');
-  const [password, setPassword] = useState('');
+
   //playlistid
   const [playlist_Id, setPlaylist_Id] = useState(0);
 
+  //playlist User
+  const [playlistUser, setPlaylistUser] = useState([]);
+  const [playlistName, setPlaylistName] = useState('');
 
   //control music
   const handlePlayAnotherSong = () => {
@@ -117,7 +119,7 @@ const PlayingMusicProvider = ({ children }) => {
         setCurrentUser(user)
         // alert('success')
         localStorage.setItem("currentUser", user.username);
-        console.log('dang nhap thanh cong')
+        alert('Success')
       }
       
       // if(!(user.username == name && user.password == pass)) {
@@ -128,8 +130,6 @@ const PlayingMusicProvider = ({ children }) => {
     
   }
 
-
-
   const loginRequest = () =>{
     setLogin(true)
   }
@@ -137,7 +137,16 @@ const PlayingMusicProvider = ({ children }) => {
   const unLoginRequest = () =>{
     setLogin(false)
   }
+  const registerRequest = () =>{
+    setRegisterRq(true)
+  }
+  
+  const unRegisterRequest = () =>{
+    setRegisterRq(false)
+  }
 
+
+  
 
   const logoutRequest = () =>{
     setLogin(false)
@@ -150,6 +159,46 @@ const PlayingMusicProvider = ({ children }) => {
     setPlaylist_Id(id);
     localStorage.setItem('playlistId', id)
   }
+
+  //playlist User
+  useEffect(() => {
+    const getPlaylistUser = async () => {
+      try {
+        const params = {username: currentUser.username}
+        const response = await UseApi.getPlaylist({params});
+        // console.log(response)
+        response ? setPlaylistUser(response) : setPlaylistUser([])
+      } catch (error) {
+        console.log("error get list playlist: ", error);
+      }
+    };
+    getPlaylistUser();
+  }, [currentUser]);
+
+  const postPlaylist = async () => {
+    try{ 
+      const temp = {name: playlistName, username: currentUser.username};
+      const resp = await UseApi.postPlaylist(temp);
+      console.log(resp)
+      setPlaylistUser([...playlistUser, resp])
+    }catch (error) {
+      console.log("error post playlist: ", error);
+    }
+  }
+
+  const delPlaylist = async (i) => {
+    try{ 
+      const resp = await UseApi.deletePlaylist({id: i})
+      // console.log(resp)
+      const newPlaylistUser = playlistUser.filter((playlist) => {
+        return playlist.id !== i;
+      })
+      setPlaylistUser(newPlaylistUser);
+    }catch (error) {
+      console.log("error post playlist: ", error);
+    }
+  }
+
 
  
 
@@ -167,14 +216,21 @@ const PlayingMusicProvider = ({ children }) => {
     login,
     // user,
     listUser,
-    username,
-    password,
     handleLogin,
     loginRequest,
     logoutRequest,
     unLoginRequest,
+    registerRq,
+    registerRequest,
+    unRegisterRequest,
     // playlist,
     setPlaylist,
+    //playlistUser
+    playlistUser,
+    playlistName,
+    setPlaylistName,
+    postPlaylist,
+    delPlaylist,
     // listTrackId,
     playlist_Id,
   };

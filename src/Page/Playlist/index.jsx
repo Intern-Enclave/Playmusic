@@ -15,37 +15,39 @@ import { useMusic } from '../../hooks/useMusic';
 
 function Playlist() {
 
-  const {currentUser, setPlaylist} = useMusic();
+  const {currentUser, setPlaylist,playlistUser,postPlaylist,delPlaylist,playlistName,setPlaylistName} = useMusic();
 
-  const [playlistUser, setPlaylistUser] = useState([]);
+  // const [playlistUser, setPlaylistUser] = useState([]);
   const [formRequest, setFormRequest] = useState(false);
-  const [playlistName, setPlaylistName] = useState('');
+  // const [playlistName, setPlaylistName] = useState('');
   
-  useEffect(() => {
-    const getPlaylistUser = async () => {
-      try {
-        const params = {username: currentUser.username}
-        const response = await UseApi.getPlaylist({params});
-        // console.log(response)
-        response ? setPlaylistUser(response) : setPlaylistUser([])
-      } catch (error) {
-        console.log("error get list playlist: ", error);
-      }
-    };
-    getPlaylistUser();
-  }, [currentUser]);
+  // useEffect(() => {
+  //   const getPlaylistUser = async () => {
+  //     try {
+  //       const params = {username: currentUser.username}
+  //       const response = await UseApi.getPlaylist({params});
+  //       // console.log(response)
+  //       response ? setPlaylistUser(response) : setPlaylistUser([])
+  //     } catch (error) {
+  //       console.log("error get list playlist: ", error);
+  //     }
+  //   };
+  //   getPlaylistUser();
+  // }, [currentUser]);
+
 
   
   
-  const postPlaylist = async () => {
-    try{ 
-      const temp = {name: playlistName, username: currentUser.username};
-      const resp = await UseApi.postPlaylist(temp);
-      console.log(resp)
-    }catch (error) {
-      console.log("error post playlist: ", error);
-    }
-  }
+  // const postPlaylist = async () => {
+  //   try{ 
+  //     const temp = {name: playlistName, username: currentUser.username};
+  //     const resp = await UseApi.postPlaylist(temp);
+  //     console.log(resp)
+  //     setPlaylistUser([...playlistUser, resp])
+  //   }catch (error) {
+  //     console.log("error post playlist: ", error);
+  //   }
+  // }
   
   const onsubmit=()=>{
     setFormRequest(false);
@@ -53,20 +55,24 @@ function Playlist() {
   }
 
 
-  const delPlaylist = async (i) => {
-    try{ 
-      const resp = await UseApi.deletePlaylist({id: i})
-      console.log(resp)
-    }catch (error) {
-      console.log("error post playlist: ", error);
-    }
-  }
+  // const delPlaylist = async (i) => {
+  //   try{ 
+  //     const resp = await UseApi.deletePlaylist({id: i})
+  //     console.log(resp)
+  //     const newPlaylistUser = playlistUser.filter((playlist) => {
+  //       return playlist.id !== i;
+  //     })
+  //     setPlaylistUser(newPlaylistUser);
+  //   }catch (error) {
+  //     console.log("error post playlist: ", error);
+  //   }
+  // }
 
 
 
   return (
     <div className="pl-container">
-      <button >delete</button>
+      
       {formRequest && (
         <div className="modal">
         <div className="modal__overlay"></div>

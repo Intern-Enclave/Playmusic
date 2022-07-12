@@ -11,7 +11,6 @@ import { FaHome,FaMusic } from 'react-icons/fa';
 import { TbPlaylist } from 'react-icons/tb';
 
 import { useMusic } from '../../hooks/useMusic';
-import Playlist from '../../Page/Playlist';
 
 function Sidebar() {
 

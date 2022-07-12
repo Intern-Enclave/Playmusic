@@ -45,8 +45,7 @@
     border-radius: 5%;
     background-color: #432275;
     bottom: 55vh;
-    left: 0;
-    // display: flex;
+    left: -10vh;
 }
 
 .more-menu {
@@ -69,6 +68,18 @@
     transform: translateX(195%);
     margin-left: -61px;
     border-radius: 15%;
+}
+
+.menu-option-icon{
+    position: relative;
+    margin-left: 15px;
+
+    & svg{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
 }
 
 .song-tittle {
@@ -194,4 +205,94 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
+}
+
+.addd-topl-pos {
+    position: relative;
+}
+.choose-playlist-menu-container.open1 {
+    display: block;
+}
+.choose-playlist-menu-container {
+    width: 250px;
+    height: 250px;
+    position: absolute;
+    top: -200%;
+    left: 97%;
+    background-color: #432275;
+    border-radius: 2%;
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%);
+    display: none;
+    overflow: hidden;
+    overflow-y: auto;
+}
+
+.choose-playlist-menu-content {
+    padding-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.choose-menu-header {
+    position: fixed;
+    width: 95%;
+    padding-top: 10px;
+    z-index: 10;
+    background-color: #432275;
+}
+
+.all-pl-add {
+    position: relative;
+    margin-top: 100px;
+    z-index: 5;
+}
+
+.search-playlist-add {
+    width: 100%;
+    height: 35px;
+    padding: 0 15px;
+    margin-bottom: 10px;
+    // position: absolute;
+    // background-color:#432275;
+}
+
+.search-playlist-add input {
+    width: 100%;
+    height: 100%;
+    border-radius:999px;
+    background-color: rgba(255, 255, 255, 0.101);
+    border: 1px solid rgba(255, 255, 255, 0.41);
+    padding: 0 15px;
+    color: #fff;
+}
+
+.create-playlist-add {
+    display: flex;
+    padding-right: 15px;
+    color: #fff;
+    padding: 10px 14px;
+    opacity: 0.6;
+}
+
+.playlist-add-item {
+    display: flex;
+    padding-right: 15px;
+    color: #fff;
+    padding: 10px 14px;
+    opacity: 0.8;
+}
+.playlist-add-item span {
+    margin-left: 20px;
+}
+
+.playlist-add-item:hover {
+    background-color: rgba(255, 255, 255, 0.604);
+    color: #fff;
+}
+
+.create-playlist-add:hover{
+    background-color: rgba(255, 255, 255, 0.604);
+    color: #fff;
+
 }

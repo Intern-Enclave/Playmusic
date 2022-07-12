@@ -1,0 +1,199 @@
+@use '../../scss/' as *;
+
+.modal {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    animation: fadein linear 0.1s;
+    z-index: 100;
+}
+
+.modal__overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .4);
+}
+
+.modal__body {
+    
+    margin: auto;
+    position: relative;
+    z-index: 1;
+    animation: growth linear 0.1s;
+}
+
+@keyframes growth {
+    from {
+        transform: scale(0.7);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+.register {
+    width: 400px;
+    background-color: $text-primary;
+    border-radius: 10px;
+    overflow: hidden;
+    color: $purple-primary;
+    position: relative;
+
+    & svg {
+        font-size: 2.5rem;
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        cursor: pointer;
+
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+
+}
+
+// .register__form > p{
+//     color: red;
+// }
+
+.register__container {
+    padding: 16px 32px;
+}
+
+.register__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 8px;
+    margin-bottom: 0px;
+}
+
+.register__heading {
+    font-size: 2.2rem;
+    font-weight: 600;
+}
+
+.register__switch {
+    font-size: 1.6rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+
+.invalid .register__input {
+    border-color: #888;
+}
+
+.invalid .form__message {
+    color: #888;
+}
+
+.register__input {
+    width: 100%;
+    height: 40px;
+    margin-top: 24px;
+    padding: 0 12px;
+    font-size: 1.4rem;
+    border: 1px solid $purple-primary;
+    border-radius: 5px;
+    outline: none;
+}
+
+.register__input:focus {
+    border: 2px solid $purple-primary;
+}
+
+.form__message {
+    display: block;
+    font-size: 1.2rem;
+    margin-top: 5px;
+    margin-left: 10px;
+    color: $purple-primary;
+}
+
+.register__aside {
+    margin-top: 18px;
+}
+
+.register__asdie-text {
+    padding: 0 12px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.register__text-link {
+    text-decoration: none;
+    color: $purple-primary;
+}
+
+.register__controls {
+    margin-top: 80px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.register__controls-back {
+    margin-right: 8px;
+}
+
+.register__socals {
+    background-color: #e5e2e2;
+    padding: 12px 36px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn--with-icon {}
+
+.register__socals-icon {
+    font-size: 1.8rem;
+}
+
+.register__socal-lable {
+    margin: 0 30px;
+}
+
+.register__socals--facebook .register__socals-icon {
+    color: var(--white-color);
+}
+
+/* login */
+
+.register__help {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.register__help-link {
+    font-size: 1.4rem;
+    text-decoration: none;
+    color: #939393;
+}
+
+.register__help-separate {
+    display: block;
+    height: 20px;
+    margin: 0 16px 0;
+    border-left: 1px solid var(--border-color);
+}
+
+.login-button{
+    border-radius: 100px;
+    margin-top: 60px;
+    margin-bottom: 20px;
+    background-color: $purple-primary;
+}
+
+.login-button .login-button-btn{
+    background-color: transparent;
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;    
+}
+
+
