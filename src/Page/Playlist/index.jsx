@@ -1,74 +1,23 @@
-import React, { useEffect, useState} from "react";
+import React, { useState} from "react";
 
 import { Link } from "react-router-dom";
 import "./playlist.scss";
 import { AiOutlinePlusCircle, AiOutlineClose } from "react-icons/ai";
 import { BsPlayCircle } from "react-icons/bs";
 import { FiMoreHorizontal } from "react-icons/fi";
-// import { ImSwitch } from "react-icons/im";
-import UseApi from "../../API/UseApi";
 import { useMusic } from '../../hooks/useMusic';
-// import AddPlaylistForm from "../../component/addPlaylistForm/AddPlaylistForm";
-
-// import * as GetPlaylistUser from '../../services/playlistService'
 
 
 function Playlist() {
 
-  const {currentUser, setPlaylist,playlistUser,postPlaylist,delPlaylist,playlistName,setPlaylistName} = useMusic();
+  const {setPlaylist,playlistUser,postPlaylist,delPlaylist,playlistName,setPlaylistName} = useMusic();
 
-  // const [playlistUser, setPlaylistUser] = useState([]);
   const [formRequest, setFormRequest] = useState(false);
-  // const [playlistName, setPlaylistName] = useState('');
-  
-  // useEffect(() => {
-  //   const getPlaylistUser = async () => {
-  //     try {
-  //       const params = {username: currentUser.username}
-  //       const response = await UseApi.getPlaylist({params});
-  //       // console.log(response)
-  //       response ? setPlaylistUser(response) : setPlaylistUser([])
-  //     } catch (error) {
-  //       console.log("error get list playlist: ", error);
-  //     }
-  //   };
-  //   getPlaylistUser();
-  // }, [currentUser]);
-
-
-  
-  
-  // const postPlaylist = async () => {
-  //   try{ 
-  //     const temp = {name: playlistName, username: currentUser.username};
-  //     const resp = await UseApi.postPlaylist(temp);
-  //     console.log(resp)
-  //     setPlaylistUser([...playlistUser, resp])
-  //   }catch (error) {
-  //     console.log("error post playlist: ", error);
-  //   }
-  // }
   
   const onsubmit=()=>{
     setFormRequest(false);
     postPlaylist()
   }
-
-
-  // const delPlaylist = async (i) => {
-  //   try{ 
-  //     const resp = await UseApi.deletePlaylist({id: i})
-  //     console.log(resp)
-  //     const newPlaylistUser = playlistUser.filter((playlist) => {
-  //       return playlist.id !== i;
-  //     })
-  //     setPlaylistUser(newPlaylistUser);
-  //   }catch (error) {
-  //     console.log("error post playlist: ", error);
-  //   }
-  // }
-
-
 
   return (
     <div className="pl-container">
@@ -165,7 +114,7 @@ function Playlist() {
                 <div className="pl-icon">
                   <AiOutlineClose onClick={()=> delPlaylist(val.id)}/>
                 </div>
-                <Link to={'/playlist/playlist_id'} className="pl-icon pl-icon-active-play"  onClick={()=> setPlaylist(val.id)}>
+                <Link to={'/playlist/playlist_id'} className="pl-icon pl-icon-active-play"  onClick={()=> setPlaylist(val.id, val.name)}>
                   <BsPlayCircle />
                 </Link>
                 <div className="pl-icon">

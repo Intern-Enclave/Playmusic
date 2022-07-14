@@ -3,18 +3,17 @@
 .home-page-container{
     background-color: $layout-bg;
     min-height: 100%;
+    width: 100%;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 370px 310px 310px;
+    grid-template-rows: 370px 310px 250px;
     grid-row-gap: 20px;
     padding-bottom: 100px;
-    overflow: hidden;
 }
 
 .topic-music {
-    width: 1000px;
+    width: calc(100% - 20px);
 }
-
 
 .topic-tittle {
     color: #fff;
@@ -56,8 +55,9 @@
     
 }
 
+
 .more {
-    color: #fff;
+    color: #fff !important;
     font-size: 20px;
     font-weight: 600;
     margin-top: 2px;
@@ -65,7 +65,7 @@
 }
 
 .more:hover {
-    color: #43059f;
+    color: #43059f !important;
     opacity: 0.6;
     cursor: pointer;
 }
@@ -79,6 +79,9 @@
     "listbox";
     grid-row-gap: 15px;
     width: 100%;
+    width: calc(100% - 20px);
+    // border: 1px solid #fff;
+    
 }
 
 .playlists-music-header:first-child {
@@ -86,18 +89,24 @@
 }
 
 .playlists-music-box {
+    // border: 1px solid #fff;
+    width: 100%;
     grid-area: listbox;
     display: grid;
     grid-template-areas: 
     "listit1 listit2 listit3 listit4 listit5";
-    width: 100%;
+    overflow: hidden;
+    overflow-x: auto;
 }
 
 
 .playlist-music-item {
     // border: 1px solid #fff;
-    width: calc(100%/5);
-    height: 266px;
+    width: 210px;
+    // min-width: none;
+    // width: calc(100% - 20px);
+    // height: 266px;
+    height: 100%;
     padding: 0 12px;
     align-items: center;
 }
@@ -123,16 +132,20 @@
 }
 
 .playlist-music-item-img {
-    width: 185px;
-    height: 185px;
+    // width: 185px;
+    width: 100%;
+    // height: 185px;
+    height: 70%;
     text-align: center;
     // border: 1px solid #fff;
     position: relative;
 }
 
 .playlist-music-item-img img{
-    width: 185px;
-    height: 185px;
+    // width: 185px;
+    // height: 185px;
+    width: 100%;
+    height: 100%;
     border-radius: 2%;
 }
 
@@ -141,8 +154,10 @@
     justify-content: space-around;
     align-items: center;
     position: absolute;
-    width: 185px;
-    height: 185px;
+    // width: 185px;
+    // height: 185px;
+    width: 100%;
+    height: 100%;
     top:0%;
     font-size: 35px;
     background-color:rgba(0, 0, 0, 0.653);
@@ -206,7 +221,9 @@
     "topheader"
     "topbox";
     grid-row-gap: 15px;
-    width: 1185px;
+    // width: 1185px;
+    width: calc(100% - 20px);
+    // border: 1px solid #fff;
 }
 
 .top-music-header:first-child {
@@ -214,26 +231,40 @@
 }
 
 .top-music-box {
+    width: 100%;
     grid-area: topbox;
     display: grid;
     grid-template-areas: 
     "topitem1 topitem2 topitem3";
+    // border: 1px solid #fff;
+    overflow: hidden;
+    overflow-x: auto;
 }
 
 .top-music-item:nth-child(1) {
     grid-area: topitem1;
+    & .top-number{
+        color: red;
+    }
 }
 
 .top-music-item:nth-child(2) {
     grid-area: topitem2;
+    & .top-number{
+        color: yellow;
+    }
 }
 
 .top-music-item:nth-child(3) {
     grid-area: topitem3;
+    & .top-number{
+        color: green;
+    }
 }
 
 .top-music-item {
     width: 350px;
+    // width: 90%;
     height: 140px;
     margin: 0 10px;
     border: 1px solid hsla(0,0%,100%,0.1);
@@ -241,27 +272,36 @@
     border-radius: 4px;
     box-shadow: 0 2px 10px 0 var(none);
     background-color: hsla(0,0%,100%,0.1);
+    // border: 1px solid red;
+   
 }
 
 .top-music-item-content {
     display: flex;
     margin: 0 14px;
     margin-top: 9px;
-    width: 380px;
+    // width: 380px;
+    width: 100%;
 
 }
 
 .top-music-item-img {
-    height: 120px;
-    width: 120px;
+    // height: 120px;
+    // width: 120px;
+    height: 100%;
+    width: 30%;
     position: relative;
     margin-right: 20px;
+   
 }
 
 .top-music-item-img img {
-    height: 120px;
-    width: 120px;
+    // height: 120px;
+    // width: 120px;
+    height: 100%;
+    width: 100%;
     border-radius: 2%;
+    
 }
 
 .top-music-item-img-hov {
@@ -269,8 +309,10 @@
     justify-content: space-around;
     align-items: center;
     position: absolute;
-    width: 120px;
-    height: 120px;
+    // width: 120px;
+    // height: 120px;
+    width: 100%;
+    height: 94%;
     top:0%;
     font-size: 35px;
     background-color:rgba(0, 0, 0, 0.653);
@@ -280,8 +322,9 @@
 .top-music-item:hover .top-music-item-img-hov {
     display: flex;
     cursor: pointer;
- }
+}
 
+ 
 .top-music-item-desc {
     color: #fff;
 }
@@ -290,6 +333,12 @@
     font-size: 16px;
     font-weight: 700;
     font-style: Inter,sans-serif;
+    line-height: 1;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .top-singer {
@@ -305,7 +354,8 @@
 
 .top-music-item-status {
     display: flex;
-    width: 217px;
+    // width: 217px;
+    width: 50%;
     flex-direction: column;
     align-content: space-between;
 }
@@ -321,13 +371,13 @@
     font-family: "Roboto",sans-serif;
 }
 // reponsive
- @media screen and (max-width:990px)  {
-    .topic-music {
-        width: 700px;
-    }
-    .playlists-music {
-        width: 700px;
-    }
+ @media screen and (max-width:1024px)  {
+    // .topic-music {
+    //     width: 700px;
+    // }
+    // .playlists-music {
+    //     width: 700px;
+    // }
     .playlists-music-box {
         grid-template-areas: 
         "listit1 listit2 listit3";
@@ -340,9 +390,9 @@
         // grid-area: listit5;
         display: none;
     }
-    .top-music {
-        width: 700px;
-    }
+    // .top-music {
+    //     width: 700px;
+    // }
     .top-music-box {
         grid-template-areas: 
         "topitem1 topitem2";
@@ -351,6 +401,40 @@
         grid-area: topitem2;
         // display: none;
     }
+    .top-music-item:nth-child(3) {
+        // grid-area: topitem3;
+        display: none;
+    }
+ }
+
+ @media screen and (max-width:500px)  {
+    // .topic-music {
+    //     width: 700px;
+    // }
+    // .playlists-music {
+    //     width: 700px;
+    // }
+    .playlists-music-box {
+        grid-template-areas: 
+        "listit1 listit2";
+    }
+    
+    .playlist-music-item:nth-child(3),
+    .playlist-music-item:nth-child(4),
+    .playlist-music-item:nth-child(5) {
+        // grid-area: listit5;
+        display: none;
+    }
+    
+    // .top-music {
+    //     width: 700px;
+    // }
+    .top-music-box {
+        grid-template-areas: 
+        "topitem1";
+    }
+    
+    .top-music-item:nth-child(2),
     .top-music-item:nth-child(3) {
         // grid-area: topitem3;
         display: none;

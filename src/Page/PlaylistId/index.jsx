@@ -3,6 +3,7 @@ import MediaItem from "../../component/MediaItem";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
 import { AiTwotoneHeart, AiFillDelete } from "react-icons/ai";
 import { BsThreeDots,BsFillPlusCircleFill } from "react-icons/bs";
+import { FiEdit } from "react-icons/fi";
 // import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
 import "./playlist.scss";
@@ -16,13 +17,15 @@ import 'tippy.js/dist/tippy.css';
 
 
 function PlaylistId() {
-  const { setPlaylist, playlist_Id, listTrack, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong} =
+  const { setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,playlistUser} =
   useMusic();
-
 
   const [active, setActive] = useState("");
   const [listTrackId, setListTrackId] =useState([]);
+  const [playlistName, setPlaylistName] = useState('')
 
+  
+  // console.log(playlistName)
 
 
   // console.log(localStorage.getItem('playlistId'))
@@ -32,6 +35,10 @@ function PlaylistId() {
       const params = {playlistId: playlist_Id }
       const response = await UseApi.getTracksId({params});
       response ? setListTrackId(response) : setListTrackId([]);
+
+      playlistUser.map((val)=> {
+        if(val.id===playlist_Id) setPlaylistName(val.name)
+      })
     } catch (error) {
       console.log("error get playlistId: ", error);
     }
@@ -88,8 +95,16 @@ function PlaylistId() {
             src={currentSong.artist?.picture}
             // src="https://api.deezer.com/artist/13/image"
             alt=""
-            className={`playlist-music-img ${isPlay ? "play" : ""}`}
+            className={`playlist_id-music-img ${isPlay ? "play" : ""}`}
           />
+          <div className="playlist_id-cd-title">
+            <div className="playlist_id-cd-title-name">
+                {playlistName}
+            </div>
+            <span className="playlist_id-cd-title-icon">
+              <FiEdit />
+            </span>
+          </div>
         </div>
         <div className="playlist-music-info">
           <h2 className="playlist-music-info-name">{currentSong?.title}</h2>
@@ -129,11 +144,11 @@ function PlaylistId() {
       {listTrackId ? (
         listTrackId.map((val, index) => (
           <div
-          className={`playlist-item ${index === active || currentSong?.id == val.id ? "active" : ""}`}
+          className={`playlist-item ${currentSong?.id == val.id ? "active" : ""}`}
           key={val.id}
           onClick={() => {
             setActive(index);
-            handleChooseSong(val);
+            handleChooseSong(val, listTrackId);
             handlePlayAnotherSong()
           }}
           >

@@ -89,13 +89,13 @@ function NewSong() {
       {listTrack ? (
         listTrack.map((val, index) => (
           <div
-          className={`playlist-item ${index === active || currentSong?.id == val.id ? "active" : ""}`}
-          key={val.id}
-          onClick={() => {
-            setActive(index);
-            handleChooseSong(val);
-            handlePlayAnotherSong()
-          }}
+            className={`playlist-item ${currentSong?.id == val.id ? "active" : ""}`}
+            key={val.id}
+            onClick={() => {
+              setActive(index);
+              handleChooseSong(val, listTrack);
+              handlePlayAnotherSong()
+            }}
           >
             <Tippy delay={[0,200]} content='Add Playlist'>
               <button className="playlist-item-icon">

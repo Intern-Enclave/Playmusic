@@ -161,11 +161,35 @@
 .playlist-music-cd{
   display: flex;
   align-items: center;
+  flex-direction: column;
+}
+.playlist_id-cd-title{
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-top: 20px;
+  display: flex;
+  position: relative;
+
+  &-icon{
+    position: relative;
+    margin-left: 30px;
+    font-size: 2rem;
+    cursor: pointer;
+    &:hover{
+      color: $purple-primary ;
+    }
+    & svg{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
 
-.playlist-music-img{
-  width: 20vw;
-  height: 20vw;
+.playlist_id-music-img{
+  width: 15vw;
+  height: 15vw;
   border-radius: 20px;
   object-fit: cover;
   transition: border-radius linear .5s;

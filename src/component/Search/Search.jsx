@@ -13,10 +13,13 @@ import Wraper from '../Popper/Wraper';
 import { VscLoading } from "react-icons/vsc";
 import { MdClear } from "react-icons/md";
 import { BiSearchAlt2 } from "react-icons/bi";
+import { useMusic } from '../../hooks/useMusic';
 
 import './search.scss';
 
 function Search() {
+
+    const {handleChooseSong,listTrack} = useMusic();
 
     const [searchValue, setSearchValue] = useState('')
     const [searchResult, setSearchResult] = useState([])
@@ -85,7 +88,7 @@ function Search() {
                                 Offer
                             </h4>
                             {searchResult.length>0 ? (searchResult.map((result) => (
-                                <MediaItem key={result.id} singer={result?.artist.name} SongName={result?.title} img={result?.artist.picture} className={'result-item'}/>
+                               <div key={result.id} onClick={()=>handleChooseSong(result,listTrack)}> <MediaItem  singer={result?.artist.name} SongName={result?.title} img={result?.artist.picture} className={'result-item'}  /></div>
                             ))) : <div>Can not find</div>}
                         
                         </Wraper>

@@ -16,11 +16,16 @@ const PlayingMusicProvider = ({ children }) => {
 
   //playlistid
   const [playlist_Id, setPlaylist_Id] = useState(0);
+  // const [playlist_Id, setPlaylist_Id] = useState(0);
 
   //playlist User
   const [playlistUser, setPlaylistUser] = useState([]);
   const [playlistName, setPlaylistName] = useState('');
 
+  //usingPlaylist
+  const [usingPlaylist, setUsingplaylist] = useState([]);
+
+  
   //control music
   const handlePlayAnotherSong = () => {
     setIsPlay(true);
@@ -39,7 +44,7 @@ const PlayingMusicProvider = ({ children }) => {
   const handleChangeSong = (way, list) => {
     if (
       (currentSong.id == list[0].id && way == "prev") ||
-      (currentSong.id == list[listTrack.length - 1].id && way == "next")
+      (currentSong.id == list[list.length - 1].id && way == "next")
     )
       return;
     for (let i = 0; i < list.length; i++) {
@@ -58,8 +63,9 @@ const PlayingMusicProvider = ({ children }) => {
     }
   };
 
-  const handleChooseSong = (song) => {
+  const handleChooseSong = (song,list) => {
     setCurrentSong(song);
+    setUsingplaylist(list);
     localStorage.setItem("songId", song.id);
   };
   
@@ -122,10 +128,6 @@ const PlayingMusicProvider = ({ children }) => {
         alert('Success')
       }
       
-      // if(!(user.username == name && user.password == pass)) {
-      //   setCurrentUser(null)
-      //   setLogin(true)
-      // } 
     })
     
   }
@@ -146,8 +148,6 @@ const PlayingMusicProvider = ({ children }) => {
   }
 
 
-  
-
   const logoutRequest = () =>{
     setLogin(false)
     setCurrentUser(false)
@@ -165,7 +165,7 @@ const PlayingMusicProvider = ({ children }) => {
     const getPlaylistUser = async () => {
       try {
         const params = {username: currentUser.username}
-        const response = await UseApi.getPlaylist({params});
+        const response = await UseApi.getPlaylist(params);
         // console.log(response)
         response ? setPlaylistUser(response) : setPlaylistUser([])
       } catch (error) {
@@ -200,6 +200,13 @@ const PlayingMusicProvider = ({ children }) => {
   }
 
 
+  ///choose list track
+  // const handleChooseList = (list) => {
+  //   // localStorage.setItem('usingList', list)
+  //   setUsingplaylist(list) 
+  // } 
+  
+
  
 
   const value = {
@@ -233,6 +240,9 @@ const PlayingMusicProvider = ({ children }) => {
     delPlaylist,
     // listTrackId,
     playlist_Id,
+    //usingPlaylist
+    usingPlaylist,
+    setUsingplaylist,
   };
 
   return (

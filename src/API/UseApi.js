@@ -26,7 +26,7 @@ const UseApi = {
     },
     getPlaylist: (params) => {
         const url = 'playlist/getByUsername';
-        return axiosClient.get(url, params)
+        return axiosClient.get(url, {params})
     },
     postPlaylist: (params) => {
         const url = 'playlist'
@@ -45,6 +45,10 @@ const UseApi = {
     deleteSong: (params) => {
         const url = 'playlist_has_track/deleteByTrackIdInPlaylist'
         return axiosClient.delete(url, {params});
+    },
+    topSong: (params) => {
+        const url = 'track/get_top'
+        return axiosClient.get(url, {params});
     },
 }
 
