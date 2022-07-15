@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 function Login() {
 //login
-    const {handleLogin, unLoginRequest, registerRequest,loginFail} = useMusic()
+    const {handleLogin, unLoginRequest, registerRequest,loginFail,setLoginFail} = useMusic()
 
     
     const login = () =>{
@@ -31,6 +31,7 @@ function Login() {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
+        setLoginFail(false);
         setFormValues({ ...formValues, [name]: value });
     };
 
@@ -65,24 +66,15 @@ function Login() {
         return errors;
     };
 
-    console.log(loginFail)
-
     return (
         <div className="modal">
             <div className="modal__overlay"></div>
 
             <div className="modal__body">
 
-            {/* {Object.keys(formErrors).length === 0 && isSubmit ? (
-                <div className="ui message success">Signed in successfully</div>
-            ) : (
-                <pre>{JSON.stringify(formValues, undefined, 2)}</pre>
-            )}
- */}
-
                 <form action="" className="register" id="form-register" onSubmit={handleSubmit}>
                 <div className="register">
-                    <AiFillCloseCircle onClick={unLoginRequest}/>
+                    <Link to={'/'}><AiFillCloseCircle onClick={unLoginRequest}/></Link>
                     <div className="register__container">
                         <div className="register__header">
                             <h3 className="register__heading">Login</h3>
