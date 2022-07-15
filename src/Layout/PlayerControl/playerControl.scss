@@ -37,15 +37,15 @@
     display: flex;
 }
 .control-left-more-menu {
-    transform: translate(280px,250px);
+    // transform: translate(280px,250px);
     width: 265px;
     height: 380px;
     background-color: #fff;
-    position: absolute;
+    position: fixed;
     border-radius: 5%;
     background-color: #432275;
-    bottom: 55vh;
-    left: -10vh;
+    // bottom: 0;
+    left: -50px;
 }
 
 .more-menu {

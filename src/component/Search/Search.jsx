@@ -23,10 +23,11 @@ function Search() {
 
     const [searchValue, setSearchValue] = useState('')
     const [searchResult, setSearchResult] = useState([])
-    const [showResult, setShowResult] = useState(true)
+    const [showResult, setShowResult] = useState(false)
     const [loadding, setLoading] = useState(false)
+    const [focus,setFocus] = useState(false)
 
-    const debounce = useDebounce(searchValue, 700)
+    const debounce = useDebounce(searchValue, 500)
 
     const inputRef = useRef()
 
@@ -54,12 +55,15 @@ function Search() {
 
     const handleClear = () => {
         setSearchValue('');
-        setSearchResult([])
+        setSearchResult([]);
+        // setShowResult(false);
+        // handleHideResult();
         inputRef.current.focus();
     }
 
     const handleHideResult = () =>{
-        setShowResult(false)
+        setShowResult(false);
+        setFocus(false);
     }
 
     const handleChange = (e) =>{
@@ -67,6 +71,11 @@ function Search() {
         if(!searchVal.startsWith(' ')){
             setSearchValue(searchVal)
         }
+    }
+
+    const onFocus = () => {
+        setShowResult(true);
+        setFocus(true);
     }
 
     return (
@@ -78,9 +87,8 @@ function Search() {
             </div> */}
             <HeadlessTippy 
                 interactive
-                // visible = {showResult}
-                visible = {showResult && searchResult.length>0}
-                // visible
+                visible = {showResult}
+                // visible = {showResult && searchResult.length>0}
                 render={attrs => (
                     <div className='search-result' tabIndex= '-1' {...attrs}>
                         <Wraper>
@@ -89,7 +97,7 @@ function Search() {
                             </h4>
                             {searchResult.length>0 ? (searchResult.map((result) => (
                                <div key={result.id} onClick={()=>handleChooseSong(result,listTrack)}> <MediaItem  singer={result?.artist.name} SongName={result?.title} img={result?.artist.picture} className={'result-item'}  /></div>
-                            ))) : <div>Can not find</div>}
+                            ))) : <div className='cannotfind-result'>Can not find</div>}
                         
                         </Wraper>
                     </div>
@@ -103,10 +111,10 @@ function Search() {
                         placeholder="Input name song" 
                         spellCheck={false}
                         onChange = {handleChange}
-                        onFocus = {() => setShowResult(true)}
+                        onFocus = {onFocus}
                     />
-                    {!!searchValue && !loadding &&  (
-                        <button className="clear" onClick={handleClear}>
+                    {focus && !loadding &&  (
+                        <button className="clear" onClick={handleHideResult}>
                             <MdClear />
                         </button>
                     )}

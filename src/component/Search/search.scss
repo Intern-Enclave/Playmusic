@@ -48,6 +48,13 @@
 
 }
 
+.cannotfind-result{
+    color: $text-primary;
+    font-size: 1.4rem;
+    margin: 10px;
+    text-align: center;
+}
+
 .search-title{
     color: $text-primary;
     font-size: 1.8rem;
@@ -62,6 +69,7 @@
     display: flex;
     align-items: center;
     margin-right: 12px;
+    cursor: pointer;
 }
 .loading{
     color: $text-primary;
