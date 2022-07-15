@@ -229,6 +229,7 @@ const PlayingMusicProvider = ({ children }) => {
     // user,
     listUser,
     loginFail,
+    setLoginFail,
     setListUser,
     handleLogin,
     loginRequest,

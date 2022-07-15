@@ -10,7 +10,7 @@ import UseApi from '../../API/UseApi';
 
 function Register() {
 //login
-    const {unRegisterRequest,listUser,setListUser} = useMusic()
+    const {unRegisterRequest,listUser,setListUser,loginRequest} = useMusic()
 
     // const register = () => {
     //     unLoginRequest();
@@ -90,7 +90,10 @@ function Register() {
 
     }
 
-    console.log(formErrors)
+    const Login = () => {
+        unRegisterRequest();
+        loginRequest();
+    }
     
 
     return (
@@ -112,7 +115,7 @@ function Register() {
                     <div className="register__container">
                         <div className="register__header">
                             <h3 className="register__heading">Register</h3>
-                            <span className="register__switch">Login</span>
+                            <span className="register__switch" onClick={()=> Login()}>Login</span>
                         </div>
 
                         <div className="register__form">
