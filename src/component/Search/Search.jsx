@@ -108,7 +108,7 @@ function Search() {
                     <input 
                         ref={inputRef}
                         value={searchValue}
-                        placeholder="Input name song" 
+                        placeholder="Search..." 
                         spellCheck={false}
                         onChange = {handleChange}
                         onFocus = {onFocus}

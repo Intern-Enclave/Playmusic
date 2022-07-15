@@ -8,12 +8,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position: relative;
   }
   
   .Control-Button-Group {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    
 
   
     > * {
@@ -50,22 +56,45 @@
   }
   
   .timeSlide{
+    top: 15%;
     left: 50%;
     transform: translateX(-50%);
     width: 100% !important;
     margin-top: 10px;
     cursor: pointer !important ; 
+    
+     &:hover {
+      height: 18px !important;
+      border-top: 8px solid rgb(18, 12, 28);
+      border-bottom: 8px solid rgb(18, 12, 28);
+      border-radius: 999px;
+      
+
+      & .css-3uoig3-Slider{ 
+        height: 14px !important;
+        width: 14px !important;
+        transform: translateY(15%);
+      }
+
+      & .css-6nna9v-Slider {
+        height: 5px !important;
+        transform: translateY(-15%);
+        
+      }
+     }
   }
 
   .css-3uoig3-Slider{
     background-color: $purple-primary !important;
-    height: 8px !important;
-    width: 8px !important;
+    height: 1px !important;
+    width: 1px !important;
     border-radius: 50% !important;
-    margin-top: 1px !important;
+   
+    
   }
 
   .css-6nna9v-Slider{
     background-color: $purple-primary !important;
     cursor: pointer !important;
+    
   }

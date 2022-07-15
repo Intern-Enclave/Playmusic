@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './carousel.css'
+import {IoMdArrowDropright , IoMdArrowDropleft} from "react-icons/io"
 
 const Carousel = (props) => {
     const {children, show} = props
@@ -59,7 +60,7 @@ const Carousel = (props) => {
                 {
                     currentIndex > 0 &&
                     <button onClick={prev} className="left-arrow">
-                        &lt;
+                        <IoMdArrowDropleft/>
                     </button>
                 }
                 <div
@@ -78,7 +79,7 @@ const Carousel = (props) => {
                 {
                     currentIndex < (length - show) &&
                     <button onClick={next} className="right-arrow">
-                        &gt;
+                          <IoMdArrowDropright/>
                     </button>
                 }
             </div>
