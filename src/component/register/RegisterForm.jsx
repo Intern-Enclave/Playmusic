@@ -10,7 +10,7 @@ import UseApi from '../../API/UseApi';
 
 function Register() {
 //login
-    const {unRegisterRequest} = useMusic()
+    const {unRegisterRequest,listUser,setListUser} = useMusic()
 
     // const register = () => {
     //     unLoginRequest();
@@ -38,7 +38,10 @@ function Register() {
     useEffect(() => {
         if (Object.keys(formErrors).length === 0 && isSubmit) {
         console.log(formValues);
-        }
+        addUserr();
+        unRegisterRequest();   
+        alert('success')     
+    }
     }, [formErrors]);
 
     const validate = (values) => {
@@ -56,8 +59,6 @@ function Register() {
         errors.password = "Password is required";
         } else if (values.password.length < 4) {
         errors.password = "Password must be more than 4 characters";
-        } else if (values.password.length > 10) {
-        errors.password = "Password cannot exceed more than 10 characters";
         }
         if (!values.confirmPass) {
             errors.confirmPass = "Password confirm is required";
@@ -72,16 +73,24 @@ function Register() {
         try{ 
           const resp = await UseApi.postUser({username: formValues.username, password: formValues.password});
           console.log(resp)
+            setListUser([...listUser, resp])
         }catch (error) {
           console.log("error post user: ", error);
         }
       }
 
     const register = () => {
-            addUserr();
-            unRegisterRequest()
-       
+        if(formErrors != {}){
+            console.log('abc')
+                
+        }
+        else{
+            console.log('bcd')
+        }
+
     }
+
+    console.log(formErrors)
     
 
     return (
@@ -137,7 +146,7 @@ function Register() {
                                     type="password" 
                                     name='confirmPass'
                                     className="register__input" 
-                                    placeholder="Input your password"
+                                    placeholder="confirm password"
                                     // value={password}
                                     onChange = {handleChange}
                                     value = {formValues.confirmPass}
@@ -145,7 +154,8 @@ function Register() {
                             </div>
                             <p>{formErrors.confirmPass}</p>
                         </div>
-                            <div className="login-button" onClick={()=> register()}>
+                            <div className="login-button" onClick={()=>register()}>
+                            {/* <div className="login-button" > */}
                                 <Button primary className={'login-button-btn'}>Register</Button>
                             </div>
                         </div>

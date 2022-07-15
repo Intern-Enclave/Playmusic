@@ -33,7 +33,7 @@ function PlayerControl() {
       try{ 
         const temp = {trackId: currentSong?.id, playlistId: id};
         const resp = await UseApi.postSong(temp);
-        console.log(resp)
+        
         // setPlaylistUser([...playlistUser, resp])
       }catch (error) {
         console.log("error post add song: ", error);

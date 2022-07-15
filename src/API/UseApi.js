@@ -50,6 +50,11 @@ const UseApi = {
         const url = 'track/get_top'
         return axiosClient.get(url, {params});
     },
+
+    updateInfoUser: (params) => {
+        const url = 'user/update_info';
+        return axiosClient.put(url, params)
+    }
 }
 
 export default UseApi;

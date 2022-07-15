@@ -13,6 +13,7 @@ const PlayingMusicProvider = ({ children }) => {
   const [login, setLogin] = useState(false);
   const [registerRq,setRegisterRq] = useState(false);
   const [listUser, setListUser] = useState([]);
+  const [loginFail, setLoginFail] = useState(false);
 
   //playlistid
   const [playlist_Id, setPlaylist_Id] = useState(0);
@@ -122,10 +123,13 @@ const PlayingMusicProvider = ({ children }) => {
 
     listUser.map(user => {
       if(user.username == name && user.password == pass) {
-        setCurrentUser(user)
-        // alert('success')
+        setCurrentUser(user);
+        setLoginFail(false);
         localStorage.setItem("currentUser", user.username);
         alert('Success')
+      }
+      if(!(user.username == name && user.password == pass)){
+        setLoginFail(true);
       }
       
     })
@@ -220,9 +224,12 @@ const PlayingMusicProvider = ({ children }) => {
     handleChangeSong,
 
     currentUser,
+    setCurrentUser,
     login,
     // user,
     listUser,
+    loginFail,
+    setListUser,
     handleLogin,
     loginRequest,
     logoutRequest,
@@ -230,6 +237,7 @@ const PlayingMusicProvider = ({ children }) => {
     registerRq,
     registerRequest,
     unRegisterRequest,
+    getAllUser,
     // playlist,
     setPlaylist,
     //playlistUser

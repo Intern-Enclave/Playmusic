@@ -182,6 +182,17 @@
     border-left: 1px solid var(--border-color);
 }
 
+.login_fail{
+
+}
+
+.login_fail-message{
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 8px 0;
+    color: rgb(182, 58, 58);
+}
+
 .login-button{
     border-radius: 100px;
     margin-top: 60px;
