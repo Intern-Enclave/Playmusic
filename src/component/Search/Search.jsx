@@ -97,7 +97,7 @@ function Search() {
                             </h4>
                             {searchResult.length>0 ? (searchResult.map((result) => (
                                <div key={result.id} onClick={()=>handleChooseSong(result,listTrack)}> <MediaItem  singer={result?.artist.name} SongName={result?.title} img={result?.artist.picture} className={'result-item'}  /></div>
-                            ))) : <div className='cannotfind-result'>Can not find</div>}
+                            ))) : <div className='cannotfind-result'>Can not find asdasdas</div>}
                         
                         </Wraper>
                     </div>
