@@ -37,6 +37,11 @@ const UseApi = {
         const url = 'playlist_has_track/addNew'
         return axiosClient.post(url, params)
     },
+    postAvatar: (params) => {
+        console.log(params)
+        const url = 'user/files/upload'
+        return axiosClient.post(url, params)
+    },
 
     deletePlaylist: (params) => {
         const url = 'playlist'
@@ -55,6 +60,8 @@ const UseApi = {
         const url = 'user/update_info';
         return axiosClient.put(url, params)
     }
+
+
 }
 
 export default UseApi;
