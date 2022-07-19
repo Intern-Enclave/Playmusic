@@ -79,16 +79,16 @@ function Register() {
         }
       }
 
-    const register = () => {
-        if(formErrors != {}){
-            console.log('abc')
+    // const register = () => {
+    //     if(formErrors != {}){
+    //         console.log('abc')
                 
-        }
-        else{
-            console.log('bcd')
-        }
+    //     }
+    //     else{
+    //         console.log('bcd')
+    //     }
 
-    }
+    // }
 
     const Login = () => {
         unRegisterRequest();
@@ -157,7 +157,7 @@ function Register() {
                             </div>
                             <p>{formErrors.confirmPass}</p>
                         </div>
-                            <div className="login-button" onClick={()=>register()}>
+                            <div className="login-button">
                             {/* <div className="login-button" > */}
                                 <Button primary className={'login-button-btn'}>Register</Button>
                             </div>
