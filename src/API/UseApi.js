@@ -37,11 +37,11 @@ const UseApi = {
         const url = 'playlist_has_track/addNew'
         return axiosClient.post(url, params)
     },
-    postAvatar: (params) => {
-        console.log(params)
-        const url = 'user/files/upload'
-        return axiosClient.post(url, params)
-    },
+    // postAvatar: (params) => {
+    //     console.log(params)
+    //     const url = 'user/files/upload'
+    //     return axiosClient.post(url, params)
+    // },
 
     deletePlaylist: (params) => {
         const url = 'playlist'
@@ -59,7 +59,11 @@ const UseApi = {
     updateInfoUser: (params) => {
         const url = 'user/update_info';
         return axiosClient.put(url, params)
-    }
+    },
+    updatePassword: (params) => {
+        const url = 'user/change_password';
+        return axiosClient.put(url, params)
+    },
 
 
 }
