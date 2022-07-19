@@ -42,7 +42,6 @@ const User = () => {
     iinitialValues && setFormValues(iinitialValues);
   },[iinitialValues]);
 
-  // console.log(iinitialValues)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -85,7 +84,9 @@ const User = () => {
     try{
         const temp = {username: currentUser?.username, new_password: formchangepass.newpass};
         const resp = await UseApi.updatePassword(temp)
-        setCurrentUser({username:currentUser?.username, password: formchangepass.newpass});
+
+        // setCurrentUser(localStorage.getItem("currentUser"));
+
         console.log(currentUser)
     }catch(error){
         console.log("error change password: ", error);
@@ -137,6 +138,7 @@ const User = () => {
               Acount Setting
               <AiOutlineSetting style={{ marginLeft: 10 }} />
             </h3>
+
             
           </div>
           <div className="acount-setting-active">
@@ -275,7 +277,7 @@ const User = () => {
               <div className="change-pass-box-container">
                 <div className="change-pass-box-input">
                   <div className="change-oldpass change-item">
-                    <p className="info-one-dsg">Old password</p>
+                    <p className="info-one-dsg">Old password</p> 
                     <input
                       className="change-old-pass-input input-dsg"
                       type='password'
@@ -322,7 +324,6 @@ const User = () => {
                 <button className={"accept-button"}>change</button>
             </form>
           </div>
-          
         </div>
       ) : (
         <div></div>
