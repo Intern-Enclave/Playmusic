@@ -90,6 +90,7 @@ const User = () => {
     }catch(error){
         console.log("error change password: ", error);
     }
+
   }
 
   const save = () => {
@@ -167,47 +168,39 @@ const User = () => {
                 )}
               </div>
 
-              <div className="change-user-phone change-item">
-                <p className="info-one-dsg">Email</p>
-                {editRequest ? (
-                  <input
-                    className="change-user-phone-input input-dsg"
-                    name="email"
-                    placeholder="default"
-                    value={formValues.email}
-                    onChange={handleChange}
-                  ></input>
-                ) : (
-                  <input
-                    className="change-user-phone-input input-dsg"
-                    name="email"
-                    placeholder="default"
-                    value={formValues.email}
-                    readOnly
-                  ></input>
-                )}
-              </div>
-              <div className="change-user-email change-item">
-                <p className="info-one-dsg">Country</p>
-                {editRequest ? (
-                  <input
-                    className="change-user-Email input-dsg"
-                    name="country"
-                    placeholder="default"
-                    value={formValues.country}
-                    onChange={handleChange}
-                  ></input>
-                ) : (
-                  <input
-                    className="change-user-Email input-dsg"
-                    name="country"
-                    placeholder="default"
-                    value={formValues.country}
-                    readOnly
-                  ></input>
-                )}
-              </div>
 
+                            <div className='change-user-age change-item'>
+                                <p className='info-one-dsg'>Birthday</p>
+                               {editRequest ? (<input className='change-user-age input-dsg' 
+                                  type="date"
+                                    name='birthday'
+                                    placeholder='default'
+                                    value={formValues.birthday ? formValues.birthday : 'Null'}
+                                    onChange={handleChange}
+                                >
+                                </input>) :
+                                (<input className='change-user-age input-dsg' 
+                                    type="date"
+                                    name='birthday'
+                                    placeholder='default'
+                                    value={formValues.birthday ? formValues.birthday : 'Null'}
+                                    readOnly
+                                >
+                                </input>)}
+                            </div>
+                            
+                            <div className='change-user-pass ' onClick={handleShowChangePass}>
+                                <a className=''> Change password!</a>
+                            </div>
+                        </div>
+                        <div className='change-avatar change-item'>
+                            <div className='change-avatar-img'>
+                                <img src = {currentUser?.image || "https://adnchronicles.org/wp-content/uploads/2020/05/Deafult-Profile-Pitcher.png"}/>
+                                {/* {avatar && <img src = {avatar.preview}/>} */}
+                            </div>
+                            <Button className={"change-avater-button"}>Change Avatar</Button>
+                        </div>
+                    </div>
               <div className="change-user-age change-item">
                 <p className="info-one-dsg">Birthday</p>
                 {editRequest ? (

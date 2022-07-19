@@ -1,4 +1,6 @@
+import { Axios } from "axios";
 import React, { createContext, useEffect, useRef, useState } from "react";
+import apiConfig from "../API/apiConfig";
 import UseApi from "../API/UseApi";
 
 const PlayingMusicContext = createContext();
@@ -104,6 +106,9 @@ const PlayingMusicProvider = ({ children }) => {
       } else {
         let cUser = localStorage.getItem("currentUser");
         response.map((user) => {
+          if(user.image !== null) {
+            user.image = apiConfig.baseUrl + "user/images/" + user.image;
+          }
           if (user.username == cUser) setCurrentUser(user);
         });
       }
