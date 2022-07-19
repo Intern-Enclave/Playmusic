@@ -275,7 +275,7 @@ const User = () => {
               <div className="change-pass-box-container">
                 <div className="change-pass-box-input">
                   <div className="change-oldpass change-item">
-                    <p className="info-one-dsg">Old password</p>
+                    <p className="info-one-dsg">Old password</p> 
                     <input
                       className="change-old-pass-input input-dsg"
                       type='password'
