@@ -137,17 +137,24 @@ const User = () => {
               Acount Setting
               <AiOutlineSetting style={{ marginLeft: 10 }} />
             </h3>
-            <div className="change-accept" onClick={() => setEditRequest(true)}>
-              <AiOutlineEdit />
-            </div>
+            
           </div>
           <div className="acount-setting-active">
             <div className="change-info-input">
-              <div className="change-user-name change-item">
+              <div className="change-info-input-header">
+                <div className="change-info-title">
+                  <h1>User Information</h1>
+                </div>
+                <div className="change-accept-tooltip" onClick={() => setEditRequest(true)}>
+                  <div className="change-icon"><AiOutlineEdit/></div>
+                  <span class="tooltiptext">Open Edit</span>
+                </div>
+              </div>
+              <div className="change-item">
                 <p className="info-one-dsg">Full Name</p>
                 {editRequest ? (
                   <input
-                    className="change-user-name-input input-dsg"
+                    className="input-dsg"
                     name="fullName"
                     id="user-name-input"
                     placeholder="default"
@@ -156,7 +163,7 @@ const User = () => {
                   ></input>
                 ) : (
                   <input
-                    className="change-user-name-input input-dsg"
+                    className="input-dsg"
                     name="fullName"
                     id="user-name-input"
                     placeholder="default"
@@ -166,11 +173,11 @@ const User = () => {
                 )}
               </div>
 
-              <div className="change-user-phone change-item">
+              <div className="change-item">
                 <p className="info-one-dsg">Email</p>
                 {editRequest ? (
                   <input
-                    className="change-user-phone-input input-dsg"
+                    className="input-dsg"
                     name="email"
                     placeholder="default"
                     value={formValues.email}
@@ -178,7 +185,7 @@ const User = () => {
                   ></input>
                 ) : (
                   <input
-                    className="change-user-phone-input input-dsg"
+                    className="input-dsg"
                     name="email"
                     placeholder="default"
                     value={formValues.email}
@@ -186,11 +193,11 @@ const User = () => {
                   ></input>
                 )}
               </div>
-              <div className="change-user-email change-item">
+              <div className="change-item">
                 <p className="info-one-dsg">Country</p>
                 {editRequest ? (
                   <input
-                    className="change-user-Email input-dsg"
+                    className="input-dsg"
                     name="country"
                     placeholder="default"
                     value={formValues.country}
@@ -198,7 +205,7 @@ const User = () => {
                   ></input>
                 ) : (
                   <input
-                    className="change-user-Email input-dsg"
+                    className="input-dsg"
                     name="country"
                     placeholder="default"
                     value={formValues.country}
@@ -207,11 +214,11 @@ const User = () => {
                 )}
               </div>
 
-              <div className="change-user-age change-item">
+              <div className="change-item">
                 <p className="info-one-dsg">Birthday</p>
                 {editRequest ? (
                   <input
-                    className="change-user-age input-dsg"
+                    className="input-dsg"
                     type="date"
                     name="birthday"
                     placeholder="default"
@@ -220,7 +227,7 @@ const User = () => {
                   ></input>
                 ) : (
                   <input
-                    className="change-user-age input-dsg"
+                    className="input-dsg"
                     type="date"
                     name="birthday"
                     placeholder="default"
@@ -229,16 +236,20 @@ const User = () => {
                   ></input>
                 )}
               </div>
-
-              <div className="change-user-pass " onClick={handleShowChangePass}>
-                <a className=""> Change password!</a>
+              <div className="setting-acept-button">
+                <div className="change-user-pass " onClick={handleShowChangePass}>
+                  <a className=""> Do you want to change password?</a>
+                </div>
+                <button className={"accept-button"} onClick={save}>
+                  Save
+                </button>
               </div>
             </div>
             <div className="change-avatar change-item">
               <div className="change-avatar-img">
                 <img src={currentUser?.image || "https://adnchronicles.org/wp-content/uploads/2020/05/Deafult-Profile-Pitcher.png"} />
               </div>
-              <Button className={"change-avater-button"}>Change Avatar</Button>
+              <Button className={"change-avatar-button"}>Change Avatar</Button>
             </div>
           </div>
 
@@ -306,16 +317,12 @@ const User = () => {
                   <p>{formErrors.confirmPass}</p>
 
                 </div>
-                <div className="space"></div>
+                {/* <div className="space"></div> */}
               </div>
-              <button className={"accept-button"}>change</button>
+                <button className={"accept-button"}>change</button>
             </form>
           </div>
-          <div className="setting-acept-button">
-            <button className={"accept-button"} onClick={save}>
-              Save
-            </button>
-          </div>
+          
         </div>
       ) : (
         <div></div>
