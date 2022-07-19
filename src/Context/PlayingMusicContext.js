@@ -154,7 +154,8 @@ const PlayingMusicProvider = ({ children }) => {
 
   const logoutRequest = () =>{
     setLogin(false)
-    setCurrentUser(false)
+    setCurrentUser(null)
+    setPlaylistUser([])
     localStorage.setItem("currentUser", null);
   }
 
