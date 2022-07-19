@@ -147,7 +147,7 @@ const User = () => {
                 </div>
                 <div className="change-accept-tooltip" onClick={() => setEditRequest(true)}>
                   <div className="change-icon"><AiOutlineEdit/></div>
-                  <span class="tooltiptext">Open Edit</span>
+                  <span className="tooltiptext">Open Edit</span>
                 </div>
               </div>
               <div className="change-item">
