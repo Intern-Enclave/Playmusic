@@ -12,16 +12,27 @@ import "./user.scss"
 const User = () => {
 
     const {currentUser,setCurrentUser} = useMusic();
-    // const [initialValues, setInitialValues] = useState();
+    const [iinitialValues, setInitialValues] = useState();
 
     
     const initialValues = {username:currentUser?.username, fullName:currentUser?.fullName, birthday:currentUser?.birthday, 
-        country: currentUser?.country,image: currentUser?.image, phone:currentUser?.phone, email:currentUser?.email};       
+        country: currentUser?.country,image: currentUser?.image, phone:currentUser?.phone, email:currentUser?.email};             
+
     const [formValues, setFormValues] = useState(initialValues);
     const [isSubmit, setIsSubmit] = useState(false);
     const [editRequest, setEditRequest] = useState(false);
+    // const [avatar, setAvatar] = useState();
 
+    useEffect(()=> {
+        currentUser && setInitialValues({username:currentUser?.username, fullName:currentUser?.fullName, birthday:currentUser?.birthday, 
+            country: currentUser?.country,image: currentUser?.image, phone:currentUser?.phone, email:currentUser?.email})
+    },[currentUser])
+    
+    useEffect(()=> {
+        iinitialValues && setFormValues(iinitialValues)
+    },[iinitialValues])
 
+    // console.log(iinitialValues)
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormValues({ ...formValues, [name]: value });
@@ -59,7 +70,26 @@ const User = () => {
         const modal = document.querySelector(".change-pass-box");
         modal.classList.add("open");
       };
+
     
+    // const handleChangeAvatar = (e)=> {
+    //     const file = e.target.files[0]  
+    //     file.preview = URL.createObjectURL(file)
+    //     setAvatar(file)
+    // }
+    
+    // console.log(avatar)
+
+    // const postAva = async () => {
+    //     try{ 
+    //       const temp = {file: avatar.preview, username: currentUser?.username};
+    //       const resp = await UseApi.postAvatar(temp);
+    //       console.log(resp)
+    //     //   setPlaylistUser([...playlistUser, resp])
+    //     }catch (error) {
+    //       console.log("error post playlist: ", error);
+    //     }
+    //   }
      
     
 
@@ -77,6 +107,11 @@ const User = () => {
                     <div className='acount-setting-active'>
                         <div className='change-info-input'>
                             <div className='change-user-name change-item'>
+                            {/* <input 
+                                type='file'
+                                        onChange={handleChangeAvatar} 
+                                    >
+                                    </input> */}
                                 <p className='info-one-dsg'>Full Name</p>
                                 {editRequest ? 
                                     (<input className='change-user-name-input input-dsg' 
@@ -161,6 +196,7 @@ const User = () => {
                         <div className='change-avatar change-item'>
                             <div className='change-avatar-img'>
                                 <img src = {currentUser?.image}/>
+                                {/* {avatar && <img src = {avatar.preview}/>} */}
                             </div>
                             <Button className={"change-avater-button"}>Change Avatar</Button>
                         </div>
