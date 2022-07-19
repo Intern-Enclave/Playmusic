@@ -22,8 +22,8 @@ function PlaylistId() {
 
   const [active, setActive] = useState("");
   const [listTrackId, setListTrackId] =useState([]);
-  const [playlistName, setPlaylistName] = useState('')
-
+  const [playlistName, setPlaylistName] = useState(null);
+  const [play, setPlay] = useState(false);
   
   // console.log(playlistName)
 
@@ -37,7 +37,9 @@ function PlaylistId() {
       response ? setListTrackId(response) : setListTrackId([]);
 
       playlistUser.map((val)=> {
-        if(val.id===playlist_Id) setPlaylistName(val.name)
+        if(val.id==playlist_Id){
+          setPlaylistName(val.name)
+        } 
       })
     } catch (error) {
       console.log("error get playlistId: ", error);
@@ -48,6 +50,15 @@ function PlaylistId() {
     getPlaylistId();
   }, [playlist_Id]);
 
+
+  
+  useEffect(() => {
+    playlistUser.map((val)=> {
+      if(val.id==playlist_Id) {
+        setPlaylistName(val.name)
+      }
+    })
+  }, [playlistUser]);
 
   const delSong = async (i) => {
     try{ 
@@ -83,48 +94,49 @@ function PlaylistId() {
   }
 
 
-
-
-
   return (
     <div className="playlist container">
       <div className="playlist-music">
 
-        <div className="playlist-music-cd">
+         <div className="playlist-music-cd">
           <img
-            src={currentSong.artist?.picture}
+            src={play ? currentSong.artist?.picture : listTrackId[0]?.artist?.picture}
             // src="https://api.deezer.com/artist/13/image"
             alt=""
-            className={`playlist_id-music-img ${isPlay ? "play" : ""}`}
+            className={`playlist_id-music-img ${isPlay&&play ? "play" : ""}`}
           />
-          <div className="playlist_id-cd-title">
+          {playlistName && (<div className="playlist_id-cd-title">
             <div className="playlist_id-cd-title-name">
                 {playlistName}
             </div>
             <span className="playlist_id-cd-title-icon">
               <FiEdit />
             </span>
-          </div>
+          </div>)}
         </div>
         <div className="playlist-music-info">
-          <h2 className="playlist-music-info-name">{currentSong?.title}</h2>
+          <h2 className="playlist-music-info-name">{play ? currentSong?.title : listTrackId[0]?.title}</h2>
           <h3 className="playlist-music-info-singer">
-            Singer: {currentSong?.artist?.name}
+            Singer: {play ? currentSong?.artist?.name : listTrackId[0]?.artist?.name}
           </h3>
           <h3 className="playlist-music-info-album">
-            Album: {currentSong?.album?.title}
+            Album: {play ? currentSong?.album?.title : listTrackId[0]?.album?.title}
           </h3>
           <h3 className="playlist-music-info-time">
-            Time: {convertHMS(currentSong?.duration)}
+            Time: {play ? convertHMS(currentSong?.duration) : convertHMS(listTrackId[0]?.duration)}
           </h3>
 
           <div className="playlist-music-control">
             <Button
-              onClick={togglePlay}
+              onClick={()=>{
+                togglePlay();
+                setPlay(!play);
+                handleChooseSong(listTrackId[0],listTrackId)
+              }}
               primary
-              leftIcon={isPlay ? <TbPlayerPause /> : <TbPlayerPlay />}
+              leftIcon={isPlay&&play ? <TbPlayerPause /> : <TbPlayerPlay />}
             >
-              {isPlay ? "Pause" : "Play"}
+              {isPlay&&play ? "Pause" : "Play"}
             </Button>
             {/* <Button onClick={pause.togglePlay()} primary leftIcon={pause?.isPlay ? <TbPlayerPause /> : <TbPlayerPlay />} >{pause?.isPlay ? 'Pause' : 'Play'}</Button> */}
             <div className="playlist-music-control-icon">
@@ -144,12 +156,13 @@ function PlaylistId() {
       {listTrackId ? (
         listTrackId.map((val, index) => (
           <div
-          className={`playlist-item ${currentSong?.id == val.id ? "active" : ""}`}
+          className={`playlist-item ${(currentSong?.id == val.id) ? "active" : ""}`}
           key={val.id}
           onClick={() => {
             setActive(index);
             handleChooseSong(val, listTrackId);
-            handlePlayAnotherSong()
+            handlePlayAnotherSong();
+            setPlay(true);
           }}
           >
             <Tippy delay={[0,200]} content='delete'>

@@ -42,7 +42,6 @@ const User = () => {
     iinitialValues && setFormValues(iinitialValues);
   },[iinitialValues]);
 
-  // console.log(iinitialValues)
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
@@ -85,7 +84,7 @@ const User = () => {
     try{
         const temp = {username: currentUser?.username, new_password: formchangepass.newpass};
         const resp = await UseApi.updatePassword(temp)
-        setCurrentUser({username:currentUser?.username, password: formchangepass.newpass});
+        // setCurrentUser(localStorage.getItem("currentUser"));
         console.log(currentUser)
     }catch(error){
         console.log("error change password: ", error);
