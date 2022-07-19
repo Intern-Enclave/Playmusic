@@ -195,7 +195,7 @@ const User = () => {
                         </div>
                         <div className='change-avatar change-item'>
                             <div className='change-avatar-img'>
-                                <img src = {currentUser?.image}/>
+                                <img src = {currentUser?.image || "https://adnchronicles.org/wp-content/uploads/2020/05/Deafult-Profile-Pitcher.png"}/>
                                 {/* {avatar && <img src = {avatar.preview}/>} */}
                             </div>
                             <Button className={"change-avater-button"}>Change Avatar</Button>
