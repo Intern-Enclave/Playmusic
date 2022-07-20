@@ -48,16 +48,15 @@ function Sidebar() {
 
     const {pathname} = useLocation()
     const active = sidebar.findIndex(e=> e.path === pathname);
-
    
     return (
         <div className='sidebar'>
             <div className="user">
                 <Link to='/user' className='user-link' onClick={()=> (!currentUser && loginRequest())}>
-                    <Image className='user-avatar' src = {currentUser?.image ? currentUser?.image : 'https://www.y8.edu.vn/wp-content/themes/myarcadetheme/images/noimg.png'} />
+                    <Image className='user-avatar' src = {currentUser?.image ? currentUser?.image : 'https://adnchronicles.org/wp-content/uploads/2020/05/Deafult-Profile-Pitcher.png'} />
                 </Link>
-            <div className="user-name-sidebar">{currentUser ? currentUser.username : 'Username'}</div>
-            </div>
+            <div className="user-name-sidebar">{currentUser ? currentUser.username : ''}</div>
+            </div>  
             <ul className='bar'>
                 {!currentUser ? 
                     (

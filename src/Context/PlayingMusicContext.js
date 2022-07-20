@@ -1,4 +1,6 @@
+import { Axios } from "axios";
 import React, { createContext, useEffect, useRef, useState } from "react";
+import apiConfig from "../API/apiConfig";
 import UseApi from "../API/UseApi";
 
 const PlayingMusicContext = createContext();
@@ -43,18 +45,24 @@ const PlayingMusicProvider = ({ children }) => {
   };
   
   const handleChangeSong = (way, list) => {
-    if (
-      (currentSong.id == list[0].id && way == "prev") ||
-      (currentSong.id == list[list.length - 1].id && way == "next")
-    )
-      return;
+    // if (
+    //   (currentSong.id == list[0].id && way == "prev") ||
+    //   (currentSong.id == list[list.length - 1].id && way == "next")
+    // )
+    //   return;
     for (let i = 0; i < list.length; i++) {
       if (currentSong.id == list[i].id) {
         if (way == "prev") {
           setCurrentSong(list[i - 1]);
         }
+        if(way == "prev" && i==0){
+          setCurrentSong(list[list.length - 1])
+        }
         if (way == "next") {
           setCurrentSong(list[i + 1]);
+        }
+        if(way == "next" && i==list.length-1){
+          setCurrentSong(list[0])
         }
         if (isPlay) {
           handlePlayAnotherSong();
@@ -84,6 +92,7 @@ const PlayingMusicProvider = ({ children }) => {
         });
       }
       setListTrack(response);
+      setUsingplaylist(response);
     } catch (error) {
       console.log("error get list tracks: ", error);
     }
@@ -104,6 +113,9 @@ const PlayingMusicProvider = ({ children }) => {
       } else {
         let cUser = localStorage.getItem("currentUser");
         response.map((user) => {
+          if(user.image !== null) {
+            user.image = apiConfig.baseUrl + "user/images/" + user.image;
+          }
           if (user.username == cUser) setCurrentUser(user);
         });
       }
@@ -154,7 +166,8 @@ const PlayingMusicProvider = ({ children }) => {
 
   const logoutRequest = () =>{
     setLogin(false)
-    setCurrentUser(false)
+    setCurrentUser(null)
+    setPlaylistUser([])
     localStorage.setItem("currentUser", null);
   }
 
