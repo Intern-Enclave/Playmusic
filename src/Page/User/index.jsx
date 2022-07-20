@@ -58,6 +58,7 @@ const User = () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formchangepass);
       updatePass();
+      // console.log(username);
       alert('success');
       handleHideChangePass();
     }
@@ -86,12 +87,18 @@ const User = () => {
         const resp = await UseApi.updatePassword(temp)
 
         // setCurrentUser(localStorage.getItem("currentUser"));
+        setCurrentUser(temp)
 
         console.log(currentUser)
     }catch(error){
         console.log("error change password: ", error);
     }
   }
+
+  // useEffect(()=> {
+  //   return setCurrentUser({...formValues, password: formchangepass.newpass})
+  // }, [])
+  // console.log(currentUser)
 
   const save = () => {
     editInfo();
