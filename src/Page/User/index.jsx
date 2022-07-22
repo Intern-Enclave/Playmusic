@@ -14,7 +14,7 @@ import "tippy.js/dist/tippy.css";
 import "./user.scss";
 
 const User = () => {
-  const { currentUser, setCurrentUser } = useMusic();
+  const { currentUser, setIsFetchingData } = useMusic();
   const [iinitialValues, setInitialValues] = useState();
 
   const changepass = {pass: '', newpass:'', confirmPass:''};
@@ -64,7 +64,9 @@ const User = () => {
     }
   }, [formErrors]);
 
+
   const editInfo = async () => {
+    setIsFetchingData(true)
     try {
       const user = {
         username: currentUser?.username,
@@ -78,32 +80,41 @@ const User = () => {
       const resp = await UseApi.updateInfoUser(user);
     } catch (error) {
       console.log("error edit info: ", error);
+    }finally{
+      setIsFetchingData(false)
     }
   };
 
   const updatePass = async () => {
+    setIsFetchingData(true)
     try{
         const temp = {username: currentUser?.username, new_password: formchangepass.newpass};
         const resp = await UseApi.updatePassword(temp)
 
         // setCurrentUser(localStorage.getItem("currentUser"));
-        setCurrentUser(temp)
+        // setCurrentUser(temp)
 
         console.log(currentUser)
     }catch(error){
         console.log("error change password: ", error);
     }
+    setIsFetchingData(false)
   }
 
-  // useEffect(()=> {
-  //   return setCurrentUser({...formValues, password: formchangepass.newpass})
-  // }, [])
-  // console.log(currentUser)
+  
 
   const save = () => {
-    editInfo();
+    editInfo({
+      username: currentUser?.username,
+      fullName: formValues.fullName,
+      birthday: formValues.birthday,
+      country: formValues.country,
+      image: formValues.image,
+      phone: formValues.phone,
+      email: formValues.email,
+    });
     setEditRequest(false);
-    setCurrentUser(formValues);
+    // setCurrentUser(formValues);
     console.log(currentUser);
   };
 

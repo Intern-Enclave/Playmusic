@@ -27,9 +27,10 @@ import { Link } from "react-router-dom";
 
 function PlayerControl() {
 
-    const {currentSong, playlistUser, setPlaylist} = useMusic()
+    const {currentSong, playlistUser, setPlaylist,setIsFetchingData} = useMusic()
 
     const addSong = async (id) => {
+        setIsFetchingData(true);
       try{ 
         const temp = {trackId: currentSong?.id, playlistId: id};
         const resp = await UseApi.postSong(temp);
@@ -37,6 +38,8 @@ function PlayerControl() {
         // setPlaylistUser([...playlistUser, resp])
       }catch (error) {
         console.log("error post add song: ", error);
+      }finally{
+        setIsFetchingData(false);
       }
     }    
 

@@ -10,16 +10,18 @@ import { useMusic } from '../../hooks/useMusic';
 
 function Playlist() {
 
-  const {setPlaylist,playlistUser,postPlaylist,delPlaylist,playlistName,setPlaylistName} = useMusic();
+  const {setPlaylist,playlistUser,postPlaylist,delPlaylist,playlistName,setPlaylistName, isLoading} = useMusic();
 
   const [formRequest, setFormRequest] = useState(false);
   
   const onsubmit=()=>{
+    console.log(123)
     setFormRequest(false);
     postPlaylist()
   }
 
   return (
+    isLoading ? <h1> Đang tải đợi tí</h1> : 
     <div className="pl-container">
       
       {formRequest && (
@@ -68,8 +70,8 @@ function Playlist() {
                             </span>
                         </div> */}
                     </div>
-                    <div className='create-button'>
-                        <span onClick={onsubmit}>Create new</span>
+                    <div className='create-button' onClick={onsubmit}>
+                        <span >Create new</span>
                     </div>
                 </div>
             </div>

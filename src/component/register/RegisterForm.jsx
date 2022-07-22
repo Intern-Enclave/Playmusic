@@ -10,7 +10,7 @@ import UseApi from '../../API/UseApi';
 
 function Register() {
 //login
-    const {unRegisterRequest,listUser,setListUser,loginRequest} = useMusic()
+    const {unRegisterRequest,listUser,setListUser,loginRequest,setIsFetchingData} = useMusic()
 
     // const register = () => {
     //     unLoginRequest();
@@ -70,12 +70,15 @@ function Register() {
     };
 
     const addUserr = async () => {
+        setIsFetchingData(true);
         try{ 
           const resp = await UseApi.postUser({username: formValues.username, password: formValues.password});
           console.log(resp)
             setListUser([...listUser, resp])
         }catch (error) {
           console.log("error post user: ", error);
+        }finally{
+            setIsFetchingData(false);
         }
       }
 

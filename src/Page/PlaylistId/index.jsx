@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import MediaItem from "../../component/MediaItem";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
 import { AiTwotoneHeart, AiFillDelete } from "react-icons/ai";
-import { BsThreeDots,BsFillPlusCircleFill } from "react-icons/bs";
+import { BsThreeDots } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 // import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
@@ -17,38 +17,39 @@ import 'tippy.js/dist/tippy.css';
 
 
 function PlaylistId() {
-  const { setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,playlistUser} =
+  const { setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,
+    playlistUser,setIsFetchingData, isFetchingData,listTrackId} =
   useMusic();
 
   const [active, setActive] = useState("");
-  const [listTrackId, setListTrackId] =useState([]);
+  // const [listTrackId, setListTrackId] =useState([]);
   const [playlistName, setPlaylistName] = useState(null);
   const [play, setPlay] = useState(false);
   
-  // console.log(playlistName)
-
 
   // console.log(localStorage.getItem('playlistId'))
-  const getPlaylistId = async () => {
-    try {
-      setPlaylist(localStorage.getItem('playlistId'));
-      const params = {playlistId: playlist_Id }
-      const response = await UseApi.getTracksId({params});
-      response ? setListTrackId(response) : setListTrackId([]);
 
-      playlistUser.map((val)=> {
-        if(val.id==playlist_Id){
-          setPlaylistName(val.name)
-        } 
-      })
-    } catch (error) {
-      console.log("error get playlistId: ", error);
-    }
-  };
+
+  // const getPlaylistId = async () => {
+  //   try {
+  //     setPlaylist(localStorage.getItem('playlistId'));
+  //     const params = {playlistId: playlist_Id }
+  //     const response = await UseApi.getTracksId({params});
+  //     response ? setListTrackId(response) : setListTrackId([]);
+
+  //     playlistUser.map((val)=> {
+  //       if(val.id==playlist_Id){
+  //         setPlaylistName(val.name)
+  //       } 
+  //     })
+  //   } catch (error) {
+  //     console.log("error get playlistId: ", error);
+  //   }
+  // };
   
-  useEffect(() => {
-    getPlaylistId();
-  }, [playlist_Id]);
+  // useEffect(() => {
+  //   getPlaylistId();
+  // }, [playlist_Id,isFetchingData]);
 
 
   
@@ -61,15 +62,18 @@ function PlaylistId() {
   }, [playlistUser]);
 
   const delSong = async (i) => {
+    setIsFetchingData(true);
     try{ 
       const resp = await UseApi.deleteSong({trackId:i, playlistId: playlist_Id})
       console.log(resp)
       const newPlaylistId = listTrackId.filter((playlist) => {
         return playlist.id !== i;
       })
-      setListTrackId(newPlaylistId)
+      // setListTrackId(newPlaylistId) 
     }catch (error) {
       console.log("error post playlist: ", error);
+    }finally{
+      setIsFetchingData(false);
     }
   }
 
@@ -154,7 +158,7 @@ function PlaylistId() {
         <div className="playlist-title-time">Time</div>
       </div>
       {listTrackId ? (
-        listTrackId.map((val, index) => (
+        listTrackId?.map((val, index) => (
           <div
           className={`playlist-item ${(currentSong?.id == val.id) ? "active" : ""}`}
           key={val.id}
