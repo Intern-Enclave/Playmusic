@@ -58,11 +58,19 @@ const UseApi = {
 
     updateInfoUser: (params) => {
         const url = 'user/update_info';
-        return axiosClient.put(url, params)
+        return axiosClient.put(url, params);
     },
     updatePassword: (params) => {
         const url = 'user/change_password';
-        return axiosClient.put(url, params)
+        return axiosClient.put(url, params);
+    },
+    uploadImage: (formData) => {
+        const url = 'user/files/upload';
+        return axiosClient.post(url,{formData});
+    },
+    uploadImageTest: (formData) => {
+        const url = 'user/files/upload/test';
+        return axiosClient.post(url,{formData});
     },
 
 

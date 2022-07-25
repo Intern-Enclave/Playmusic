@@ -159,29 +159,33 @@ function PlaylistId() {
       </div>
       {listTrackId ? (
         listTrackId?.map((val, index) => (
-          <div
-          className={`playlist-item ${(currentSong?.id == val.id) ? "active" : ""}`}
-          key={val.id}
-          onClick={() => {
-            setActive(index);
-            handleChooseSong(val, listTrackId);
-            handlePlayAnotherSong();
-            setPlay(true);
-          }}
+          <div   
+            className={`playlist-item-wraper ${(currentSong?.id == val.id) ? "active" : ""}`}  
+            key={val.id}
           >
-            <Tippy delay={[0,200]} content='delete'>
-              <button className="playlist-item-icon" onClick={() => delSong(val.id)}>
-                <AiFillDelete />
-              </button>
-            </Tippy>
-
-            <MediaItem
-              singer={val.artist.name}
-              SongName={val.title}
-              img={val.artist.picture}
-            />
-            <div className="playlist-item-album">{val.album.title}</div>
-            <div className="playlist-item-time">{convertHMS(val.duration)}</div>
+              <Tippy delay={[0,200]} content='delete'>
+                <button className="playlist-item-icon" onClick={() => delSong(val.id)}>
+                  <AiFillDelete />
+                </button>
+              </Tippy>
+            <div 
+              onClick={() => {
+                setActive(index);
+                handleChooseSong(val, listTrackId);
+                handlePlayAnotherSong();
+                setPlay(true);
+              }}
+              className={`playlist-item` }
+            >
+  
+              <MediaItem
+                singer={val.artist.name}
+                SongName={val.title}
+                img={val.artist.picture}
+              />
+              <div className="playlist-item-album">{val.album.title}</div>
+              <div className="playlist-item-time">{convertHMS(val.duration)}</div>
+            </div>
           </div>
         ))
       ) : (

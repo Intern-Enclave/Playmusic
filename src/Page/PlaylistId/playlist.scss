@@ -25,13 +25,54 @@
 
 .playlist-item{
   display: flex;
+  width: 100%;
   justify-content: space-between;
   padding: 0 40px;
   position: relative;
   // border-top: 1px solid $text-secondary;
 
+  
+    & svg{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+    &-album{
+      font-size: 1.4rem;
+      color: $text-secondary;
+      cursor: pointer;
+      width: 30%;
+      text-align: left;
+      margin: auto;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: normal;
+      -webkit-line-clamp: 2;
+      line-height: 1.6rem;
+      max-height: 3.2rem;
+    }
+    
+    &-time{
+      font-size: 1.4rem;
+      color: $text-secondary;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      margin-left: 80px;
+    
+    }
 
-  &-icon{
+    &:hover{
+      background-color: $alpha-bg;
+    }
+    
+}
+
+
+.playlist-item-icon{
     color: $text-primary;
     margin: auto;
     display: none;
@@ -44,54 +85,7 @@
     height: 30px;
     border-radius: 50%;
     cursor: pointer;
-  
-    & svg{
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-}
-
-
-  &-album{
-    font-size: 1.4rem;
-    color: $text-secondary;
-    cursor: pointer;
-    width: 30%;
-    text-align: left;
-    margin: auto;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: normal;
-    -webkit-line-clamp: 2;
-    line-height: 1.6rem;
-    max-height: 3.2rem;
-  }
-
-  &-time{
-    font-size: 1.4rem;
-    color: $text-secondary;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    margin-left: 80px;
-
-  }
-
-  &:hover{
-    background-color: $alpha-bg;
-  }
-
-  &:hover > .playlist-item-icon{
-    display: block;
-  }
-}
-
-.active > .playlist-item-icon{
-  display: block;
+    z-index: 5;
 }
 
 .Song-Thumbnail {
@@ -278,5 +272,21 @@
       left: 50%;
       transform: translateX(-50%);
     }
+  }
+}
+
+
+.playlist-item-wraper{
+  position: relative;
+  align-items: center;
+  // background-color: ;
+  
+  &:hover{
+    background-color: $alpha-bg;
+  }
+  
+  &:hover > .playlist-item-icon{
+    display: block;
+    cursor: pointer;
   }
 }

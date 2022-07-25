@@ -15,9 +15,8 @@ function Playlist() {
   const [formRequest, setFormRequest] = useState(false);
   
   const onsubmit=()=>{
-    console.log(123)
     setFormRequest(false);
-    postPlaylist()
+    postPlaylist();
   }
 
   return (

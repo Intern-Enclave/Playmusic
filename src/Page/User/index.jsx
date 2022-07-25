@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+
 import Button from "../../component/Button/Button";
 import {
   AiOutlineEdit,
@@ -7,6 +9,7 @@ import {
 } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
 import { useMusic } from "../../hooks/useMusic";
+import Image from "../../component/Image";
 import UseApi from "../../API/UseApi";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -147,6 +150,54 @@ const User = () => {
     return errors;
   };
 
+  const [data,setData] = useState({})
+
+  let formData = new FormData();
+  const onFileChange = (e)=>{
+    console.log(e.target.files[0])
+    if(e.target && e.target.files[0]){
+      formData.append('file', e.target.files[0], 'avatar.png')
+      console.log(formData.get('file'))
+      setData(formData.get('file'))
+    }
+  }
+
+  
+  const submitFileData = async ()=>{
+    try{ 
+      console.log(JSON.stringify(data))
+      const temp = {file: data, username: currentUser?.username}
+      console.log(temp)
+      const resp = await UseApi.uploadImage(data);
+      
+    }catch (error) {
+      console.log("error upload_image: ", error);
+    }finally{
+    }
+  }
+
+  // const [selectedFile, setSelectedFile] = React.useState(null);
+
+  // const handleSubmit2 = async (event) => {
+  //   event.preventDefault()
+  //   const formData = new FormData();
+  //   formData.append("selectedFile", selectedFile);
+  //   try {
+  //     const response = await axios({
+  //       method: "post",
+  //       url: "http://172.16.75.26:8080/api/user/files/upload",
+  //       data: formData,
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     });
+  //   } catch(error) {
+  //     console.log(error)
+  //   }
+  // }
+
+  // const handleFileSelect = (event) => {
+  //   setSelectedFile(event.target.files[0])
+  // }
+
   return (
     <div className="acount-setting-container">
       {currentUser ? (
@@ -267,9 +318,14 @@ const User = () => {
             </div>
             <div className="change-avatar change-item">
               <div className="change-avatar-img">
-                <img src={currentUser?.image || "https://adnchronicles.org/wp-content/uploads/2020/05/Deafult-Profile-Pitcher.png"} />
+                <Image src = {currentUser?.image} />
               </div>
-              <Button className={"change-avatar-button"}>Change Avatar</Button>
+            {/* <form onSubmit={handleSubmit2}> 
+              <input type="file" name="file_upload" onChange={handleFileSelect} />
+              <input type="submit" value="Upload File" />
+            </form> */}
+
+              <Button className={"change-avatar-button"} onClick={submitFileData}>Change Avatar</Button>
             </div>
           </div>
 
