@@ -93,11 +93,11 @@ function Search() {
                     <div className='search-result' tabIndex= '-1' {...attrs}>
                         <Wraper>
                             <h4 className="search-title">
-                                Offer duc ngu
+                                Offer
                             </h4>
                             {searchResult.length>0 ? (searchResult.map((result) => (
                                <div key={result.id} onClick={()=>handleChooseSong(result,listTrack)}> <MediaItem  singer={result?.artist.name} SongName={result?.title} img={result?.artist.picture} className={'result-item'}  /></div>
-                            ))) : <div className='cannotfind-result'>Can not find asdasdas</div>}
+                            ))) : <div className='cannotfind-result'>Can not find</div>}
                         
                         </Wraper>
                     </div>

@@ -32,6 +32,10 @@ const UseApi = {
         const url = 'playlist'
         return axiosClient.post(url, params)
     },
+    updatePlaylistName: (body) => {
+        const url = 'playlist/rename';
+        return axiosClient.put(url, body);
+    },
 
     postSong: (params) => {
         const url = 'playlist_has_track/addNew'

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MediaItem from "../../component/MediaItem";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
-import { AiTwotoneHeart, AiFillDelete } from "react-icons/ai";
+import { AiTwotoneHeart, AiFillDelete,AiOutlineClose } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 // import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
@@ -18,40 +18,13 @@ import 'tippy.js/dist/tippy.css';
 
 function PlaylistId() {
   const { setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,
-    playlistUser,setIsFetchingData, isFetchingData,listTrackId} =
+    playlistUser,setIsFetchingData, isFetchingData,listTrackId, currentUser} =
   useMusic();
 
-  const [active, setActive] = useState("");
-  // const [listTrackId, setListTrackId] =useState([]);
   const [playlistName, setPlaylistName] = useState(null);
+  const [newPlaylistName, setNewPlaylistName] = useState(null);
+  const [formRequest, setFormRequest] = useState(false);
   const [play, setPlay] = useState(false);
-  
-
-  // console.log(localStorage.getItem('playlistId'))
-
-
-  // const getPlaylistId = async () => {
-  //   try {
-  //     setPlaylist(localStorage.getItem('playlistId'));
-  //     const params = {playlistId: playlist_Id }
-  //     const response = await UseApi.getTracksId({params});
-  //     response ? setListTrackId(response) : setListTrackId([]);
-
-  //     playlistUser.map((val)=> {
-  //       if(val.id==playlist_Id){
-  //         setPlaylistName(val.name)
-  //       } 
-  //     })
-  //   } catch (error) {
-  //     console.log("error get playlistId: ", error);
-  //   }
-  // };
-  
-  // useEffect(() => {
-  //   getPlaylistId();
-  // }, [playlist_Id,isFetchingData]);
-
-
   
   useEffect(() => {
     playlistUser.map((val)=> {
@@ -77,6 +50,28 @@ function PlaylistId() {
     }
   }
 
+  const editPlaylistName = async () => {
+    setIsFetchingData(true)
+    try{
+        const temp = {
+          name: playlistName,
+          rename: newPlaylistName,
+          username:currentUser?.username,
+        }
+        const resp = await UseApi.updatePlaylistName(temp)
+        // console.log(temp)
+    }catch(error){
+        console.log("error edit playlist name ", error);
+    }finally{
+      setIsFetchingData(false)
+    }
+  }
+
+  const onsubmit = () => {
+    setFormRequest(false);
+    editPlaylistName();
+  };
+
 
 
   function convertHMS(value) {
@@ -100,6 +95,41 @@ function PlaylistId() {
 
   return (
     <div className="playlist container">
+    {formRequest && (
+      <div className="modal">
+          <div className="modal__overlay"></div>
+
+          <div className="modal__body">
+            <form action="" className="register" id="form-register">
+              <div className="create-playlist-modal">
+                <div className="create-playlist-container">
+                  <div className="create-playlist-content">
+                    <div className="create-playlist-from-content">
+                      <span to={"/playlist"} className="close-button">
+                        <AiOutlineClose onClick={() => setFormRequest(false)} />
+                      </span>
+                      <div className="create-playlist-header">
+                        <h3 className="create-playlist-tittle">
+                          Edit playlist name
+                        </h3>
+                      </div>
+                      <input
+                        className="create-playlist-name-input"
+                        placeholder="Type your playlist name"
+                        onChange={(e) => setNewPlaylistName(e.target.value)}
+                      ></input>
+                      <div className="create-button save" onClick={onsubmit}>
+                        <span>Save</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>)}
+
+
       <div className="playlist-music">
 
          <div className="playlist-music-cd">
@@ -113,7 +143,7 @@ function PlaylistId() {
             <div className="playlist_id-cd-title-name">
                 {playlistName}
             </div>
-            <span className="playlist_id-cd-title-icon">
+            <span className="playlist_id-cd-title-icon" onClick={() => setFormRequest(true)}>
               <FiEdit />
             </span>
           </div>)}
@@ -170,7 +200,6 @@ function PlaylistId() {
               </Tippy>
             <div 
               onClick={() => {
-                setActive(index);
                 handleChooseSong(val, listTrackId);
                 handlePlayAnotherSong();
                 setPlay(true);

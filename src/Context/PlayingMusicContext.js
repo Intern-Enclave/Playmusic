@@ -155,11 +155,13 @@ const PlayingMusicProvider = ({ children }) => {
   }
 
   const loginRequest = () =>{
+    setLoginFail(false)
     setLogin(true)
   }
   
   const unLoginRequest = () =>{
     setLogin(false)
+    setLoginFail(false)
   }
   const registerRequest = () =>{
     setRegisterRq(true)
