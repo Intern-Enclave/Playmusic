@@ -32,6 +32,13 @@ const PlayingMusicProvider = ({ children }) => {
   //usingPlaylist
   const [usingPlaylist, setUsingplaylist] = useState([]);
 
+  //notification
+  const [notification, setNotification] = useState([ {
+    id: 1,
+    tittle: "Succes",
+    description: "infomation"
+}])
+
   
   //control music
   const handlePlayAnotherSong = () => {
@@ -145,6 +152,11 @@ const PlayingMusicProvider = ({ children }) => {
         setCurrentUser(user);
         setLoginFail(false);
         localStorage.setItem("currentUser", user.username);
+        setNotification([{
+          id: 1,
+          tittle: "Succes",
+          description: 'Login success', 
+      }])
       }
       if(!(user.username == name && user.password == pass)){
         setLoginFail(true);
@@ -316,6 +328,9 @@ const editInfo = async (user) => {
     //update data
     setIsLoading,
     setIsFetchingData,
+    //notification
+    notification,
+    setNotification
   };
 
   return (

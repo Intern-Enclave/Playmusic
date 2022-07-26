@@ -7,7 +7,7 @@ import {useLocation} from 'react-router'
 import './sidebar.scss'
 
 import { BiLogIn, BiLogOut } from 'react-icons/bi';
-import { FaHome,FaMusic } from 'react-icons/fa';
+import { FaCompactDisc,FaMusic } from 'react-icons/fa';
 import { TbPlaylist } from 'react-icons/tb';
 
 import { useMusic } from '../../hooks/useMusic';
@@ -26,13 +26,13 @@ function Sidebar() {
 
     const sidebar = [
         {
-            title: 'Home',
-            icon: <FaHome />,
+            title: 'Discovery',
+            icon: <FaCompactDisc />,
             path: '/',
             current: false,
         },
         {
-            title: 'New Song',
+            title: 'New Songs',
             icon:<FaMusic/>,
             path: '/newsong',
             current: false

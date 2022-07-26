@@ -3,7 +3,6 @@
 .toast-modal {
     background-color: #fff;
     position: fixed;
-    z-index: 10;
     width: 300px;
     background-color: #7200a1;
     color: #fff;
@@ -12,9 +11,10 @@
     opacity: 0.9;
     font-size: 14px;
     transition: .3s ease;
-    bottom: 15rem;
-    left: 1rem;
+    right: 10px;
+    top: 8px;
     animation: toast-in-left 2s;
+    z-index: 100;
 
     &:hover {
         box-shadow: 0 0 7px rgb(122, 121, 121);
@@ -43,7 +43,7 @@
 
 @keyframes toast-in-left {
     from {
-        transform: translateX(-100%);
+        transform: translateX(100%);
     }
     to {
         transform: translateX(0);

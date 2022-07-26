@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import './toast.scss'
-import {AiOutlineClose} from "react-icons/ai"
+import {AiOutlineClose} from "react-icons/ai";
+import './toast.scss';
 
 const Toastmenu = ({toastlist, setList}) => {
 
@@ -8,6 +8,7 @@ const Toastmenu = ({toastlist, setList}) => {
     const tostListitem = toastlist.filter(e => e.id !== id);
     setList(tostListitem);
    },[toastlist, toastlist]);
+
     return (
         <div className='toast-modal'>
             {

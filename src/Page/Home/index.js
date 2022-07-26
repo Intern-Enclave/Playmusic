@@ -32,7 +32,7 @@ const Home = () => {
     <div className="home-page-container">
       <div className="topic-music">
         <h3 className="topic tittle">Topic to day</h3>
-        <Carousel show={2}>
+        <Carousel show={3}>
             {
                 listTrack.slice(0,5).map((val) => (
                     <div className="topic-item carousel-item" key={val.id}>

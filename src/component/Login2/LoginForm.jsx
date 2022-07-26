@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 
 function Login() {
 //login
-    const {handleLogin, unLoginRequest, registerRequest,loginFail,setLoginFail} = useMusic()  
+    const {handleLogin, unLoginRequest, registerRequest,loginFail,setLoginFail, setNotification} = useMusic()  
     //valid
     const initialValues = { username: "", password: "" };
     const [formValues, setFormValues] = useState(initialValues);
