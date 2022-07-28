@@ -13,7 +13,7 @@ import { useMusic } from "../../hooks/useMusic";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
-function NewSong() {
+function AlbumId() {
   const {
     listTrack,
     currentSong,
@@ -130,4 +130,4 @@ function NewSong() {
   );
 }
 
-export default NewSong;
+export default AlbumId;

@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const { listTrack } = useMusic();
 
-  const [top, setTop] = useState([])
+  const [top, setTop] = useState([]);
+  const [album, setAlbum] = useState([]);
 //topMusic
     useEffect(() => {
         const topMusic = async () => {
@@ -26,19 +27,33 @@ const Home = () => {
         };
         topMusic();
     }, []);
+    useEffect(() => {
+        const topAlbum = async () => {
+        try {
+            const response = await UseApi.getTop5Album();
+            response ? setAlbum(response) : setAlbum([])
+
+        } catch (error) {
+            console.log("error get album: ", error);
+        }
+        };
+        topAlbum();
+    }, []);
+
+
 
     // console.log(top)
   return (
     <div className="home-page-container">
       <div className="topic-music">
-        <h3 className="topic tittle">Topic to day</h3>
-        <Carousel show={2}>
+        <h3 className="topic tittle">Topic</h3>
+        <Carousel show={3}>
             {
-                listTrack.slice(0,5).map((val) => (
+                album?.map((val, index) => (
                     <div className="topic-item carousel-item" key={val.id}>
                         <div style={{ padding: 8 }}>
                         <img
-                            src={val.album.cover_big}
+                            src={val.cover_big}
                             alt="placeholder"
                             style={{ width: "100%", height: 250 }}
                         />
@@ -61,7 +76,7 @@ const Home = () => {
                 <div className="playlist-music-item" key={val.id}>
                     <div className="playlist-music-item-img">
                     <img
-                        src={val.artist.picture}
+                         src={val.artist.picture}
                         alt="placeholder"
                     ></img>
                     <div className="playlist-music-item-img-hov">
@@ -133,6 +148,46 @@ const Home = () => {
         ))}
 
          
+        </div>
+      </div>
+
+      <div className="singer">
+        <div className="singer-context">
+          <div className="singer-content">
+            <div className="singer-header">
+              <h3 className="singer-title tittle">Singer</h3>
+              <Link to={'/singer'} className="singer-more more">More</Link>
+            </div>
+          <div className="singer-box">
+
+            {listTrack.slice(0,5).map((val) => (
+
+              <div className="singer-item">
+                <div className="singer-item-content">
+                  <div className="singer-item-img">
+                    <img
+                      src={val.artist.picture}
+                      alt="placeholder"
+                    ></img>
+                    {/* <div className="top-music-item-img-hov">
+                      <div className="hov-play">
+                        <span>
+                          <AiOutlinePlayCircle />
+                        </span>
+                      </div>
+                    </div> */}
+                  </div>
+                  <div className="singer-item-status">
+                    <div className="singer-item-desc">
+                      <p className="singer-name">{val.artist.name}</p>
+                    </div>
+                    {/* {/ <div className="top-number">{`#${idx +1}`}</div> /} */}
+                  </div>
+                </div>
+              </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </div>

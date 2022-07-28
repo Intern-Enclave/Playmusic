@@ -3,7 +3,6 @@ import React, { createContext, useEffect, useState } from "react";
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import { publicRoute } from "./routes";
 import UseApi from "./API/UseApi";
-
 import Layout from "./Layout";
 import './App.css'
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '../Button/Button';
+import Toastmenu from '../Toast';
 import './login.scss'
 
 import { useMusic } from '../../hooks/useMusic';
@@ -10,24 +11,36 @@ import { Link } from 'react-router-dom';
 
 function Login() {
 //login
-    const {handleLogin, unLoginRequest, registerRequest,loginFail,setLoginFail} = useMusic()
-
+    const {handleLogin, unLoginRequest, registerRequest,loginFail,setLoginFail, setNotification} = useMusic()  
+    //valid
+    const initialValues = { username: "", password: "" };
+    const [formValues, setFormValues] = useState(initialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [isSubmit, setIsSubmit] = useState(false);
+    const [List, setList] = useState([]);
     
     const login = () =>{
-        handleLogin(formValues.username, formValues.password)
+        handleLogin(formValues.username, formValues.password);
+        // handleShowToastMenu();
     }
 
     const register = () => {
         unLoginRequest();
         registerRequest();
     }
+    
+    //toast
+    let toastProperties = null;
 
+    const handleShowToastMenu = () => {
+        toastProperties = {
+            id: 1,
+            tittle: "Succes",
+            description: "infomation"
+        }
 
-    //valid
-    const initialValues = { username: "", password: "" };
-    const [formValues, setFormValues] = useState(initialValues);
-    const [formErrors, setFormErrors] = useState({});
-    const [isSubmit, setIsSubmit] = useState(false);
+        setList([toastProperties])
+    }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -71,7 +84,7 @@ function Login() {
             <div className="modal__overlay"></div>
 
             <div className="modal__body">
-
+            
                 <form action="" className="register" id="form-register" onSubmit={handleSubmit}>
                 <div className="register">
                     <Link to={'/'}><AiFillCloseCircle onClick={unLoginRequest}/></Link>
@@ -122,6 +135,8 @@ function Login() {
                             <div className="login-button" onClick ={login}>
                                 <Button primary className={'login-button-btn'}>Login</Button>
                             </div>
+                            <Toastmenu toastlist={List} setList= {setList}/>
+
                         </div>
                 </div>
                 </form> 

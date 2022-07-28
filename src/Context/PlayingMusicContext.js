@@ -6,6 +6,8 @@ import UseApi from "../API/UseApi";
 const PlayingMusicContext = createContext();
 
 const PlayingMusicProvider = ({ children }) => {
+  const [isFetchingData, setIsFetchingData] = useState(false)
+  const [isLoading, setIsLoading] = useState(false)
   const [isPlay, setIsPlay] = useState(false);
   const [listTrack, setListTrack] = useState([]);
   const [currentSong, setCurrentSong] = useState({});
@@ -19,6 +21,8 @@ const PlayingMusicProvider = ({ children }) => {
 
   //playlistid
   const [playlist_Id, setPlaylist_Id] = useState(0);
+  const [listTrackId, setListTrackId] =useState([]);
+  const [playlistNameId, setPlaylistNameId] = useState('');
   // const [playlist_Id, setPlaylist_Id] = useState(0);
 
   //playlist User
@@ -27,6 +31,9 @@ const PlayingMusicProvider = ({ children }) => {
 
   //usingPlaylist
   const [usingPlaylist, setUsingplaylist] = useState([]);
+
+  //notification
+  const [notification, setNotification] = useState([])
 
   
   //control music
@@ -79,6 +86,7 @@ const PlayingMusicProvider = ({ children }) => {
   };
   
   const getAll = async () => {
+   
     try {
       const response = await UseApi.getAllTracks();
 
@@ -95,6 +103,8 @@ const PlayingMusicProvider = ({ children }) => {
       setUsingplaylist(response);
     } catch (error) {
       console.log("error get list tracks: ", error);
+    } finally {
+      setIsLoading(false)
     }
   };
   
@@ -128,7 +138,7 @@ const PlayingMusicProvider = ({ children }) => {
   
   useEffect(() => {
     getAllUser();
-  }, []);
+  }, [isFetchingData]);
 
 
   const handleLogin = (name, pass)=>{
@@ -138,7 +148,11 @@ const PlayingMusicProvider = ({ children }) => {
         setCurrentUser(user);
         setLoginFail(false);
         localStorage.setItem("currentUser", user.username);
-        alert('Success')
+        setNotification([{
+          id: 1,
+          tittle: "Succes",
+          description: 'Login success', 
+      }])
       }
       if(!(user.username == name && user.password == pass)){
         setLoginFail(true);
@@ -149,11 +163,13 @@ const PlayingMusicProvider = ({ children }) => {
   }
 
   const loginRequest = () =>{
+    setLoginFail(false)
     setLogin(true)
   }
   
   const unLoginRequest = () =>{
     setLogin(false)
+    setLoginFail(false)
   }
   const registerRequest = () =>{
     setRegisterRq(true)
@@ -177,56 +193,94 @@ const PlayingMusicProvider = ({ children }) => {
     localStorage.setItem('playlistId', id)
   }
 
-  //playlist User
+  const getPlaylistId = async () => {
+    try {
+      setPlaylist(localStorage.getItem('playlistId'));
+      const params = {playlistId: playlist_Id }
+      const response = await UseApi.getTracksId({params});
+      response ? setListTrackId(response) : setListTrackId([]);
+
+      // playlistUser.map((val)=> {
+      //   if(val.id==playlist_Id){
+      //     setPlaylistNameId(val.name)
+      //   } 
+      // })
+    } catch (error) {
+      console.log("error get playlistId: ", error);
+    }
+  };
+  
   useEffect(() => {
-    const getPlaylistUser = async () => {
-      try {
-        const params = {username: currentUser.username}
-        const response = await UseApi.getPlaylist(params);
-        // console.log(response)
-        response ? setPlaylistUser(response) : setPlaylistUser([])
-      } catch (error) {
-        console.log("error get list playlist: ", error);
-      }
-    };
+    getPlaylistId();
+  }, [playlist_Id,isFetchingData]);
+
+  //playlist User
+  const getPlaylistUser = async () => {
+    setIsLoading(true)
+    try {
+      const params = {username: currentUser.username}
+      const response = await UseApi.getPlaylist(params);
+      // console.log(response)
+      response ? setPlaylistUser(response) : setPlaylistUser([])
+    } catch (error) {
+      console.log("error get list playlist: ", error);
+    }finally{
+      setIsLoading(false)
+    }
+  };
+  useEffect(() => {
     getPlaylistUser();
-  }, [currentUser]);
+  }, [currentUser, isFetchingData]);
 
   const postPlaylist = async () => {
+    setIsFetchingData(true)
     try{ 
       const temp = {name: playlistName, username: currentUser.username};
       const resp = await UseApi.postPlaylist(temp);
-      console.log(resp)
-      setPlaylistUser([...playlistUser, resp])
+   
     }catch (error) {
       console.log("error post playlist: ", error);
+    }
+    finally{
+      setIsFetchingData(false)
     }
   }
 
   const delPlaylist = async (i) => {
+    setIsFetchingData(true);
     try{ 
       const resp = await UseApi.deletePlaylist({id: i})
       // console.log(resp)
       const newPlaylistUser = playlistUser.filter((playlist) => {
         return playlist.id !== i;
       })
-      setPlaylistUser(newPlaylistUser);
+      // setPlaylistUser(newPlaylistUser);
     }catch (error) {
       console.log("error post playlist: ", error);
+    }
+    finally{
+      setIsFetchingData(false)
     }
   }
 
 
-  ///choose list track
-  // const handleChooseList = (list) => {
-  //   // localStorage.setItem('usingList', list)
-  //   setUsingplaylist(list) 
-  // } 
+//info user
+const editInfo = async (user) => {
+  setIsFetchingData(true)
+  try {
+    const resp = await UseApi.updateInfoUser(user);
+  } catch (error) {
+    console.log("error edit info: ", error);
+  }finally{
+    setIsFetchingData(false)
+  }
+};
   
 
  
 
   const value = {
+    isLoading,
     isPlay,
     listTrack,
     currentSong,
@@ -262,9 +316,17 @@ const PlayingMusicProvider = ({ children }) => {
     delPlaylist,
     // listTrackId,
     playlist_Id,
+    listTrackId,
+    playlistNameId,
     //usingPlaylist
     usingPlaylist,
     setUsingplaylist,
+    //update data
+    setIsLoading,
+    setIsFetchingData,
+    //notification
+    notification,
+    setNotification
   };
 
   return (
