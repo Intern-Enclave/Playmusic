@@ -11,15 +11,7 @@ const UseApi = {
         // const url = 'playlist_has_track/getByPlaylistId?playlistId=2';
         return axiosClient.get(url, params)
     }, 
-    getAllUser: () => {
-        const url = 'user';
-        // const url = 'data';
-        return axiosClient.get(url)
-    }, 
-    postUser: (ob) => {
-        const url = 'user/register';
-        return axiosClient.post(url,ob)
-    },
+    
     search: (params) => {
         const url = 'track/search';
         return axiosClient.get(url,params)
@@ -27,6 +19,10 @@ const UseApi = {
     getPlaylist: (params) => {
         const url = 'playlist/getByUsername';
         return axiosClient.get(url, {params})
+    },
+    getTop5Album: () => {
+        const url = 'album';
+        return axiosClient.get(url)
     },
     postPlaylist: (params) => {
         const url = 'playlist'
@@ -41,11 +37,6 @@ const UseApi = {
         const url = 'playlist_has_track/addNew'
         return axiosClient.post(url, params)
     },
-    postAvatar: (body) => {
-        // console.log(params)
-        const url = 'user/files/upload'
-        return axiosClient.post(url, body)
-    },
 
     deletePlaylist: (params) => {
         const url = 'playlist'
@@ -58,6 +49,18 @@ const UseApi = {
     topSong: (params) => {
         const url = 'track/get_top'
         return axiosClient.get(url, {params});
+    },
+
+
+    //user
+    getAllUser: () => {
+        const url = 'user';
+        // const url = 'data';
+        return axiosClient.get(url)
+    }, 
+    postUser: (ob) => {
+        const url = 'user/register';
+        return axiosClient.post(url,ob)
     },
 
     updateInfoUser: (params) => {
@@ -76,6 +79,8 @@ const UseApi = {
         const url = 'user/files/upload/test';
         return axiosClient.post(url,{formData});
     },
+
+
 
 
 }

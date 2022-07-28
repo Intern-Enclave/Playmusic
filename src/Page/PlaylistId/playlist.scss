@@ -4,6 +4,7 @@
 .playlist{
   background-color: $layout-bg;
   min-height: calc(100%);
+  display: flex;
   // padding-bottom: $height-player-control;
   // margin-bottom: 100px;
 
@@ -12,7 +13,7 @@
     color: $text-secondary;
     font-size: 1.6rem;
     justify-content: space-between;
-    padding:0 40px 20px 55px;
+    padding:0 40px 10px 55px;
     border-bottom: 1px solid $text-secondary;
 
 
@@ -21,6 +22,9 @@
     }
   }
 
+}
+.playlist-music-info{
+  margin-top: 40px;
 }
 
 .playlist-item{
@@ -152,11 +156,11 @@
 
 //music
 
-.playlist-music-cd{
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
+// .playlist-music-cd{
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+// }
 .playlist_id-cd-title{
   font-size: 2.5rem;
   font-weight: 600;
@@ -182,8 +186,8 @@
 }
 
 .playlist_id-music-img{
-  width: 15vw;
-  height: 15vw;
+  width: 20vw;
+  height: 20vw;
   border-radius: 20px;
   object-fit: cover;
   transition: border-radius linear .5s;
@@ -206,8 +210,14 @@
     }
 }
 
+.playlist-info{
+  width: 45%;
+  position: relative;
+}
+
 .playlist-music{
   display: flex;
+  flex-direction: column;
   color: $text-primary;
   width: 100%;
   margin: 40px 0;
@@ -216,11 +226,16 @@
 
   &-cd{
     margin:0 10%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
   }
 
   &-info{
     // padding-top: 30px;
     position: relative;
+    margin-top: 0;
+    text-align: center;
 
     &-singer,
     &-time,
@@ -231,25 +246,24 @@
       padding: 5px 0;
     }
 
-    &::before{
-      content: '';
-      height: 100%;
-      width: 1px;
-      background-color: $alpha-bg;
-      position: absolute;
-      top: 0;
-      left: -20px;
-    }
-  }
-
-  &-control{
-    margin-top: 20px;
-    margin-left: 0;
+    // &::before{
+    //   content: '';
+    //   width: 80%;
+    //   height: 2px;
+    //   background-color: $alpha-bg;
+    //   position: absolute;
+    //   top: -20px;
+    //   left: 50%;
+    //   transform: translateX(-50%);
+    // }
   }
 }
 
 .playlist-music-control{
   display: flex;
+  margin: 20px 10%;
+  justify-content: space-between;
+  position: relative;
 
   &-icon{
     width: 40px;
@@ -257,9 +271,9 @@
     font-size: 2rem;
     display: flex;
     align-items: center;
-    margin: auto;
+    margin: 0;
     position: relative;
-    margin-left: 20px;
+    // margin-left: 20px;
     background-color: $alpha-bg;
     border-radius: 50%;
 
@@ -295,3 +309,5 @@
   margin: 0 50px;
   margin-top: 30px;
 }
+
+

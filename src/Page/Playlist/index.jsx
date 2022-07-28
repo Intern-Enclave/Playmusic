@@ -26,7 +26,7 @@ function Playlist() {
   };
 
   return isLoading ? (
-    <h1> Loading</h1>
+    <h1> Loading...</h1>
   ) : (
     <div className="pl-container">
       {formRequest && (

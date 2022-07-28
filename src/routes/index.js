@@ -4,10 +4,12 @@ import NewSong from "../Page/NewSong"
 import User from "../Page/User"
 import Playlist from "../Page/Playlist"
 import PlaylistId from "../Page/PlaylistId"
+import AlbumId from "../Page/AlbumId"
 
 const publicRoute = [
     {path: '/', component: Home},
     {path: '/album', component: Album},
+    {path: '/album_id', component: AlbumId},
     {path: '/newsong', component: NewSong},
     {path: '/playlist', component: Playlist},
     {path: '/user', component: User},

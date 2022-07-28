@@ -77,7 +77,6 @@ function Search() {
         setShowResult(true);
         setFocus(true);
     }
-
     return (
         <div className='search-wrap'> 
             {/* <div className='logo'>
@@ -95,7 +94,7 @@ function Search() {
                             <h4 className="search-title">
                                 Offer
                             </h4>
-                            {searchResult.length>0 ? (searchResult.map((result) => (
+                            {searchResult.length>0 ? (searchResult.slice(0,5).map((result) => (
                                <div key={result.id} onClick={()=>handleChooseSong(result,listTrack)}> <MediaItem  singer={result?.artist.name} SongName={result?.title} img={result?.artist.picture} className={'result-item'}  /></div>
                             ))) : <div className='cannotfind-result'>Can not find</div>}
                         

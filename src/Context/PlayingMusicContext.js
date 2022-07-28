@@ -33,11 +33,7 @@ const PlayingMusicProvider = ({ children }) => {
   const [usingPlaylist, setUsingplaylist] = useState([]);
 
   //notification
-  const [notification, setNotification] = useState([ {
-    id: 1,
-    tittle: "Succes",
-    description: "infomation"
-}])
+  const [notification, setNotification] = useState([])
 
   
   //control music
