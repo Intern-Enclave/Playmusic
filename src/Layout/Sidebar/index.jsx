@@ -9,6 +9,8 @@ import './sidebar.scss'
 import { BiLogIn, BiLogOut } from 'react-icons/bi';
 import { FaCompactDisc,FaMusic } from 'react-icons/fa';
 import { TbPlaylist } from 'react-icons/tb';
+import { BsBarChartFill } from 'react-icons/bs';
+
 
 import { useMusic } from '../../hooks/useMusic';
 
@@ -43,6 +45,14 @@ function Sidebar() {
             path: '/playlist',
             current: true,
         },
+        {
+            title: 'Chart',
+            icon:<BsBarChartFill/>,
+            path: '/topmusic',
+            current: true,
+        },
+
+
 
     ]
 

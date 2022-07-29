@@ -54,8 +54,18 @@
     width: 48px;
     height: 48px;
     border-radius: 24px;
-    background-color: white;
-    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    /* border: 1px solid #ddd; */
+}
+
+
+.left-arrow svg, .right-arrow svg {
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .left-arrow {

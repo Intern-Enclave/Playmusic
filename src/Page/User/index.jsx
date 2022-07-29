@@ -14,6 +14,7 @@ import UseApi from "../../API/UseApi";
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
+import Toastmenu from "../../component/Toast";
 import "./user.scss";
 
 const User = () => {
@@ -198,6 +199,43 @@ const User = () => {
   //   setSelectedFile(event.target.files[0])
   // }
 
+  const [List, setList] = useState([]);
+    let toastProperties = null;
+
+    const handleShowToastMenu = type => {
+      switch(type) {
+        case 'success':
+          toastProperties = {
+            id: List.length + 1,
+            tittle: "Success",
+            description: "Saved Information",
+            color: "#7200a1"
+        }
+        break;
+
+        case 'pass-success':
+          toastProperties = {
+            id: List.length + 1,
+            tittle: "Success",
+            description: "Change password complete",
+            color: "#7200a1"
+        }
+        break;
+
+        default:
+          toastProperties = [];
+      }
+      setList([...List ,toastProperties])
+        // toastProperties = {
+        //     id: 1,
+        //     tittle: "Success",
+        //     description: "Saved Information",
+        //     color: "#7200a1"
+        // }
+
+        // setList([toastProperties])
+    }
+
   return (
     <div className="acount-setting-container">
       {currentUser ? (
@@ -311,10 +349,11 @@ const User = () => {
                 <div className="change-user-pass " onClick={handleShowChangePass}>
                   <a className=""> Do you want to change password?</a>
                 </div>
-                <button className={"accept-button"} onClick={save}>
+                <button className={"accept-button"} onClick={()=>{save(); handleShowToastMenu('success')}}>
                   Save
                 </button>
               </div>
+              <Toastmenu toastlist={List} setList= {setList}/>
             </div>
             <div className="change-avatar change-item">
               <div className="change-avatar-img">
