@@ -76,11 +76,13 @@ function NewSong() {
                 {isPlay ? "Pause" : "Play"}
               </Button>
               {/* <Button onClick={pause.togglePlay()} primary leftIcon={pause?.isPlay ? <TbPlayerPause /> : <TbPlayerPlay />} >{pause?.isPlay ? 'Pause' : 'Play'}</Button> */}
-              <div className="playlist-music-control-icon">
-                <AiTwotoneHeart />
-              </div>
-              <div className="playlist-music-control-icon">
-                <BsThreeDots />
+              <div className="playlist-music-control-icons">
+                <div className="playlist-music-control-icon">
+                  <AiTwotoneHeart />
+                </div>
+                <div className="playlist-music-control-icon">
+                  <BsThreeDots />
+                </div>
               </div>
             </div>
           </div>

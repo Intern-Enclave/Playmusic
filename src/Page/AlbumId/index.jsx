@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import MediaItem from "../../component/MediaItem";
 import { ImMusic } from "react-icons/im";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
@@ -9,13 +9,16 @@ import { BsThreeDots } from "react-icons/bs";
 import "./newsong.scss";
 import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
+import UseApi from "../../API/UseApi";
 
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
 
 function AlbumId() {
   const {
-    listTrack,
+    listTrackInAlbum,
+    setListTrackInAlbum,
+    album,
     currentSong,
     togglePlay,
     isPlay,
@@ -23,6 +26,9 @@ function AlbumId() {
     handlePlayAnotherSong,
   } = useMusic();
   const [active, setActive] = useState("");
+  // const [listTrackInAlbum, setListTrackInAlbum] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
+
 
   function convertHMS(value) {
     const sec = parseInt(value, 10); // convert value to number if it's string
@@ -76,11 +82,13 @@ function AlbumId() {
                 {isPlay ? "Pause" : "Play"}
               </Button>
               {/* <Button onClick={pause.togglePlay()} primary leftIcon={pause?.isPlay ? <TbPlayerPause /> : <TbPlayerPlay />} >{pause?.isPlay ? 'Pause' : 'Play'}</Button> */}
-              <div className="playlist-music-control-icon">
-                <AiTwotoneHeart />
-              </div>
-              <div className="playlist-music-control-icon">
-                <BsThreeDots />
+              <div className="playlist-music-control-icons">
+                <div className="playlist-music-control-icon">
+                  <AiTwotoneHeart />
+                </div>
+                <div className="playlist-music-control-icon">
+                  <BsThreeDots />
+                </div>
               </div>
             </div>
           </div>
@@ -93,8 +101,8 @@ function AlbumId() {
           <div className="playlist-title-time">Time</div>
         </div>
         <div className="playlist-content">
-          {listTrack ? (
-            listTrack.map((val, index) => (
+          {listTrackInAlbum ? (
+            listTrackInAlbum.map((val, index) => (
               <div
                 className={`playlist-item ${
                   currentSong?.id == val.id ? "active" : ""
@@ -102,7 +110,7 @@ function AlbumId() {
                 key={val.id}
                 onClick={() => {
                   setActive(index);
-                  handleChooseSong(val, listTrack);
+                  handleChooseSong(val, listTrackInAlbum);
                   handlePlayAnotherSong();
                 }}
               >

@@ -23,7 +23,10 @@ const PlayingMusicProvider = ({ children }) => {
   const [playlist_Id, setPlaylist_Id] = useState(0);
   const [listTrackId, setListTrackId] =useState([]);
   const [playlistNameId, setPlaylistNameId] = useState('');
-  // const [playlist_Id, setPlaylist_Id] = useState(0);
+  
+  //album
+  const [listTrackInAlbum, setListTrackInAlbum] = useState([]);
+  const [album, setAlbum] = useState();
 
   //playlist User
   const [playlistUser, setPlaylistUser] = useState([]);
@@ -214,6 +217,29 @@ const PlayingMusicProvider = ({ children }) => {
     getPlaylistId();
   }, [playlist_Id,isFetchingData]);
 
+//album
+
+const setAlbumId = (id) =>{
+  setAlbum(id);
+  localStorage.setItem('album', id)
+}
+
+const getListTrackInAlbum = async () => { 
+  try {
+    setAlbumId(localStorage.getItem('album'));
+    const response = await UseApi.getListTrackInAlbum({albumId: album });
+    response ? setListTrackInAlbum(response) : setListTrackInAlbum([]);
+  } catch (error) {
+    console.log("error get list track in album: ", error);
+  }finally{
+    
+  }
+};
+
+useEffect(() => {
+  getListTrackInAlbum();
+}, [album,isFetchingData]);
+
   //playlist User
   const getPlaylistUser = async () => {
     setIsLoading(true)
@@ -321,6 +347,11 @@ const editInfo = async (user) => {
     //usingPlaylist
     usingPlaylist,
     setUsingplaylist,
+    //album
+    listTrackInAlbum,
+    album,
+    setAlbum,
+    setAlbumId,
     //update data
     setIsLoading,
     setIsFetchingData,
