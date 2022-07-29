@@ -35,6 +35,8 @@ const PlayingMusicProvider = ({ children }) => {
   //notification
   const [notification, setNotification] = useState([])
 
+  //add Song
+  const [showAddSong, setShowAddSong] = useState(false)
   
   //control music
   const handlePlayAnotherSong = () => {
@@ -326,7 +328,10 @@ const editInfo = async (user) => {
     setIsFetchingData,
     //notification
     notification,
-    setNotification
+    setNotification,
+    //addSong
+    showAddSong,
+    setShowAddSong,
   };
 
   return (

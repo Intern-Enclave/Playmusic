@@ -10,6 +10,7 @@ import "./playlist.scss";
 import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
 import UseApi from "../../API/UseApi";
+import Toastmenu from "../../component/Toast";
 
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -28,7 +29,46 @@ function PlaylistId() {
     isFetchingData,
     listTrackId,
     currentUser,
+    ShowAddSong ,setShowAddSong 
   } = useMusic();
+
+  const [List, setList] = useState([]);
+  let toastProperties = null;
+
+  const handleShowToastMenu = (type, songName, playlistName) => {
+    switch(type) {
+      case 'success':
+        toastProperties = {
+          id: List.length + 1,
+          tittle: "Success",
+          description: `${songName} is deleted from playlist ${playlistName}`,
+          color: "#7200a1"
+      }
+      break;
+
+      case 'pass-success':
+        toastProperties = {
+          id: List.length + 1,
+          tittle: "Success",
+          description: "Change password complete",
+          color: "#7200a1"
+      }
+      break;
+
+      default:
+        toastProperties = [];
+    }
+    setList([...List ,toastProperties])
+      // toastProperties = {
+      //     id: 1,
+      //     tittle: "Success",
+      //     description: "Saved Information",
+      //     color: "#7200a1"
+      // }
+
+      // setList([toastProperties])
+  }
+
 
   const [playlistName, setPlaylistName] = useState(null);
   const [newPlaylistName, setNewPlaylistName] = useState(null);
@@ -104,6 +144,7 @@ function PlaylistId() {
 
   return (
     <div className="playlist container">
+      <Toastmenu toastlist={List} setList= {setList}/>
       {formRequest && (
         <div className="modal">
           <div className="modal__overlay"></div>
@@ -191,7 +232,7 @@ function PlaylistId() {
               <Tippy delay={[0, 200]} content="delete">
                 <button
                   className="playlist-item-icon"
-                  onClick={() => delSong(val.id)}
+                  onClick={() => {delSong(val.id);handleShowToastMenu('success',val.title,playlistName)}}
                 >
                   <AiFillDelete />
                 </button>
@@ -201,6 +242,7 @@ function PlaylistId() {
                   handleChooseSong(val, listTrackId);
                   handlePlayAnotherSong();
                   setPlay(true);
+                  
                 }}
                 className={`playlist-item`}
               >

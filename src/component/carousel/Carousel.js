@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './carousel.css'
-import {IoMdArrowDropright , IoMdArrowDropleft} from "react-icons/io"
+import {AiOutlineRight , AiOutlineLeft} from "react-icons/ai"
 
 const Carousel = (props) => {
     const {children, show} = props
@@ -60,7 +60,7 @@ const Carousel = (props) => {
                 {
                     currentIndex > 0 &&
                     <button onClick={prev} className="left-arrow">
-                        <IoMdArrowDropleft/>
+                        <AiOutlineLeft/>
                     </button>
                 }
                 <div
@@ -79,7 +79,7 @@ const Carousel = (props) => {
                 {
                     currentIndex < (length - show) &&
                     <button onClick={next} className="right-arrow">
-                          <IoMdArrowDropright/>
+                          <AiOutlineRight/>
                     </button>
                 }
             </div>

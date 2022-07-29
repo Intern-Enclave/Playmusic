@@ -66,7 +66,7 @@ const Home = () => {
 
       <div className="playlists-music">
         <div className="playlists-music-header">
-          <h3 className="playlists tittle">Playlists</h3>
+          <h3 className="playlists tittle">New Songs</h3>
           <Link to={'/newsong'} className="playlists-more more">More</Link>
         </div>
         <div className="playlists-music-box">
@@ -115,12 +115,12 @@ const Home = () => {
       <div className="top-music">
         <div className="top-music-header ">
           <h3 className="tops tittle">Top</h3>
-          <p className="tops-more more">More</p>
+          <Link to={'/topmusic'} className="tops-more more">More</Link>
         </div>
         <div className="top-music-box">
         
         {top?.map((val,idx) => (
-          <div className="top-music-item" key={val.id}>
+          <Link to={'/topmusic'} className="top-music-item" key={val.id}>
             <div className="top-music-item-content">
               <div className="top-music-item-img">
                 <img
@@ -143,7 +143,7 @@ const Home = () => {
                 <div className="top-number">{`#${idx +1}`}</div>
               </div>
             </div>
-          </div>
+          </Link>
 
         ))}
 
@@ -163,6 +163,7 @@ const Home = () => {
             {listTrack.slice(0,5).map((val) => (
 
               <div className="singer-item">
+                <Link to={'/singerId'}> 
                 <div className="singer-item-content">
                   <div className="singer-item-img">
                     <img
@@ -184,6 +185,7 @@ const Home = () => {
                     {/* {/ <div className="top-number">{`#${idx +1}`}</div> /} */}
                   </div>
                 </div>
+                </Link> 
               </div>
               ))}
             </div>
