@@ -10,10 +10,12 @@ import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { listTrack } = useMusic();
+  const { listTrack, setAlbum, album, setAlbumId } = useMusic();
 
   const [top, setTop] = useState([]);
-  const [album, setAlbum] = useState([]);
+  const [listAlbum, setListAlbum] = useState([]);
+
+ 
 //topMusic
     useEffect(() => {
         const topMusic = async () => {
@@ -31,7 +33,7 @@ const Home = () => {
         const topAlbum = async () => {
         try {
             const response = await UseApi.getTop5Album();
-            response ? setAlbum(response) : setAlbum([])
+            response ? setListAlbum(response) : setListAlbum([])
 
         } catch (error) {
             console.log("error get album: ", error);
@@ -41,16 +43,16 @@ const Home = () => {
     }, []);
 
 
-
     // console.log(top)
   return (
     <div className="home-page-container">
+      {/* <button onClick={()=>(getListTrackinAlbum(50131702))}>test</button> */}
       <div className="topic-music">
         <h3 className="topic tittle">Topic</h3>
         <Carousel show={3}>
             {
-                album?.map((val, index) => (
-                    <div className="topic-item carousel-item" key={val.id}>
+                listAlbum?.map((val) => (
+                    <Link to={'/album_id'} className="topic-item carousel-item" key={val.id}  onClick={()=> setAlbumId(val.id)}>
                         <div style={{ padding: 8 }}>
                         <img
                             src={val.cover_big}
@@ -58,7 +60,7 @@ const Home = () => {
                             style={{ width: "100%", height: 250 }}
                         />
                         </div>
-                    </div>
+                    </Link>
                 ))
             }
         </Carousel>
@@ -161,7 +163,6 @@ const Home = () => {
           <div className="singer-box">
 
             {listTrack.slice(0,5).map((val) => (
-
               <div className="singer-item">
                 <Link to={'/singerId'}> 
                 <div className="singer-item-content">

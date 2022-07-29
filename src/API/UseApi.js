@@ -24,6 +24,11 @@ const UseApi = {
         const url = 'album';
         return axiosClient.get(url)
     },
+
+    getListTrackInAlbum: (params) => {
+        const url = 'album/get_track';
+        return axiosClient.get(url, {params})
+    },
     postPlaylist: (params) => {
         const url = 'playlist'
         return axiosClient.post(url, params)
