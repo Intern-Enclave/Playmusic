@@ -21,6 +21,7 @@ function NewSong() {
     isPlay,
     handleChooseSong,
     handlePlayAnotherSong,
+    ShowAddSong ,setShowAddSong 
   } = useMusic();
   const [active, setActive] = useState("");
 
@@ -109,7 +110,7 @@ function NewSong() {
                 }}
               >
                 <Tippy delay={[0, 200]} content="Add Playlist">
-                  <button className="playlist-item-icon">
+                  <button className="playlist-item-icon" onClick={()=>setShowAddSong(!ShowAddSong)}>
                     <AiOutlinePlus />
                   </button>
                 </Tippy>
