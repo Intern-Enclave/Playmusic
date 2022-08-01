@@ -130,6 +130,7 @@ const PlayingMusicProvider = ({ children }) => {
         response.map((user) => {
           if(user.image !== null) {
             user.image = apiConfig.baseUrl + "user/images/" + user.image;
+            console.log(user.image)
           }
           if (user.username == cUser) setCurrentUser(user);
         });

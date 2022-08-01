@@ -16,6 +16,7 @@ import "tippy.js/dist/tippy.css";
 
 import Toastmenu from "../../component/Toast";
 import "./user.scss";
+import apiConfig from "../../API/apiConfig";
 
 const User = () => {
   const { currentUser, setIsFetchingData } = useMusic();
@@ -177,27 +178,30 @@ const User = () => {
     }
   }
 
-  // const [selectedFile, setSelectedFile] = React.useState(null);
+  const [imageFile, setimageFile] = useState(null);
 
-  // const handleSubmit2 = async (event) => {
-  //   event.preventDefault()
-  //   const formData = new FormData();
-  //   formData.append("selectedFile", selectedFile);
-  //   try {
-  //     const response = await axios({
-  //       method: "post",
-  //       url: "http://172.16.75.26:8080/api/user/files/upload",
-  //       data: formData,
-  //       headers: { "Content-Type": "multipart/form-data" },
-  //     });
-  //   } catch(error) {
-  //     console.log(error)
-  //   }
-  // }
+  const handleSubmit2 = async (event) => {
+    event.preventDefault()
+    const formData = new FormData();
+    //Repair ------
+    formData.append("imageFile", imageFile);
+    formData.append("username" , 'admin1')
+    try {
+      const response = await axios.post(apiConfig.baseUrl + `user/image`, formData, {
+        onUploadProgress:progressEvent => {
+            console.log("Uploading : " + ((progressEvent.loaded / progressEvent.total) * 100).toString() + "%")
+        }
+    });
+    console.log('diumia')
+     //--------------
+    } catch(error) {
+      console.log('upload image errer: ',error)
+    }
+  }
 
-  // const handleFileSelect = (event) => {
-  //   setSelectedFile(event.target.files[0])
-  // }
+  const handleFileSelect = (event) => {
+    setimageFile(event.target.files[0])
+  }
 
   const [List, setList] = useState([]);
     let toastProperties = null;
@@ -359,12 +363,11 @@ const User = () => {
               <div className="change-avatar-img">
                 <Image src = {currentUser?.image} />
               </div>
-            {/* <form onSubmit={handleSubmit2}> 
+            <form onSubmit={handleSubmit2} className='form-upload-image'> 
               <input type="file" name="file_upload" onChange={handleFileSelect} />
-              <input type="submit" value="Upload File" />
-            </form> */}
-
-              <Button className={"change-avatar-button"} onClick={submitFileData}>Change Avatar</Button>
+              {/* <input type="submit" value="Upload File" /> */}
+              <Button className={"change-avatar-button"} onClick={handleSubmit2}>Change Avatar</Button>
+            </form>
             </div>
           </div>
 
