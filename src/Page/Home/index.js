@@ -10,7 +10,7 @@ import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { listTrack, setAlbum, album, setAlbumId } = useMusic();
+  const { listTrack, setAlbum, album, setAlbumId, set } = useMusic();
 
   const [top, setTop] = useState([]);
   const [listAlbum, setListAlbum] = useState([]);
@@ -75,7 +75,7 @@ const Home = () => {
 
             {listTrack.slice(0,5).map((val) => (
 
-                <div className="playlist-music-item" key={val.id}>
+                <Link to={'/newsong'} className="playlist-music-item" key={val.id}>
                     <div className="playlist-music-item-img">
                     <img
                          src={val.artist.picture}
@@ -109,7 +109,7 @@ const Home = () => {
                     <p className="playlists-tittle">{val.title}</p>
                     <p className="playlists-singer">{val.artist.name}</p>
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
       </div>

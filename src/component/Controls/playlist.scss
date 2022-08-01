@@ -10,6 +10,21 @@
     justify-content: center;
     position: relative;
   }
+
+  .duration-right{
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: $text-primary;
+    position: absolute;
+    right: 0;
+  }
+  .duration-left{
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: $text-primary;
+    position: absolute;
+    left: 0;
+  }
   
   .Control-Button-Group {
     display: flex;
