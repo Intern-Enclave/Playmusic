@@ -159,9 +159,12 @@
 }
 
 .change-avatar-img {
-  height: 50%;
+  height: 300px;
+  // padding-right: 50%;
+  width: 300px;
   border-radius: 50%;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.463);
+
 }
 
 .change-avatar-img img {

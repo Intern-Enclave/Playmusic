@@ -185,7 +185,8 @@ const User = () => {
     const formData = new FormData();
     //Repair ------
     formData.append("imageFile", imageFile);
-    formData.append("username" , 'admin1')
+    formData.append("username" , currentUser?.username)
+    setIsFetchingData(true)
     try {
       const response = await axios.post(apiConfig.baseUrl + `user/image`, formData, {
         onUploadProgress:progressEvent => {
@@ -196,6 +197,8 @@ const User = () => {
      //--------------
     } catch(error) {
       console.log('upload image errer: ',error)
+    }finally{
+      setIsFetchingData(false)
     }
   }
 
