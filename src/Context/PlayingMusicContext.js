@@ -37,6 +37,9 @@ const PlayingMusicProvider = ({ children }) => {
 
   //add Song
   const [showAddSong, setShowAddSong] = useState(false)
+
+  //Show comment
+  const [ShowComment, setShowComment] = useState(false)
   
   //control music
   const handlePlayAnotherSong = () => {
@@ -332,6 +335,9 @@ const editInfo = async (user) => {
     //addSong
     showAddSong,
     setShowAddSong,
+    //show comment
+    ShowComment, 
+    setShowComment,
   };
 
   return (

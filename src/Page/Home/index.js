@@ -162,7 +162,8 @@ const Home = () => {
 
             {listTrack.slice(0,5).map((val) => (
 
-              <div className="singer-item">
+              <div className="singer-item"
+              key={val.id}>
                 <Link to={'/singerId'}> 
                 <div className="singer-item-content">
                   <div className="singer-item-img">
