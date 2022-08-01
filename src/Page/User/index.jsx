@@ -178,23 +178,24 @@ const User = () => {
     }
   }
 
-  const [imageFile, setimageFile] = React.useState(null);
+  const [imageFile, setimageFile] = useState(null);
 
   const handleSubmit2 = async (event) => {
     event.preventDefault()
     const formData = new FormData();
     //Repair ------
     formData.append("imageFile", imageFile);
-    formData.append("username" , "admin")
+    formData.append("username" , 'admin1')
     try {
       const response = await axios.post(apiConfig.baseUrl + `user/image`, formData, {
         onUploadProgress:progressEvent => {
             console.log("Uploading : " + ((progressEvent.loaded / progressEvent.total) * 100).toString() + "%")
         }
     });
+    console.log('diumia')
      //--------------
     } catch(error) {
-      console.log(error)
+      console.log('upload image errer: ',error)
     }
   }
 
@@ -362,11 +363,11 @@ const User = () => {
               <div className="change-avatar-img">
                 <Image src = {currentUser?.image} />
               </div>
-            <form onSubmit={handleSubmit2}> 
+            <form onSubmit={handleSubmit2} className='form-upload-image'> 
               <input type="file" name="file_upload" onChange={handleFileSelect} />
-              <input type="submit" value="Upload File" />
+              {/* <input type="submit" value="Upload File" /> */}
+              <Button className={"change-avatar-button"} onClick={handleSubmit2}>Change Avatar</Button>
             </form>
-              <Button className={"change-avatar-button"} onClick={submitFileData}>Change Avatar</Button>
             </div>
           </div>
 
