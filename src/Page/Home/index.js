@@ -10,7 +10,7 @@ import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { listTrack, setAlbum, album, setAlbumId, set } = useMusic();
+  const { listTrack,  setAlbumId,setUsingplaylist,listTrackInAlbum } = useMusic();
 
   const [top, setTop] = useState([]);
   const [listAlbum, setListAlbum] = useState([]);

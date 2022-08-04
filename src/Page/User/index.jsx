@@ -8,6 +8,7 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
 import { useMusic } from "../../hooks/useMusic";
 import Image from "../../component/Image";
 import UseApi from "../../API/UseApi";
@@ -29,6 +30,7 @@ const User = () => {
 
   const [formValues, setFormValues] = useState({});
   const [editRequest, setEditRequest] = useState(false);
+  const [formRequest,setFormRequest] = useState(false);
 
   useEffect(() => {
     currentUser &&
@@ -193,7 +195,9 @@ const User = () => {
             console.log("Uploading : " + ((progressEvent.loaded / progressEvent.total) * 100).toString() + "%")
         }
     });
-    console.log('diumia')
+
+    setFormRequest(false)
+    setFormRequest(false)
      //--------------
     } catch(error) {
       console.log('upload image errer: ',error)
@@ -245,6 +249,37 @@ const User = () => {
 
   return (
     <div className="acount-setting-container">
+      {formRequest && (
+        <div className="modal">
+          <div className="modal__overlay"></div>
+
+          <div className="modal__body">
+            <form action="" className="register" id="form-register" onSubmit={handleSubmit2}>
+              <div className="create-playlist-modal">
+                <div className="create-playlist-container">
+                  <div className="create-playlist-content">
+                    <div className="create-playlist-from-content">
+                      <span to={"/playlist"} className="close-button">
+                        <AiOutlineClose onClick={() => setFormRequest(false)} />
+                      </span>
+                      <div className="create-playlist-header">
+                        <h3 className="create-playlist-tittle">
+                          Choose Avatar
+                        </h3>
+                      </div>
+                      <input type="file" name="file_upload" onChange={handleFileSelect} />
+                      <div className="create-button save" onClick={handleSubmit2}>
+                        <span>Save</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {currentUser ? (
         <div className="acount-setting-content">
           <div className="acount-setting-header">
@@ -366,11 +401,11 @@ const User = () => {
               <div className="change-avatar-img">
                 <Image src = {currentUser?.image} />
               </div>
-            <form onSubmit={handleSubmit2} className='form-upload-image'> 
-              <input type="file" name="file_upload" onChange={handleFileSelect} />
+            {/* <form onSubmit={handleSubmit2} className='form-upload-image'>  */}
+              {/* <input type="file" name="file_upload" onChange={handleFileSelect} /> */}
               {/* <input type="submit" value="Upload File" /> */}
-              <Button className={"change-avatar-button"} onClick={handleSubmit2}>Change Avatar</Button>
-            </form>
+              <Button className={"change-avatar-button"} onClick={()=>setFormRequest(true)}>Change Avatar</Button>
+            {/* </form> */}
             </div>
           </div>
 

@@ -130,7 +130,6 @@ const PlayingMusicProvider = ({ children }) => {
         response.map((user) => {
           if(user.image !== null) {
             user.image = apiConfig.baseUrl + "user/images/" + user.image;
-            console.log(user.image)
           }
           if (user.username == cUser) setCurrentUser(user);
         });
@@ -232,6 +231,7 @@ const getListTrackInAlbum = async () => {
     setAlbumId(localStorage.getItem('album'));
     const response = await UseApi.getListTrackInAlbum({albumId: album });
     response ? setListTrackInAlbum(response) : setListTrackInAlbum([]);
+    setUsingplaylist(response)
   } catch (error) {
     console.log("error get list track in album: ", error);
   }finally{
