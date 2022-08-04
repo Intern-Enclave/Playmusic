@@ -10,11 +10,12 @@ import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { listTrack, handleChooseSong ,handlePlayAnotherSong,imga, setImga, singername, setSingername  } = useMusic();
+  const { listTrack,  setAlbumId,setUsingplaylist,listTrackInAlbum } = useMusic();
 
   const [top, setTop] = useState([]);
-  const [album, setAlbum] = useState([]);
-  // const [Listartists, setListartists] = useState([])
+  const [listAlbum, setListAlbum] = useState([]);
+
+ 
 //topMusic
     useEffect(() => {
         const topMusic = async () => {
@@ -32,7 +33,7 @@ const Home = () => {
         const topAlbum = async () => {
         try {
             const response = await UseApi.getTop5Album();
-            response ? setAlbum(response) : setAlbum([])
+            response ? setListAlbum(response) : setListAlbum([])
 
         } catch (error) {
             console.log("error get album: ", error);
@@ -41,30 +42,17 @@ const Home = () => {
         topAlbum();
     }, []);
 
-  //   useEffect(() => {
-  //     const listSingerss = async () => {
-  //     try {
-  //         const response = await UseApi.getAllArtist();
-  //         response ? setListartists(response) : setListartists([])
-
-  //     } catch (error) {
-  //         console.log("error get artist: ", error);
-  //     }
-  //     };
-  //     listSingerss();
-  // }, []);
-
-
 
     // console.log(top)
   return (
     <div className="home-page-container">
+      {/* <button onClick={()=>(getListTrackinAlbum(50131702))}>test</button> */}
       <div className="topic-music">
         <h3 className="topic tittle">Topic</h3>
         <Carousel show={3}>
             {
-                album?.map((val, index) => (
-                    <div className="topic-item carousel-item" key={val.id}>
+                listAlbum?.map((val) => (
+                    <Link to={'/album_id'} className="topic-item carousel-item" key={val.id}  onClick={()=> setAlbumId(val.id)}>
                         <div style={{ padding: 8 }}>
                         <img
                             src={val.cover_big}
@@ -72,7 +60,7 @@ const Home = () => {
                             style={{ width: "100%", height: 250 }}
                         />
                         </div>
-                    </div>
+                    </Link>
                 ))
             }
         </Carousel>
@@ -87,7 +75,7 @@ const Home = () => {
 
             {listTrack.slice(0,5).map((val) => (
 
-                <div className="playlist-music-item" key={val.id}>
+                <Link to={'/newsong'} className="playlist-music-item" key={val.id}>
                     <div className="playlist-music-item-img">
                     <img
                          src={val.artist.picture}
@@ -121,7 +109,7 @@ const Home = () => {
                     <p className="playlists-tittle">{val.title}</p>
                     <p className="playlists-singer">{val.artist.name}</p>
                     </div>
-                </div>
+                </Link>
             ))}
         </div>
       </div>
@@ -134,15 +122,7 @@ const Home = () => {
         <div className="top-music-box">
         
         {top?.map((val,idx) => (
-          <Link to={'/topmusic'} 
-                className="top-music-item" 
-                key={val.id}
-                onClick = {() =>{
-                  //setActive(index);
-                  handleChooseSong(val, listTrack);
-                  handlePlayAnotherSong();
-                }}
-          >
+          <Link to={'/topmusic'} className="top-music-item" key={val.id}>
             <div className="top-music-item-content">
               <div className="top-music-item-img">
                 <img
@@ -183,11 +163,7 @@ const Home = () => {
           <div className="singer-box">
 
             {listTrack.slice(0,5).map((val) => (
-
-              <div className="singer-item"
-                  onClick={() =>{setImga(val.artist.picture); setSingername(val.artist.name)}}
-                  key = {val.id}
-              >
+              <div className="singer-item" key={val.id}>
                 <Link to={'/singerId'}> 
                 <div className="singer-item-content">
                   <div className="singer-item-img">
