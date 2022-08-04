@@ -10,7 +10,7 @@ import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { listTrack,  setAlbumId,setUsingplaylist,listTrackInAlbum } = useMusic();
+  const { listTrack,  setAlbumId,setUsingplaylist,listTrackInAlbum, setImga, setSingername, handleChooseSong } = useMusic();
 
   const [top, setTop] = useState([]);
   const [listAlbum, setListAlbum] = useState([]);
@@ -75,7 +75,7 @@ const Home = () => {
 
             {listTrack.slice(0,5).map((val) => (
 
-                <Link to={'/newsong'} className="playlist-music-item" key={val.id}>
+                <Link to={'/newsong'} className="playlist-music-item" key={val.id} onClick={()=>handleChooseSong(val, listTrack)}>
                     <div className="playlist-music-item-img">
                     <img
                          src={val.artist.picture}
@@ -163,7 +163,11 @@ const Home = () => {
           <div className="singer-box">
 
             {listTrack.slice(0,5).map((val) => (
-              <div className="singer-item" key={val.id}>
+
+              <div className="singer-item"
+                  onClick={() =>{setImga(val.artist.picture); setSingername(val.artist.name)}}
+                  key = {val.id}
+              >
                 <Link to={'/singerId'}> 
                 <div className="singer-item-content">
                   <div className="singer-item-img">
@@ -196,5 +200,4 @@ const Home = () => {
     </div>
   );
 };
-
 export default Home;
