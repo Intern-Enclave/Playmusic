@@ -43,13 +43,25 @@
   }
   
   .Prev-Button,
-  .Next-Button {
+  .Next-Button,
+  .random-Button,
+  .repeat-Button {
     color: $text-primary;
     font-size: 2rem;
     margin-top: 4px;
     &:hover{
       color: $purple-primary;
     }
+  }
+
+  .random-Button{
+    margin-left: 80px;
+  }
+  .repeat-Button{
+    margin-right: 80px;
+  }
+  .randomActive{
+    color: $purple-primary;
   }
   
   .Pause-Play-Button {

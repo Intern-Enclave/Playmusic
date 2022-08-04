@@ -191,7 +191,7 @@ function Topmusic() {
                 key={val.id}
                 onClick={() => {
                   setActive(index);
-                  handleChooseSong(val, listTrack);
+                  handleChooseSong(val, top);
                   handlePlayAnotherSong();
                 }}
               >
