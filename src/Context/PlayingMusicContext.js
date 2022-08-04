@@ -36,10 +36,13 @@ const PlayingMusicProvider = ({ children }) => {
   const [usingPlaylist, setUsingplaylist] = useState([]);
 
   //notification
-  const [notification, setNotification] = useState([])
+  const [notification, setNotification] = useState([]);
 
   //add Song
-  const [showAddSong, setShowAddSong] = useState(false)
+  const [showAddSong, setShowAddSong] = useState(false);
+
+  //random Song
+  const [random, setRandom] = useState(false);
   
   //control music
   const handlePlayAnotherSong = () => {
@@ -62,24 +65,33 @@ const PlayingMusicProvider = ({ children }) => {
     //   (currentSong.id == list[list.length - 1].id && way == "next")
     // )
     //   return;
-    for (let i = 0; i < list.length; i++) {
-      if (currentSong.id == list[i].id) {
-        if (way == "prev") {
-          setCurrentSong(list[i - 1]);
+    if(random){
+      if (way == "prev") {
+        setCurrentSong(list[Math.floor(Math.random() * list.length)]);
+      }
+      if (way == "next") {
+        setCurrentSong(list[Math.floor(Math.random() * list.length)]);
+      }
+    }else{
+      for (let i = 0; i < list.length; i++) {
+        if (currentSong.id == list[i].id) {
+          if (way == "prev") {
+            setCurrentSong(list[i - 1]);
+          }
+          if(way == "prev" && i==0){
+            setCurrentSong(list[list.length - 1])
+          }
+          if (way == "next") {
+            setCurrentSong(list[i + 1]);
+          }
+          if(way == "next" && i==list.length-1){
+            setCurrentSong(list[0])
+          }
+          if (isPlay) {
+            handlePlayAnotherSong();
+          }
+          break;
         }
-        if(way == "prev" && i==0){
-          setCurrentSong(list[list.length - 1])
-        }
-        if (way == "next") {
-          setCurrentSong(list[i + 1]);
-        }
-        if(way == "next" && i==list.length-1){
-          setCurrentSong(list[0])
-        }
-        if (isPlay) {
-          handlePlayAnotherSong();
-        }
-        break;
       }
     }
   };
@@ -364,6 +376,9 @@ const editInfo = async (user) => {
     //addSong
     showAddSong,
     setShowAddSong,
+    //random Song
+    random,
+    setRandom,
   };
 
   return (

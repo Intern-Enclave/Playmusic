@@ -2,18 +2,23 @@ import React, { useState } from "react";
 import TimeSlider from "react-input-slider";
 
 import { TbPlayerTrackNext, TbPlayerTrackPrev, TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
+import { FaRandom } from 'react-icons/fa';
+import { FiRepeat } from 'react-icons/fi';
 // import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
 import './playlist.scss'
 import { useMusic } from "../../hooks/useMusic";
 
 const Controls = () => {
-  const { isPlay, togglePlay, currentSong, songRef,handleChangeSong,listTrack,usingPlaylist} = useMusic()
+  const { isPlay, togglePlay, currentSong, songRef,handleChangeSong,listTrack,usingPlaylist,setRandom, random} = useMusic()
   
   // const [audioIndex, setAudioIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
 
+  const scrollToActiveSong = ()=>{
+    document.getElementsByClassName('active').scrollIntoView()
+  }
 
   const handleLoadedData = () => {
     setDuration(songRef.current.duration);
@@ -57,9 +62,15 @@ const Controls = () => {
       <span className="duration-left">{convertHMS(currentTime)}</span>
       <div className="Control-Button-Group">
         <div
+          className={`repeat-Button ${!random ? 'randomActive' : ''}`}
+          onClick={() => setRandom(false)}
+        >
+          <FiRepeat />
+        </div>
+        <div
           className="Prev-Button"
           // onClick={() => handleChangeSong('prev', listTrack)}
-          onClick={() => handleChangeSong('prev', usingPlaylist)}
+          onClick={() => {handleChangeSong('prev', usingPlaylist)}}
         >
           <TbPlayerTrackPrev />
         </div>
@@ -69,10 +80,17 @@ const Controls = () => {
         <div
           className="Next-Button"
           onClick={() => 
-            // handleChangeSong('next', listTrack)}
-            handleChangeSong('next', usingPlaylist)}
+           { handleChangeSong('next', usingPlaylist) }
+          }
         >
           <TbPlayerTrackNext />
+        </div>
+
+        <div
+          className={`random-Button ${random ? 'randomActive' : ''}`}
+          onClick={() => setRandom(true)}
+        >
+          <FaRandom />
         </div>
       </div>
       <span className="duration-right">{convertHMS(duration)}</span>
