@@ -81,7 +81,17 @@ const UseApi = {
     },
 
 
-
+    getAllArtist: (params) => {
+        // const url = 'data';
+        const url = 'artist/get_page';
+        return axiosClient.get(url,{params})
+    },
+    
+    get5Artist: (params) => {
+        // const url = 'data';
+        const url = 'artist';
+        return axiosClient.get(url)
+    },
 
 }
 

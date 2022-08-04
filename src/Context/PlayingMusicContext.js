@@ -23,6 +23,10 @@ const PlayingMusicProvider = ({ children }) => {
   const [playlist_Id, setPlaylist_Id] = useState(0);
   const [listTrackId, setListTrackId] =useState([]);
   const [playlistNameId, setPlaylistNameId] = useState('');
+  
+  //singername
+  const [singername, setSingername] = useState("")
+  
   // const [playlist_Id, setPlaylist_Id] = useState(0);
 
   //playlist User
@@ -40,6 +44,8 @@ const PlayingMusicProvider = ({ children }) => {
 
   //Show comment
   const [ShowComment, setShowComment] = useState(false)
+
+  const [imga, setImga] = useState('');
   
   //control music
   const handlePlayAnotherSong = () => {
@@ -198,6 +204,8 @@ const PlayingMusicProvider = ({ children }) => {
     localStorage.setItem('playlistId', id)
   }
 
+  /////singerId
+
   const getPlaylistId = async () => {
     try {
       setPlaylist(localStorage.getItem('playlistId'));
@@ -219,6 +227,8 @@ const PlayingMusicProvider = ({ children }) => {
     getPlaylistId();
   }, [playlist_Id,isFetchingData]);
 
+  //get artist
+  
   //playlist User
   const getPlaylistUser = async () => {
     setIsLoading(true)
@@ -280,6 +290,8 @@ const editInfo = async (user) => {
     setIsFetchingData(false)
   }
 };
+
+
   
 
  
@@ -338,6 +350,10 @@ const editInfo = async (user) => {
     //show comment
     ShowComment, 
     setShowComment,
+    //singer name
+    singername, 
+    setSingername,
+    imga, setImga,
   };
 
   return (

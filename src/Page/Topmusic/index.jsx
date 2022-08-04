@@ -91,18 +91,7 @@ function Topmusic() {
   }, [playlist_Id]);
 
 
-  const delSong = async (i) => {
-    try{ 
-      const resp = await UseApi.deleteSong({trackId:i, playlistId: playlist_Id})
-      console.log(resp)
-      const newPlaylistId = listTrackId.filter((playlist) => {
-        return playlist.id !== i;
-      })
-      setListTrackId(newPlaylistId)
-    }catch (error) {
-      console.log("error post playlist: ", error);
-    }
-  }
+  
 
 
 
@@ -191,7 +180,7 @@ function Topmusic() {
                 key={val.id}
                 onClick={() => {
                   setActive(index);
-                  handleChooseSong(val, listTrack);
+                  handleChooseSong(val, top);
                   handlePlayAnotherSong();
                 }}
               >

@@ -10,10 +10,11 @@ import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { listTrack } = useMusic();
+  const { listTrack, handleChooseSong ,handlePlayAnotherSong,imga, setImga, singername, setSingername  } = useMusic();
 
   const [top, setTop] = useState([]);
   const [album, setAlbum] = useState([]);
+  // const [Listartists, setListartists] = useState([])
 //topMusic
     useEffect(() => {
         const topMusic = async () => {
@@ -39,6 +40,19 @@ const Home = () => {
         };
         topAlbum();
     }, []);
+
+  //   useEffect(() => {
+  //     const listSingerss = async () => {
+  //     try {
+  //         const response = await UseApi.getAllArtist();
+  //         response ? setListartists(response) : setListartists([])
+
+  //     } catch (error) {
+  //         console.log("error get artist: ", error);
+  //     }
+  //     };
+  //     listSingerss();
+  // }, []);
 
 
 
@@ -120,7 +134,15 @@ const Home = () => {
         <div className="top-music-box">
         
         {top?.map((val,idx) => (
-          <Link to={'/topmusic'} className="top-music-item" key={val.id}>
+          <Link to={'/topmusic'} 
+                className="top-music-item" 
+                key={val.id}
+                onClick = {() =>{
+                  //setActive(index);
+                  handleChooseSong(val, listTrack);
+                  handlePlayAnotherSong();
+                }}
+          >
             <div className="top-music-item-content">
               <div className="top-music-item-img">
                 <img
@@ -163,7 +185,8 @@ const Home = () => {
             {listTrack.slice(0,5).map((val) => (
 
               <div className="singer-item"
-              key={val.id}>
+                  onClick={() =>{setImga(val.artist.picture); setSingername(val.artist.name)}}
+              >
                 <Link to={'/singerId'}> 
                 <div className="singer-item-content">
                   <div className="singer-item-img">

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import MediaItem from "../../component/MediaItem";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
-import { AiTwotoneHeart, AiFillDelete } from "react-icons/ai";
+import { AiTwotoneHeart,  AiOutlinePlus} from "react-icons/ai";
 import { BsThreeDots,BsFillPlusCircleFill } from "react-icons/bs";
 import { FiEdit } from "react-icons/fi";
 // import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
-import img from './img/images-motthegioi-vn-8443_c2ftlxntaxroltetotuzos0xntg3mta3mji0.jpg'
+import img from './img/logo600.png'
 
 import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
@@ -18,18 +18,20 @@ import 'tippy.js/dist/tippy.css';
 
 
 function SingerId() {
-  const { setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,playlistUser} =
+  const { setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,playlistUser, listTrack, singername, 
+    setSingername,imga, setImga, setShowAddSong, ShowAddSong} =
   useMusic();
 
   const [active, setActive] = useState("");
   const [listTrackId, setListTrackId] =useState([]);
   const [playlistName, setPlaylistName] = useState('')
+  const [singerslist, setSingerslist] =useState([]);
+  const [play, setPlay] = useState(false);
+  const [showBtn, setShowBtn] = useState(false);
 
-  
-  // console.log(playlistName)
+const kkk = {};
 
 
-  // console.log(localStorage.getItem('playlistId'))
   const getPlaylistId = async () => {
     try {
       setPlaylist(localStorage.getItem('playlistId'));
@@ -127,11 +129,11 @@ function SingerId() {
         <div className="singerid-header-content">
           <div className="singerid-header-desc">
             <div className="singerid-header-desc-info">
-              <h1>Sam Simth</h1>
+              <h1>{singername}</h1>
               <p>Samuel Frederick Smith born 19 May 1992 is an English singer and songwriter.</p>
             </div>
             <div className="singerid-header-desc-img">
-              <img src = {img}></img>
+              <img src = {imga}></img>
             </div>
           </div>
         </div>
@@ -142,10 +144,11 @@ function SingerId() {
 
             <div className="singerid-music-cd">
               <img
-                src={currentSong.artist?.picture}
+                // src={currentSong.artist?.picture}
+                src ={imga}
                 // src="https://api.deezer.com/artist/13/image"
                 alt=""
-                className={`singerid_id-music-img ${isPlay ? "play" : ""}`}
+                className={`playlist-music-img ${isPlay && play ? "play" : ""}`}
               />
               {/* <div className="singerid_id-cd-title">
                 <div className="singerid_id-cd-title-name">
@@ -157,27 +160,27 @@ function SingerId() {
               </div> */}
             </div>
             <div className="singerid-music-info">
-              <h2 className="singerid-music-info-name">{currentSong?.title}</h2>
+              <h2 className="singerid-music-info-name">{play ? currentSong?.title: `Title of music`}</h2>
               {/* <h3 className="singerid-music-info-singer">
               currentSong?.artist?.name
                 Singer: {'1111111111111111111'}
               </h3> */}
              
               <h3 className="singerid-music-info-album">
-                Album: {currentSong?.album?.title}
+                Album: {play ?currentSong?.album?.title : `Album of ${singername}` }
               </h3>
               <h3 className="singerid-music-info-time">
-                Time: {convertHMS(currentSong?.duration)}
+                Time: {play ? convertHMS(currentSong?.duration): "00.00"}
               </h3>
 
               <div className="singerid-music-control">
-                <Button
+                {showBtn && <Button
                   onClick={togglePlay}
                   primary
                   leftIcon={isPlay ? <TbPlayerPause /> : <TbPlayerPlay />}
                 >
                   {isPlay ? "Pause" : "Play"}
-                </Button>
+                </Button>}
                 {/* <Button onClick={pause.togglePlay()} primary leftIcon={pause?.isPlay ? <TbPlayerPause /> : <TbPlayerPlay />} >{pause?.isPlay ? 'Pause' : 'Play'}</Button> */}
                 <div className="singerid-more-btn">
                   <div className="singerid-music-control-icon">
@@ -193,26 +196,29 @@ function SingerId() {
           </div>
           <div className="singerid-music-box">
             <div className="playlist-title ">
-              <div className="playlist-title-song">The Song</div>
+              <div className="playlist-title-song">Tittle</div>
               <div className="playlist-title-album">Album</div>
               <div className="playlist-title-time from-singerid-time" >Time</div>
             </div>
-          {listTrackId ? (
-            listTrackId.map((val, index) => (
+          {listTrack ? (
+            listTrack.map((val, index) => (
+              (val.artist.name == singername)&&(
               <div
-              className={`singerid-item ${currentSong?.id == val.id ? "active" : ""}`}
+              className={`singerid-item  playlist-item ${currentSong?.id == val.id ? "active" : ""}`}
               key={val.id}
               onClick={() => {
                 setActive(index);
-                handleChooseSong(val, listTrackId);
+                handleChooseSong(val, listTrack.filter((val) => val.artist.name === singername ));
                 handlePlayAnotherSong()
+                setPlay(true);
+                setShowBtn(true);
               }}
               >
-                {/* <Tippy delay={[0,200]} content='delete'>
-                  <button className="playlist-item-icon" onClick={() => {delSong(val.id);handleShowToastMenu('success',val.title,playlistName)}}>
-                    <AiFillDelete />
+                <Tippy delay={[0, 200]} content="Add Playlist">
+                  <button className="playlist-item-icon" onClick={()=>setShowAddSong(!ShowAddSong)}>
+                    <AiOutlinePlus />
                   </button>
-                </Tippy> */}
+                </Tippy>
 
                 <MediaItem
                   singer={val.artist.name}
@@ -221,7 +227,7 @@ function SingerId() {
                 />
                 <div className="playlist-item-album">{val.album.title}</div>
                 <div className="playlist-item-time">{convertHMS(val.duration)}</div>
-              </div>
+              </div>)
             ))
           ) : (
             <div></div>
