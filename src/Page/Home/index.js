@@ -186,6 +186,7 @@ const Home = () => {
 
               <div className="singer-item"
                   onClick={() =>{setImga(val.artist.picture); setSingername(val.artist.name)}}
+                  key = {val.id}
               >
                 <Link to={'/singerId'}> 
                 <div className="singer-item-content">
