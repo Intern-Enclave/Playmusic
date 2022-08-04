@@ -8,6 +8,7 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
 import { useMusic } from "../../hooks/useMusic";
 import Image from "../../component/Image";
 import UseApi from "../../API/UseApi";
@@ -16,6 +17,7 @@ import "tippy.js/dist/tippy.css";
 
 import Toastmenu from "../../component/Toast";
 import "./user.scss";
+import apiConfig from "../../API/apiConfig";
 
 const User = () => {
   const { currentUser, setIsFetchingData } = useMusic();
@@ -28,6 +30,7 @@ const User = () => {
 
   const [formValues, setFormValues] = useState({});
   const [editRequest, setEditRequest] = useState(false);
+  const [formRequest,setFormRequest] = useState(false);
 
   useEffect(() => {
     currentUser &&
@@ -177,27 +180,35 @@ const User = () => {
     }
   }
 
-  // const [selectedFile, setSelectedFile] = React.useState(null);
+  const [imageFile, setimageFile] = useState(null);
 
-  // const handleSubmit2 = async (event) => {
-  //   event.preventDefault()
-  //   const formData = new FormData();
-  //   formData.append("selectedFile", selectedFile);
-  //   try {
-  //     const response = await axios({
-  //       method: "post",
-  //       url: "http://172.16.75.26:8080/api/user/files/upload",
-  //       data: formData,
-  //       headers: { "Content-Type": "multipart/form-data" },
-  //     });
-  //   } catch(error) {
-  //     console.log(error)
-  //   }
-  // }
+  const handleSubmit2 = async (event) => {
+    event.preventDefault()
+    const formData = new FormData();
+    //Repair ------
+    formData.append("imageFile", imageFile);
+    formData.append("username" , currentUser?.username)
+    setIsFetchingData(true)
+    try {
+      const response = await axios.post(apiConfig.baseUrl + `user/image`, formData, {
+        onUploadProgress:progressEvent => {
+            console.log("Uploading : " + ((progressEvent.loaded / progressEvent.total) * 100).toString() + "%")
+        }
+    });
 
-  // const handleFileSelect = (event) => {
-  //   setSelectedFile(event.target.files[0])
-  // }
+    setFormRequest(false)
+    setFormRequest(false)
+     //--------------
+    } catch(error) {
+      console.log('upload image errer: ',error)
+    }finally{
+      setIsFetchingData(false)
+    }
+  }
+
+  const handleFileSelect = (event) => {
+    setimageFile(event.target.files[0])
+  }
 
   const [List, setList] = useState([]);
     let toastProperties = null;
@@ -238,6 +249,37 @@ const User = () => {
 
   return (
     <div className="acount-setting-container">
+      {formRequest && (
+        <div className="modal">
+          <div className="modal__overlay"></div>
+
+          <div className="modal__body">
+            <form action="" className="register" id="form-register" onSubmit={handleSubmit2}>
+              <div className="create-playlist-modal">
+                <div className="create-playlist-container">
+                  <div className="create-playlist-content">
+                    <div className="create-playlist-from-content">
+                      <span to={"/playlist"} className="close-button">
+                        <AiOutlineClose onClick={() => setFormRequest(false)} />
+                      </span>
+                      <div className="create-playlist-header">
+                        <h3 className="create-playlist-tittle">
+                          Choose Avatar
+                        </h3>
+                      </div>
+                      <input type="file" name="file_upload" onChange={handleFileSelect} />
+                      <div className="create-button save" onClick={handleSubmit2}>
+                        <span>Save</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       {currentUser ? (
         <div className="acount-setting-content">
           <div className="acount-setting-header">
@@ -359,12 +401,11 @@ const User = () => {
               <div className="change-avatar-img">
                 <Image src = {currentUser?.image} />
               </div>
-            {/* <form onSubmit={handleSubmit2}> 
-              <input type="file" name="file_upload" onChange={handleFileSelect} />
-              <input type="submit" value="Upload File" />
-            </form> */}
-
-              <Button className={"change-avatar-button"} onClick={submitFileData}>Change Avatar</Button>
+            {/* <form onSubmit={handleSubmit2} className='form-upload-image'>  */}
+              {/* <input type="file" name="file_upload" onChange={handleFileSelect} /> */}
+              {/* <input type="submit" value="Upload File" /> */}
+              <Button className={"change-avatar-button"} onClick={()=>setFormRequest(true)}>Change Avatar</Button>
+            {/* </form> */}
             </div>
           </div>
 

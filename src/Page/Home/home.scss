@@ -11,6 +11,10 @@
     padding-bottom: 100px;
 }
 
+.topic-item {
+    display: block !important;
+}
+
 .topic-music {
     width: calc(100% - 20px);
 }
@@ -110,6 +114,7 @@
     height: 100%;
     padding: 0 12px;
     align-items: center;
+    display: block !important;
 }
 
 .playlist-music-item:nth-child(1) {

@@ -28,6 +28,9 @@ const PlayingMusicProvider = ({ children }) => {
   const [singername, setSingername] = useState("")
   
   // const [playlist_Id, setPlaylist_Id] = useState(0);
+  //album
+  const [listTrackInAlbum, setListTrackInAlbum] = useState([]);
+  const [album, setAlbum] = useState();
 
   //playlist User
   const [playlistUser, setPlaylistUser] = useState([]);
@@ -37,7 +40,7 @@ const PlayingMusicProvider = ({ children }) => {
   const [usingPlaylist, setUsingplaylist] = useState([]);
 
   //notification
-  const [notification, setNotification] = useState([])
+  const [notification, setNotification] = useState([]);
 
   //add Song
   const [showAddSong, setShowAddSong] = useState(false)
@@ -46,6 +49,10 @@ const PlayingMusicProvider = ({ children }) => {
   const [ShowComment, setShowComment] = useState(false)
 
   const [imga, setImga] = useState('');
+  // const [showAddSong, setShowAddSong] = useState(false);
+
+  //random Song
+  const [random, setRandom] = useState(false);
   
   //control music
   const handlePlayAnotherSong = () => {
@@ -68,24 +75,33 @@ const PlayingMusicProvider = ({ children }) => {
     //   (currentSong.id == list[list.length - 1].id && way == "next")
     // )
     //   return;
-    for (let i = 0; i < list.length; i++) {
-      if (currentSong.id == list[i].id) {
-        if (way == "prev") {
-          setCurrentSong(list[i - 1]);
+    if(random){
+      if (way == "prev") {
+        setCurrentSong(list[Math.floor(Math.random() * list.length)]);
+      }
+      if (way == "next") {
+        setCurrentSong(list[Math.floor(Math.random() * list.length)]);
+      }
+    }else{
+      for (let i = 0; i < list.length; i++) {
+        if (currentSong.id == list[i].id) {
+          if (way == "prev") {
+            setCurrentSong(list[i - 1]);
+          }
+          if(way == "prev" && i==0){
+            setCurrentSong(list[list.length - 1])
+          }
+          if (way == "next") {
+            setCurrentSong(list[i + 1]);
+          }
+          if(way == "next" && i==list.length-1){
+            setCurrentSong(list[0])
+          }
+          if (isPlay) {
+            handlePlayAnotherSong();
+          }
+          break;
         }
-        if(way == "prev" && i==0){
-          setCurrentSong(list[list.length - 1])
-        }
-        if (way == "next") {
-          setCurrentSong(list[i + 1]);
-        }
-        if(way == "next" && i==list.length-1){
-          setCurrentSong(list[0])
-        }
-        if (isPlay) {
-          handlePlayAnotherSong();
-        }
-        break;
       }
     }
   };
@@ -229,6 +245,30 @@ const PlayingMusicProvider = ({ children }) => {
 
   //get artist
   
+//album
+
+const setAlbumId = (id) =>{
+  setAlbum(id);
+  localStorage.setItem('album', id)
+}
+
+const getListTrackInAlbum = async () => { 
+  try {
+    setAlbumId(localStorage.getItem('album'));
+    const response = await UseApi.getListTrackInAlbum({albumId: album });
+    response ? setListTrackInAlbum(response) : setListTrackInAlbum([]);
+    setUsingplaylist(response)
+  } catch (error) {
+    console.log("error get list track in album: ", error);
+  }finally{
+    
+  }
+};
+
+useEffect(() => {
+  getListTrackInAlbum();
+}, [album,isFetchingData]);
+
   //playlist User
   const getPlaylistUser = async () => {
     setIsLoading(true)
@@ -338,6 +378,11 @@ const editInfo = async (user) => {
     //usingPlaylist
     usingPlaylist,
     setUsingplaylist,
+    //album
+    listTrackInAlbum,
+    album,
+    setAlbum,
+    setAlbumId,
     //update data
     setIsLoading,
     setIsFetchingData,
@@ -354,6 +399,9 @@ const editInfo = async (user) => {
     singername, 
     setSingername,
     imga, setImga,
+    //random Song
+    random,
+    setRandom,
   };
 
   return (

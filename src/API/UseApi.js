@@ -24,6 +24,11 @@ const UseApi = {
         const url = 'album';
         return axiosClient.get(url)
     },
+
+    getListTrackInAlbum: (params) => {
+        const url = 'album/get_track';
+        return axiosClient.get(url, {params})
+    },
     postPlaylist: (params) => {
         const url = 'playlist'
         return axiosClient.post(url, params)
@@ -72,8 +77,9 @@ const UseApi = {
         return axiosClient.put(url, params);
     },
     uploadImage: (formData) => {
-        const url = 'user/files/upload';
-        return axiosClient.post(url,{formData});
+        const url = 'user/image';
+        console.log(url)
+        return axiosClient.get(url,{formData});
     },
     uploadImageTest: (formData) => {
         const url = 'user/files/upload/test';
