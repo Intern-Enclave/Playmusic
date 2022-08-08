@@ -99,6 +99,16 @@ const UseApi = {
         return axiosClient.get(url)
     },
 
+    //comment
+    getCommentTrack: (params) =>{
+        const url = 'comment/find_by_track_id';
+        return axiosClient.get(url, {params});
+    },
+    postCommentForTrack: (body) => {
+        const url = 'comment';
+        return axiosClient.post(url, body);
+    },
+
 }
 
 export default UseApi;

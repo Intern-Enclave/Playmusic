@@ -117,25 +117,25 @@
     display: block !important;
 }
 
-.playlist-music-item:nth-child(1) {
-    grid-area: listit1;
-}
+// .playlist-music-item:nth-child(1) {
+//     grid-area: listit1;
+// }
 
-.playlist-music-item:nth-child(2) {
-    grid-area: listit2;
-}
+// .playlist-music-item:nth-child(2) {
+//     grid-area: listit2;
+// }
 
-.playlist-music-item:nth-child(3) {
-    grid-area: listit3;
-}
+// .playlist-music-item:nth-child(3) {
+//     grid-area: listit3;
+// }
 
-.playlist-music-item:nth-child(4) {
-    grid-area: listit4;
-}
+// .playlist-music-item:nth-child(4) {
+//     grid-area: listit4;
+// }
 
-.playlist-music-item:nth-child(5) {
-    grid-area: listit5;
-}
+// .playlist-music-item:nth-child(5) {
+//     grid-area: listit5;
+// }
 
 .playlist-music-item-img {
     // width: 185px;
@@ -504,11 +504,11 @@
         grid-template-areas: 
         "listit1 listit2 listit3";
     }
-    .playlist-music-item:nth-child(5) {
+    .playlist-music-itemkk:nth-child(5) {
         // grid-area: listit5;
         display: none;
     }
-    .playlist-music-item:nth-child(4) {
+    .playlist-music-itemkk:nth-child(4) {
         // grid-area: listit5;
         display: none;
     }
