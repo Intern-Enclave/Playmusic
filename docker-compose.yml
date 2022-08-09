@@ -1,17 +1,27 @@
 version: '3.8'
 services:
-  react_musicplayer:
-    image: levidocker123/react_musicplayer_docker:latest
-    container_name: react_musicplayer
-    build:
+  # react_musicplayer:
+  #   image: levidocker123/react_musicplayer_docker:latest
+  #   container_name: react_musicplayer
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - '.:/app'
+  #     - '/app/node_modules'
+  #   ports:
+  #     - '3000:3000'
+  #   environment:
+  #     - CHOKIDAR_USEPOLLING=true
+
+  react-playmusic-app:
+    image: react-playmusic-app:latest
+    build: 
       context: .
       dockerfile: Dockerfile
-    volumes:
-      - '.:/app'
-      - '/app/node_modules'
+      args:
+        - REACT_APP_API_URL=http://10.8.0.14:8080/api/
     ports:
-      - '3000:3000'
-    environment:
-      - CHOKIDAR_USEPOLLING=true
+      - 8081:80
     
   

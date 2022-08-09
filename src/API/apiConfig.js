@@ -1,5 +1,5 @@
 const apiConfig = {
-    baseUrl: 'http://172.16.75.26:8080/api/'
+    baseUrl: process.env.REACT_APP_API_URL
 }
 
 export default apiConfig;
