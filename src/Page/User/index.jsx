@@ -240,22 +240,13 @@ const User = () => {
           toastProperties = [];
       }
       setList([...List ,toastProperties])
-        // toastProperties = {
-        //     id: 1,
-        //     tittle: "Success",
-        //     description: "Saved Information",
-        //     color: "#7200a1"
-        // }
-
-        // setList([toastProperties])
     }
 
   return (
     <div className="acount-setting-container">
       {formRequest && (
         <div className="modal">
-          <div className="modal__overlay"></div>
-
+          {/* <div className="modal__overlay"></div> */}
           <div className="modal__body">
             <form action="" className="register" id="form-register" onSubmit={handleSubmit2}>
               <div className="create-playlist-modal">
@@ -278,8 +269,8 @@ const User = () => {
                         </div>
                       </label>
                       <div className="file-avatar-img-name">
-                              <p>{fileSrc}</p>
-                            </div>
+                        <p>{fileSrc}</p>
+                      </div>
                       <input 
                             id="chose-avatar-input" 
                             type="file" 
@@ -287,7 +278,10 @@ const User = () => {
                             onChange={handleFileSelect} 
                             />
                        <div className="avartar-img">
-                        {imageFile && <img src={URL.createObjectURL(imageFile)} alt="" width="100%" />}
+                        <div className="img-review">
+                           {imageFile ? (<img src={URL.createObjectURL(imageFile)} alt="" />)
+                            :(<img src ={currentUser?.image}/>)}
+                        </div>
                        </div>
                       <div className="create-button save" onClick={handleSubmit2}>
                         <span>Save Avatar</span>
@@ -308,8 +302,6 @@ const User = () => {
               Acount Setting
               <AiOutlineSetting style={{ marginLeft: 10 }} />
             </h3>
-
-            
           </div>
           <div className="acount-setting-active">
             <div className="change-info-input">
