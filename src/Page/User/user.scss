@@ -214,13 +214,6 @@
     position: relative;
     cursor: pointer;
 
-    & svg {
-      position: absolute;
-      top: 50%;
-      right: 50%;
-      transform: translate(0%, 0%);
-    }
-
     &:hover {
       opacity: 0.6;
     }
@@ -230,7 +223,6 @@
   margin: 10px 0;
   width: 300px;
   height: 25px;
-  //border: 1px solid #fff;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space:nowrap;

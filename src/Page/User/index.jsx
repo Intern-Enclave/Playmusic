@@ -250,16 +250,6 @@ const User = () => {
         // setList([toastProperties])
     }
 
-    const handleShowFileName = (e) => {
-     // const element = document.querySelector("#chose-avatar-input[type='file']")
-      var files = e.target.files;
-      var filesArray = [].slice.call(files);
-        filesArray.forEach(e => {
-          
-          setFileSrc(e.name)
-          
-        })
-    }
   return (
     <div className="acount-setting-container">
       {formRequest && (
@@ -283,8 +273,8 @@ const User = () => {
                       <label htmlFor="chose-avatar-input">
                         <div className="choose-avatar-btn">
                           <div className ="choose-avatar-btn-content">
-                            <BsImage/> 
-                            <p>Upload image</p></div>
+                            <p>Upload image</p>
+                            <BsImage/> </div>
                         </div>
                       </label>
                       <div className="file-avatar-img-name">
@@ -294,7 +284,11 @@ const User = () => {
                             id="chose-avatar-input" 
                             type="file" 
                             name="file_upload" 
-                            onChange={(e) => {handleFileSelect(e); handleShowFileName(e)}} />
+                            onChange={handleFileSelect} 
+                            />
+                       <div className="avartar-img">
+                        {imageFile && <img src={URL.createObjectURL(imageFile)} alt="" width="100%" />}
+                       </div>
                       <div className="create-button save" onClick={handleSubmit2}>
                         <span>Save Avatar</span>
                       </div>
