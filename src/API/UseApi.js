@@ -108,6 +108,21 @@ const UseApi = {
         const url = 'comment';
         return axiosClient.post(url, body);
     },
+    //like
+
+    postLikeForTrack: (body) => {
+        const url = 'comment/likes';
+        return axiosClient.post(url, body);
+    },
+    getLikeForTrack: (params) => {
+        const url = 'comment/likes';
+        return axiosClient.get(url, {params});
+    },
+    postDiskLikeForTrack: (body) => {
+        const url = 'comment/likes';
+        return axiosClient.post(url, body);
+    },
+    
 
 }
 

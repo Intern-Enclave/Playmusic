@@ -385,6 +385,7 @@ const editInfo = async (user) => {
     setAlbumId,
     //update data
     setIsLoading,
+    isFetchingData,
     setIsFetchingData,
     //notification
     notification,
