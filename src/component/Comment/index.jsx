@@ -10,18 +10,18 @@ import UseApi from '../../API/UseApi';
 import CommentItem from '../CommentIt';
 
 const Comment = () => {
-    const {ShowComment, setShowComment, currentSong, currentUser} = useMusic()
+    const {ShowComment, setShowComment, currentSong, currentUser,isFetchingData, setIsFetchingData} = useMusic()
 
     const [listComment, setListComment] = useState([]);
     const [comment, setComment] = useState('');
-    const [isFetchingData,setIsFetchingData] = useState(false);
+    // const [isFetchingData,setIsFetchingData] = useState(false);
+    const [isLike, setIsLike] = useState(false);
 
 
     const getComment = async () => { 
         try {
           const response = await UseApi.getCommentTrack({trackId: currentSong?.id });
           setListComment(response);
-          console.log(response[0].user.image);
         } catch (error) {
           console.log("error get comment: ", error);
         }finally{
@@ -47,6 +47,7 @@ const Comment = () => {
                 const resp = await UseApi.postCommentForTrack(temp);
                 console.log(temp)
             }
+
        
         }catch (error) {
           console.log("error post comment: ", error);
@@ -82,7 +83,15 @@ const Comment = () => {
                         </div>
                         <div className='comment-all-cmt'>
                             {listComment.map((val)=>
-                                <CommentItem src={`http://172.16.75.26:8080/api/user/images/${val.user?.image}`} userName={val.user.username} content={val.content} like={val.likes} dislike={val.dislikes} key={val.id} time={val.createAt}/>
+                                <CommentItem src={`http://172.16.75.26:8080/api/user/images/${val.user?.image}`} 
+                                    id={val.id}
+                                    content={val.content} 
+                                    like={val.likes} 
+                                    dislike={val.dislikes} 
+                                    time={val.createAt}
+                                    key={val.id} 
+                                    // isLike={false}
+                                />
                             )}
                             {/* <CommentItem userName={'abc'} content={'bcd'} time={'5 day'}/>
                             <CommentItem/>
