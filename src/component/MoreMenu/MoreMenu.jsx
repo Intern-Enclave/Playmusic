@@ -3,6 +3,7 @@ import { useMusic } from "../../hooks/useMusic";
 import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 import Toastmenu from "../Toast"
+import Comment from '../Comment';
 
 import "./MoreMenu.scss"
 
@@ -18,7 +19,8 @@ import {TbPlaylist,TbVolume} from 'react-icons/tb';
 
 const MoreMenu = ({nameSong, imgSong}) => {
 
-    const {currentSong, playlistUser, setPlaylist,setShowAddSong,showAddSong} = useMusic()
+    const {currentSong, playlistUser, setPlaylist,setShowAddSong,showAddSong,
+        ShowComment, setShowComment} = useMusic()
 
     const [List, setList] = useState([]);
     let toastProperties = null;
@@ -101,6 +103,11 @@ const MoreMenu = ({nameSong, imgSong}) => {
         // onClick={(e) => setShow(!Show)}
         <div className='conatiner-add'>
             <Toastmenu toastlist={List} setList= {setList}/>
+            {/* {ShowComment && <Comment/>} */}
+            {ShowComment && 
+                <Comment
+                    onClick={(e)=>{e.stopPropagation()}}
+                />} 
                 
             <div className="overlay1" onClick={()=>{setShowAddSong(false)}} >
                     <div className="control-left-more-menu " onClick={(e)=>{e.stopPropagation()}}>
@@ -162,12 +169,14 @@ const MoreMenu = ({nameSong, imgSong}) => {
                                     </div>
                                     <p> Play with music lyrics</p>
                                 </div>
-                                <div className="menu-optin-one">
+                                <div className="menu-optin-one" onClick={()=>setShowComment(!ShowComment)}>
                                     <div className="menu-option-icon">
                                         <span><AiOutlineComment/></span>
                                     </div>
                                     <p>Comments</p>
                                 </div>
+                                
+                                
                                 <div className="menu-optin-one">
                                     <div className="menu-option-icon">
                                         <span><AiOutlineLink/></span>

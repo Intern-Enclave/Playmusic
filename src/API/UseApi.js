@@ -77,8 +77,9 @@ const UseApi = {
         return axiosClient.put(url, params);
     },
     uploadImage: (formData) => {
-        const url = 'user/files/upload';
-        return axiosClient.post(url,{formData});
+        const url = 'user/image';
+        console.log(url)
+        return axiosClient.get(url,{formData});
     },
     uploadImageTest: (formData) => {
         const url = 'user/files/upload/test';
@@ -86,7 +87,27 @@ const UseApi = {
     },
 
 
+    getAllArtist: (params) => {
+        // const url = 'data';
+        const url = 'artist/get_page';
+        return axiosClient.get(url,{params})
+    },
+    
+    get5Artist: (params) => {
+        // const url = 'data';
+        const url = 'artist';
+        return axiosClient.get(url)
+    },
 
+    //comment
+    getCommentTrack: (params) =>{
+        const url = 'comment/find_by_track_id';
+        return axiosClient.get(url, {params});
+    },
+    postCommentForTrack: (body) => {
+        const url = 'comment';
+        return axiosClient.post(url, body);
+    },
 
 }
 
