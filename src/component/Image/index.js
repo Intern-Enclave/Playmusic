@@ -10,7 +10,7 @@ const Image = forwardRef(({src, alt,className,...props}, ref) => {
     }
 
     return (
-      <img className={className} ref={ref} src={!src && src || fallback} alt={alt} {...props} onError={handleError} />
+      <img className={className} ref={ref} src={src || fallback} alt={alt} {...props} onError={handleError} />
     );
 })
 

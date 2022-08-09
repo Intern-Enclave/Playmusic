@@ -26,8 +26,7 @@ function AlbumId() {
     handlePlayAnotherSong,
   } = useMusic();
   const [active, setActive] = useState("");
-  // const [listTrackInAlbum, setListTrackInAlbum] = useState(null);
-  // const [isLoading, setIsLoading] = useState(false);
+  const [play, setPlay] = useState(false)
 
 
   function convertHMS(value) {
@@ -55,7 +54,11 @@ function AlbumId() {
           <div className="playlist-music-cd">
             {/* {console.log(currentSong?.artist.picture)} */}
             <img
-              src={currentSong.artist?.picture}
+              src={
+                play ?
+                currentSong.artist?.picture :
+                listTrackInAlbum[0]?.artist.picture_medium
+              }
               // src="https://api.deezer.com/artist/13/image"
               alt=""
               className={`playlist-music-img ${isPlay ? "play" : ""}`}

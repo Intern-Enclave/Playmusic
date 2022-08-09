@@ -10,6 +10,21 @@
     justify-content: center;
     position: relative;
   }
+
+  .duration-right{
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: $text-primary;
+    position: absolute;
+    right: 0;
+  }
+  .duration-left{
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: $text-primary;
+    position: absolute;
+    left: 0;
+  }
   
   .Control-Button-Group {
     display: flex;
@@ -28,13 +43,25 @@
   }
   
   .Prev-Button,
-  .Next-Button {
+  .Next-Button,
+  .random-Button,
+  .repeat-Button {
     color: $text-primary;
     font-size: 2rem;
     margin-top: 4px;
     &:hover{
       color: $purple-primary;
     }
+  }
+
+  .random-Button{
+    margin-left: 80px;
+  }
+  .repeat-Button{
+    margin-right: 80px;
+  }
+  .randomActive{
+    color: $purple-primary;
   }
   
   .Pause-Play-Button {

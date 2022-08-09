@@ -10,6 +10,7 @@ import img from './img/istockphoto-1144987755-170667a.jpg'
 import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
 import UseApi from "../../API/UseApi";
+import { Link } from "react-router-dom";
 
 import "./singer.scss";
 import Tippy from '@tippyjs/react';
@@ -18,16 +19,43 @@ import 'tippy.js/dist/tippy.css';
 
 
 function Singer() {
-  const {  listTrack ,setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,playlistUser} =
+  const {  listTrack ,setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,playlistUser, singername, 
+    setSingername,imga, setImga,} =
   useMusic();
 
-  const [active, setActive] = useState("");
+ 
   const [listTrackId, setListTrackId] =useState([]);
   const [playlistName, setPlaylistName] = useState('')
+  const [Listartists, setListartists] = useState([])
+  const [List5artist, setList5artist] = useState([]);
 
-  
-  // console.log(playlistName)
+  useEffect(() => {
+    const listSingerss = async () => {
+    try {
+        const params = {size: 10, page: 1}
+        const response = await UseApi.getAllArtist(params);
+        response ? setListartists(response) : setListartists([])
 
+    } catch (error) {
+        console.log("error get artist: ", error);
+    }
+    };
+    listSingerss();
+}, []);
+
+  useEffect(() => {
+    const list5artists = async () => {
+    try {
+        //const params = {size: 10, page: 1}
+        const response = await UseApi.get5Artist();
+        response ? setList5artist(response) : setList5artist([])
+
+    } catch (error) {
+        console.log("error get 5 artist: ", error);
+    }
+    };
+    list5artists();
+  }, []);
 
   // console.log(localStorage.getItem('playlistId'))
   const getPlaylistId = async () => {
@@ -50,38 +78,9 @@ function Singer() {
   }, [playlist_Id]);
 
 
-  const delSong = async (i) => {
-    try{ 
-      const resp = await UseApi.deleteSong({trackId:i, playlistId: playlist_Id})
-      console.log(resp)
-      const newPlaylistId = listTrackId.filter((playlist) => {
-        return playlist.id !== i;
-      })
-      setListTrackId(newPlaylistId)
-    }catch (error) {
-      console.log("error post playlist: ", error);
-    }
-  }
+  
 
-
-
-  function convertHMS(value) {
-    const sec = parseInt(value, 10); // convert value to number if it's string
-    let hours = Math.floor(sec / 3600); // get hours
-    let minutes = Math.floor((sec - hours * 3600) / 60); // get minutes
-    let seconds = sec - hours * 3600 - minutes * 60; //  get seconds
-    // add 0 if value < 10; Example: 2 => 02
-    if (hours < 10) {
-      hours = "0" + hours;
-    }
-    if (minutes < 10) {
-      minutes = "0" + minutes;
-    }
-    if (seconds < 10) {
-      seconds = "0" + seconds;
-    }
-    return minutes + ":" + seconds; // Return is HH : MM : SS
-  }
+  
 
   return (
     <div className="singer-container">
@@ -98,17 +97,21 @@ function Singer() {
             <h3>You May Be Like</h3>
           </div>
           <div className="singer-like-content">
-              {listTrack ? (
-                listTrack.slice(0,5).map((val, index) => (
+              {List5artist ? (
+                List5artist.slice(0,5).map((val, index) => (
                   <div className="singer-like-item"
                         Key = {val.id}      
                   >
-                      <div className="singer-like-img">
-                        <img src = {val.artist.picture}></img>
+                      <div className="singer-like-img"
+                        onClick={()=>setSingername(val.name)}
+                      >
+                        <Link to={'/singerId'}>
+                          <img src = {val.picture}></img>
+                        </Link>
                         <span><BsDiscFill/></span>
                       </div>
                       <div className="singer-like-desc">
-                        <p>{val.artist.name} </p>
+                        <p>{val.name} </p>
                       </div>
                     </div>
                 ))
@@ -124,16 +127,20 @@ function Singer() {
           <div className="orther-singer-content">
             {listTrack ? (
                   listTrack.map((val, index) => (
-                    <div className="orther-singer-item">
+                    <div className="orther-singer-item"
+                        Key = {val.id}
+                    > 
                       <div className="orther-singer-img"
-                            Key = {val.id}
+                            onClick={()=>{setSingername(val.artist.name);setImga(val.artist.picture)}}
                       >
+                      <Link to={'/singerId'}>
                         <img src = {val.artist.picture}></img>
+                      </Link>
                         <span><BsDiscFill/></span>
                       </div>
                       <div className="orther-singer-desc">
                         <p>{val.artist.name}</p>
-                      </div>
+                      </div> 
                     </div>
                   ))
               ) : (

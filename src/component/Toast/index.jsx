@@ -1,13 +1,17 @@
 import React, { useCallback } from 'react';
+import { useState } from 'react';
+import { useRef } from 'react';
 import {AiOutlineClose} from "react-icons/ai";
 import './toast.scss';
 
 const Toastmenu = ({toastlist, setList}) => {
-
+    
    const delateToast = useCallback(id => {
     const tostListitem = toastlist.filter(e => e.id !== id);
     setList(tostListitem);
    },[toastlist, toastlist]);
+
+   
 
     return (
         <div className='toast-modal'>
@@ -19,7 +23,7 @@ const Toastmenu = ({toastlist, setList}) => {
                     <div className='toast-header'>
                         <p>{toast.tittle}</p>
                         <button
-                        onClick={()=>delateToast(toast.id)}
+                        onClick={()=>{delateToast(toast.id)}}
                         >
                             <AiOutlineClose />
                         </button>
