@@ -8,8 +8,9 @@ import {
   AiOutlineClose,
 } from "react-icons/ai";
 import { RiLockPasswordLine } from "react-icons/ri";
-import { FiEdit } from "react-icons/fi";
+import { BsImage } from "react-icons/bs";
 import { useMusic } from "../../hooks/useMusic";
+
 import Image from "../../component/Image";
 import UseApi from "../../API/UseApi";
 import Tippy from "@tippyjs/react";
@@ -31,6 +32,8 @@ const User = () => {
   const [formValues, setFormValues] = useState({});
   const [editRequest, setEditRequest] = useState(false);
   const [formRequest,setFormRequest] = useState(false);
+
+  const [fileSrc, setFileSrc] = useState("");
 
   useEffect(() => {
     currentUser &&
@@ -165,7 +168,7 @@ const User = () => {
       setData(formData.get('file'))
     }
   }
-
+  
   
   const submitFileData = async ()=>{
     try{ 
@@ -247,6 +250,16 @@ const User = () => {
         // setList([toastProperties])
     }
 
+    const handleShowFileName = (e) => {
+     // const element = document.querySelector("#chose-avatar-input[type='file']")
+      var files = e.target.files;
+      var filesArray = [].slice.call(files);
+        filesArray.forEach(e => {
+          
+          setFileSrc(e.name)
+          
+        })
+    }
   return (
     <div className="acount-setting-container">
       {formRequest && (
@@ -267,9 +280,23 @@ const User = () => {
                           Choose Avatar
                         </h3>
                       </div>
-                      <input type="file" name="file_upload" onChange={handleFileSelect} />
+                      <label htmlFor="chose-avatar-input">
+                        <div className="choose-avatar-btn">
+                          <div className ="choose-avatar-btn-content">
+                            <BsImage/> 
+                            <p>Upload image</p></div>
+                        </div>
+                      </label>
+                      <div className="file-avatar-img-name">
+                              <p>{fileSrc}</p>
+                            </div>
+                      <input 
+                            id="chose-avatar-input" 
+                            type="file" 
+                            name="file_upload" 
+                            onChange={(e) => {handleFileSelect(e); handleShowFileName(e)}} />
                       <div className="create-button save" onClick={handleSubmit2}>
-                        <span>Save</span>
+                        <span>Save Avatar</span>
                       </div>
                     </div>
                   </div>

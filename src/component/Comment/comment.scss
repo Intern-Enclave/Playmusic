@@ -10,7 +10,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 10;
+    z-index: 20;
 }
   .comment-container {
     // display: flex;
@@ -21,7 +21,10 @@
       background-color: #432275;;
       position: relative;
       box-shadow: 0 0 12px #000;
+      
   }
+
+  
   
   .header-icon-close:hover {
     cursor: pointer;
@@ -36,6 +39,8 @@
     color: #fff;
     padding-bottom: 10px;
     border-bottom: 1px solid #fff;
+    position: relative;
+    
   }
   
   .header-icon-close {

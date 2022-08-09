@@ -54,9 +54,18 @@ const Comment = () => {
         finally{
           setIsFetchingData(false)
         }
+       setComment("")
       }
+      // scroll to botom of lasted comment
+      const scrollToBot = () => {
+        const element = document.querySelector(".comment-box");
+        element.scrollTop = element.scrollHeight;
+    }
 
-
+    useEffect(
+        () => scrollToBot())
+    //text input value is space
+    const [spaceInput, setspaceInput] = useState("");
     return (
         <div className='overlay_comment'>
             <div className='comment-container'>
@@ -96,10 +105,11 @@ const Comment = () => {
                                 className='comment-input-here scroll' 
                                 placeholder='Type your comment'
                                 onChange={(e)=> setComment(e.target.value)}
+                                value={comment}
                             >
                             </textarea>
                         </div>
-                        <div className='send-button' onClick={()=> postComment()}>Send  <span><AiOutlineSend/></span>                    
+                        <div className='send-button' onClick={()=> {postComment()}}>Send  <span><AiOutlineSend/></span>                    
                         </div>
                     </div>
                 </div>
