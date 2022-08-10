@@ -12,7 +12,7 @@
 }
 
 .topic-item {
-    display: block !important;
+    display: block 
 }
 
 .topic-music {
@@ -114,7 +114,8 @@
     height: 100%;
     padding: 0 12px;
     align-items: center;
-    display: block !important;
+    display: flex;
+    flex-direction: column;
 }
 
 // .playlist-music-item:nth-child(1) {
@@ -504,11 +505,11 @@
         grid-template-areas: 
         "listit1 listit2 listit3";
     }
-    .playlist-music-itemkk:nth-child(5) {
+    .playlist-music-item:nth-child(5) {
         // grid-area: listit5;
         display: none;
     }
-    .playlist-music-itemkk:nth-child(4) {
+    .playlist-music-item:nth-child(4) {
         // grid-area: listit5;
         display: none;
     }
