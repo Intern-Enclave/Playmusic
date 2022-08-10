@@ -1,6 +1,6 @@
 FROM node:16.16.0-buster as builder
 
-ARG REACT_APP_API_URL="http://10.8.0.14:8080/api/"
+ARG REACT_APP_API_URL="http://localhost:8080/api/"
 
 WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
