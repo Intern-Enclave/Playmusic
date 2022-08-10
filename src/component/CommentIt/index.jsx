@@ -19,7 +19,6 @@ TimeAgo.addLocale(ru)
 const CommentItem = ({id,userName, time, content, like, dislike, src}) => {
 
     const { currentUser,isFetchingData, setIsFetchingData } = useMusic();
-    // const [isFetchingData,setIsFetchingData] = useState(false);
     const [isLike, setIslike] = useState(false);
     const [isDisLike, setIsDisklike] = useState(false);
     const [isLoading, setIsLoading] = useState(false); 
@@ -49,7 +48,7 @@ const CommentItem = ({id,userName, time, content, like, dislike, src}) => {
           console.log("error post like for track: ", error);
         }
         finally{
-          setIsFetchingData(false)
+          setIsFetchingData(false);
         }
       }
     const postDisLike = async () => {
@@ -78,12 +77,12 @@ const CommentItem = ({id,userName, time, content, like, dislike, src}) => {
           console.log("error post dislike for track: ", error);
         }
         finally{
-          setIsFetchingData(false)
+          setIsFetchingData(false);
         }
       }
 
       const getIsLike = async () => {
-        setIsLoading(true)
+        setIsLoading(true);
         try {
             const response = await UseApi.getLikeForTrack({username: currentUser?.username});
             response.map(val => {

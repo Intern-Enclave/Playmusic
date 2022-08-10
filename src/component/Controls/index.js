@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 import TimeSlider from "react-input-slider";
 
-import { TbPlayerTrackNext, TbPlayerTrackPrev, TbPlayerPlay, TbPlayerPause } from 'react-icons/tb';
-import { FaRandom } from 'react-icons/fa';
-import { FiRepeat } from 'react-icons/fi';
-// import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
+import {
+  TbPlayerTrackNext,
+  TbPlayerTrackPrev,
+  TbPlayerPlay,
+  TbPlayerPause,
+} from "react-icons/tb";
+import { FaRandom } from "react-icons/fa";
+import { FiRepeat } from "react-icons/fi";
 
-import './playlist.scss'
+import "./playlist.scss";
 import { useMusic } from "../../hooks/useMusic";
 
 const Controls = () => {
-  const { isPlay, togglePlay, currentSong, songRef,handleChangeSong,listTrack,usingPlaylist,setRandom, random} = useMusic()
-  
+  const {
+    isPlay,
+    togglePlay,
+    currentSong,
+    songRef,
+    handleChangeSong,
+    usingPlaylist,
+    setRandom,
+    random,
+  } = useMusic();
+
   // const [audioIndex, setAudioIndex] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
-
-  const scrollToActiveSong = ()=>{
-    document.getElementsByClassName('active').scrollIntoView()
-  }
 
   const handleLoadedData = () => {
     setDuration(songRef.current.duration);
@@ -26,7 +35,7 @@ const Controls = () => {
   };
 
   const handlePausePlayClick = () => {
-   togglePlay()
+    togglePlay();
   };
 
   const handleTimeSliderChange = ({ x }) => {
@@ -34,7 +43,7 @@ const Controls = () => {
     setCurrentTime(x);
 
     if (!isPlay) {
-     togglePlay()
+      togglePlay();
       songRef.current.play();
     }
   };
@@ -62,7 +71,7 @@ const Controls = () => {
       <span className="duration-left">{convertHMS(currentTime)}</span>
       <div className="Control-Button-Group">
         <div
-          className={`repeat-Button ${!random ? 'randomActive' : ''}`}
+          className={`repeat-Button ${!random ? "randomActive" : ""}`}
           onClick={() => setRandom(false)}
         >
           <FiRepeat />
@@ -70,7 +79,9 @@ const Controls = () => {
         <div
           className="Prev-Button"
           // onClick={() => handleChangeSong('prev', listTrack)}
-          onClick={() => {handleChangeSong('prev', usingPlaylist)}}
+          onClick={() => {
+            handleChangeSong("prev", usingPlaylist);
+          }}
         >
           <TbPlayerTrackPrev />
         </div>
@@ -79,15 +90,15 @@ const Controls = () => {
         </div>
         <div
           className="Next-Button"
-          onClick={() => 
-           { handleChangeSong('next', usingPlaylist) }
-          }
+          onClick={() => {
+            handleChangeSong("next", usingPlaylist);
+          }}
         >
           <TbPlayerTrackNext />
         </div>
 
         <div
-          className={`random-Button ${random ? 'randomActive' : ''}`}
+          className={`random-Button ${random ? "randomActive" : ""}`}
           onClick={() => setRandom(true)}
         >
           <FaRandom />
@@ -99,7 +110,7 @@ const Controls = () => {
         xmax={duration}
         x={currentTime}
         onChange={handleTimeSliderChange}
-        className= 'timeSlide'
+        className="timeSlide"
         styles={{
           track: {
             backgroundColor: "#e3e3e3",
@@ -118,15 +129,14 @@ const Controls = () => {
           },
         }}
       />
-      
+
       <audio
         ref={songRef}
         src={currentSong?.preview}
         onLoadedData={handleLoadedData}
         onTimeUpdate={() => setCurrentTime(songRef.current.currentTime)}
-        onEnded={() =>togglePlay()}
+        onEnded={() => togglePlay()}
       />
-     
     </div>
   );
 };

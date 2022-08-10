@@ -3,23 +3,20 @@ import { useMusic } from "../../hooks/useMusic";
 import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 import Toastmenu from "../Toast"
-import Comment from '../Comment';
 
 import "./MoreMenu.scss"
 
-import { GiMicrophone } from 'react-icons/gi';
-import { FaWindowRestore, FaMicrophoneAlt } from 'react-icons/fa';
-import { FiMoreHorizontal } from 'react-icons/fi';
+import {  FaMicrophoneAlt } from 'react-icons/fa';
 import { AiFillHeart, AiOutlineDownload, AiOutlineStop, AiOutlinePlusCircle,AiOutlineComment, AiOutlineLink, AiOutlineRight  } from 'react-icons/ai';
 import { BsHeadphones } from 'react-icons/bs';
 import {MdQueueMusic} from 'react-icons/md';
 import { IoMdWifi } from 'react-icons/io';
 import {BiShare,BiMessageSquareAdd} from 'react-icons/bi';
-import {TbPlaylist,TbVolume} from 'react-icons/tb';
+import {TbPlaylist} from 'react-icons/tb';
 
 const MoreMenu = ({nameSong, imgSong}) => {
 
-    const {currentSong, playlistUser, setPlaylist,setShowAddSong,showAddSong,
+    const {currentSong, playlistUser, setPlaylist,setShowAddSong,
         ShowComment, setShowComment} = useMusic()
 
     const [List, setList] = useState([]);
@@ -49,14 +46,6 @@ const MoreMenu = ({nameSong, imgSong}) => {
             toastProperties = [];
         }
         setList([...List ,toastProperties])
-          // toastProperties = {
-          //     id: 1,
-          //     tittle: "Success",
-          //     description: "Saved Information",
-          //     color: "#7200a1"
-          // }
-  
-          // setList([toastProperties])
       }
 
 
@@ -64,8 +53,6 @@ const MoreMenu = ({nameSong, imgSong}) => {
       try{ 
         const temp = {trackId: currentSong?.id, playlistId: id};
         const resp = await UseApi.postSong(temp);
-        
-        // setPlaylistUser([...playlistUser, resp])
       }catch (error) {
         console.log("error post add song: ", error);
       }
@@ -75,16 +62,6 @@ const MoreMenu = ({nameSong, imgSong}) => {
         setPlaylist(id);
         addSong(id);
     } 
-
-    const handleShowMenuMore = () => {
-        const modal = document.querySelector(".overlay");
-        modal.classList.add("open");
-    }
-
-    const handleHideMenuMore = () => {
-        const modal = document.querySelector(".overlay1");
-        modal.classList.add("close")
-    }
 
     const handleShowAddPlaylist = () => {
         const modal = document.querySelector(".choose-playlist-menu-container");
@@ -97,18 +74,11 @@ const MoreMenu = ({nameSong, imgSong}) => {
         modal.classList.remove("open1");
     }
 
-    // const [Show, setShow] = useState(true);
     return (
         // onClick={handleHideMenuMore}
         // onClick={(e) => setShow(!Show)}
         <div className='conatiner-add'>
-            <Toastmenu toastlist={List} setList= {setList}/>
-            {/* {ShowComment && <Comment/>} */}
-            {ShowComment && 
-                <Comment
-                    onClick={(e)=>{e.stopPropagation()}}
-                />} 
-                
+            <Toastmenu toastlist={List} setList= {setList}/>    
             <div className="overlay1" onClick={()=>{setShowAddSong(false)}} >
                     <div className="control-left-more-menu " onClick={(e)=>{e.stopPropagation()}}>
                         <div className="more-menu pos-add-menu">
@@ -169,7 +139,7 @@ const MoreMenu = ({nameSong, imgSong}) => {
                                     </div>
                                     <p> Play with music lyrics</p>
                                 </div>
-                                <div className="menu-optin-one" onClick={()=>setShowComment(!ShowComment)}>
+                                <div className="menu-optin-one" onClick={()=> {setShowComment(!ShowComment);setShowAddSong(false)}}>
                                     <div className="menu-option-icon">
                                         <span><AiOutlineComment/></span>
                                     </div>

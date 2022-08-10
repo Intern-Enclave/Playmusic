@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import MediaItem from "../../component/MediaItem";
-import { ImMusic } from "react-icons/im";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
 import { AiTwotoneHeart, AiOutlinePlus } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
@@ -24,6 +23,7 @@ function NewSong() {
     ShowAddSong ,setShowAddSong 
   } = useMusic();
   const [active, setActive] = useState("");
+
 
   function convertHMS(value) {
     const sec = parseInt(value, 10); // convert value to number if it's string
@@ -103,11 +103,13 @@ function NewSong() {
                   currentSong?.id == val.id ? "active" : ""
                 }`}
                 key={val.id}
-                onClick={() => {
+                onClick={(e) => {
                   setActive(index);
                   handleChooseSong(val, listTrack);
                   handlePlayAnotherSong();
+                 
                 }}
+               
               >
                 <Tippy delay={[0, 200]} content="Add Playlist">
                   <button className="playlist-item-icon" onClick={()=>setShowAddSong(!ShowAddSong)}>
