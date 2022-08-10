@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import MediaItem from "../../component/MediaItem";
-import { ImMusic } from "react-icons/im";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
 import { AiTwotoneHeart, AiOutlinePlus } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
@@ -12,8 +11,6 @@ import { useMusic } from "../../hooks/useMusic";
 
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-import { useRef } from "react";
-import { useEffect } from "react";
 
 function NewSong() {
   const {

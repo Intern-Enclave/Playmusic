@@ -3,7 +3,6 @@ import { useMusic } from "../../hooks/useMusic";
 import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 import Toastmenu from "../Toast"
-import Comment from '../Comment';
 
 import "./MoreMenu.scss"
 
@@ -54,8 +53,6 @@ const MoreMenu = ({nameSong, imgSong}) => {
       try{ 
         const temp = {trackId: currentSong?.id, playlistId: id};
         const resp = await UseApi.postSong(temp);
-        
-        // setPlaylistUser([...playlistUser, resp])
       }catch (error) {
         console.log("error post add song: ", error);
       }
@@ -65,16 +62,6 @@ const MoreMenu = ({nameSong, imgSong}) => {
         setPlaylist(id);
         addSong(id);
     } 
-
-    const handleShowMenuMore = () => {
-        const modal = document.querySelector(".overlay");
-        modal.classList.add("open");
-    }
-
-    const handleHideMenuMore = () => {
-        const modal = document.querySelector(".overlay1");
-        modal.classList.add("close")
-    }
 
     const handleShowAddPlaylist = () => {
         const modal = document.querySelector(".choose-playlist-menu-container");

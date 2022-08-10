@@ -61,7 +61,6 @@ const Comment = () => {
     useEffect(
         () => scrollToBot())
     //text input value is space
-    const [spaceInput, setspaceInput] = useState("");
     return (
         <div className='overlay_comment' onClick={()=>setShowComment(false)}>
             <div className='comment-container' onClick={(e) => e.stopPropagation()}>
