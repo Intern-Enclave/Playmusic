@@ -64,7 +64,7 @@ const Comment = () => {
     const [spaceInput, setspaceInput] = useState("");
     return (
         <div className='overlay_comment' onClick={()=>setShowComment(false)}>
-            <div className='comment-container'>
+            <div className='comment-container' onClick={(e) => e.stopPropagation()}>
                 <div className='comment-modal-content'>
                     <div className='content-header'>
                         <h3 >Comment</h3>
