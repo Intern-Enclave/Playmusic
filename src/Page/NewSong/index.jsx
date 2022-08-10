@@ -12,6 +12,8 @@ import { useMusic } from "../../hooks/useMusic";
 
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
+import { useRef } from "react";
+import { useEffect } from "react";
 
 function NewSong() {
   const {
@@ -24,6 +26,7 @@ function NewSong() {
     ShowAddSong ,setShowAddSong 
   } = useMusic();
   const [active, setActive] = useState("");
+
 
   function convertHMS(value) {
     const sec = parseInt(value, 10); // convert value to number if it's string
@@ -103,11 +106,13 @@ function NewSong() {
                   currentSong?.id == val.id ? "active" : ""
                 }`}
                 key={val.id}
-                onClick={() => {
+                onClick={(e) => {
                   setActive(index);
                   handleChooseSong(val, listTrack);
                   handlePlayAnotherSong();
+                 
                 }}
+               
               >
                 <Tippy delay={[0, 200]} content="Add Playlist">
                   <button className="playlist-item-icon" onClick={()=>setShowAddSong(!ShowAddSong)}>

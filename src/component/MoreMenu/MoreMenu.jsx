@@ -91,13 +91,7 @@ const MoreMenu = ({nameSong, imgSong}) => {
         // onClick={handleHideMenuMore}
         // onClick={(e) => setShow(!Show)}
         <div className='conatiner-add'>
-            <Toastmenu toastlist={List} setList= {setList}/>
-            {/* {ShowComment && <Comment/>} */}
-            {ShowComment && 
-                <Comment
-                    onClick={(e)=>{e.stopPropagation()}}
-                />} 
-                
+            <Toastmenu toastlist={List} setList= {setList}/>    
             <div className="overlay1" onClick={()=>{setShowAddSong(false)}} >
                     <div className="control-left-more-menu " onClick={(e)=>{e.stopPropagation()}}>
                         <div className="more-menu pos-add-menu">
@@ -158,7 +152,7 @@ const MoreMenu = ({nameSong, imgSong}) => {
                                     </div>
                                     <p> Play with music lyrics</p>
                                 </div>
-                                <div className="menu-optin-one" onClick={()=>setShowComment(!ShowComment)}>
+                                <div className="menu-optin-one" onClick={()=> {setShowComment(!ShowComment);setShowAddSong(false)}}>
                                     <div className="menu-option-icon">
                                         <span><AiOutlineComment/></span>
                                     </div>

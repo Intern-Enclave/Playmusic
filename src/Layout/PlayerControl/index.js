@@ -11,9 +11,14 @@ import { TbVolume } from "react-icons/tb";
 
 import { useMusic } from "../../hooks/useMusic";
 import UseApi from "../../API/UseApi";
+import Comment from "../../component/Comment";
 
 import "./playerControl.scss";
 
+import { GiMicrophone } from "react-icons/gi";
+import { FaWindowRestore } from "react-icons/fa";
+import { FiMoreHorizontal } from "react-icons/fi";
+import { TbVolume } from "react-icons/tb";
 
 function PlayerControl() {
   const {
