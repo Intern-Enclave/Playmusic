@@ -113,9 +113,9 @@
     // height: 266px;
     height: 100%;
     padding: 0 12px;
-    align-items: center;
     display: flex;
     flex-direction: column;
+    justify-content: left;
 }
 
 // .playlist-music-item:nth-child(1) {
