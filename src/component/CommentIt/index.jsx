@@ -35,7 +35,6 @@ const CommentItem = ({id,userName, time, content, like, dislike, src}) => {
                     isLiked : false
                 };
                 const resp = await UseApi.postLikeForTrack(temp);
-                console.log(temp)
             }
             else{
                 const temp = {
@@ -87,14 +86,12 @@ const CommentItem = ({id,userName, time, content, like, dislike, src}) => {
         setIsLoading(true)
         try {
             const response = await UseApi.getLikeForTrack({username: currentUser?.username});
-            console.log('repo', response);
             response.map(val => {
                 if(val.username == currentUser?.username && val.comment_id == id) {
                     setIslike(val.liked);
                     setIsDisklike(val.disliked);
                 }
             })
-            console.log(isLike);
         } catch (error) {
             console.log("error get Is like comment: ", error);
         }finally{

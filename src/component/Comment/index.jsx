@@ -99,6 +99,7 @@ const Comment = () => {
                                     dislike={val.dislikes} 
                                     time={val.createAt}
                                     key={val.id} 
+                                    userName={val.user.username}
                                     // isLike={false}
                                 />
                             )}
