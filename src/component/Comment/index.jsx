@@ -8,6 +8,7 @@ import "./comment.scss"
 import { useMusic } from '../../hooks/useMusic';
 import UseApi from '../../API/UseApi';
 import CommentItem from '../CommentIt';
+import apiConfig from '../../API/apiConfig';
 
 const Comment = () => {
     const {ShowComment, setShowComment, currentSong, currentUser,isFetchingData, setIsFetchingData} = useMusic()
@@ -92,7 +93,7 @@ const Comment = () => {
                         </div>
                         <div className='comment-all-cmt'>
                             {listComment.map((val)=>
-                                <CommentItem src={`http://172.16.75.26:8080/api/user/images/${val.user?.image}`} 
+                                <CommentItem src={`${apiConfig.baseUrl}user/images/${val.user?.image}`} 
                                     id={val.id}
                                     content={val.content} 
                                     like={val.likes} 
