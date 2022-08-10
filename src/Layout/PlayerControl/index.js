@@ -21,6 +21,7 @@ import { useMusic } from "../../hooks/useMusic";
 import Button from "../../component/Button/Button";
 import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
+import Comment from "../../component/Comment";
 
 // import imgf from "/.img/flexincirkleK.jpg"
 
@@ -30,7 +31,7 @@ import MoreMenu from "../../component/MoreMenu/MoreMenu";
 
 function PlayerControl() {
 
-    const {currentSong, playlistUser, setPlaylist,setShowAddSong,showAddSong} = useMusic()
+    const {currentSong, playlistUser, setPlaylist,setShowAddSong,showAddSong, ShowComment} = useMusic()
     const [Show, setShow] = useState(false)
 
     const [List, setList] = useState([]);
@@ -88,6 +89,10 @@ function PlayerControl() {
     
     return (
         <div className='player-controls'>
+            {ShowComment && 
+                <Comment
+                    onClick={(e)=>{e.stopPropagation()}}
+                />} 
             <div className='control-left'>
                 <MediaItem 
                     // img='https://anhdep123.com/wp-content/uploads/2021/01/nhung-hinh-anh-hoang-hon-buon.jpg' 
