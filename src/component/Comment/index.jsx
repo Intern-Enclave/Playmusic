@@ -1,23 +1,19 @@
 import React, {useEffect, useState} from 'react';
+import {AiOutlineClose, AiOutlineSend} from 'react-icons/ai';
+
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
-import {AiOutlineClose, AiOutlineLike, AiOutlineDislike, AiOutlineSend} from 'react-icons/ai';
-
-import {BsReply} from 'react-icons/bs'
-import "./comment.scss"
 import { useMusic } from '../../hooks/useMusic';
 import UseApi from '../../API/UseApi';
 import CommentItem from '../CommentIt';
 import apiConfig from '../../API/apiConfig';
+import "./comment.scss";
 
 const Comment = () => {
-    const {ShowComment, setShowComment, currentSong, currentUser,isFetchingData, setIsFetchingData} = useMusic()
+    const { setShowComment, currentSong, currentUser,isFetchingData, setIsFetchingData} = useMusic()
 
     const [listComment, setListComment] = useState([]);
     const [comment, setComment] = useState('');
-    // const [isFetchingData,setIsFetchingData] = useState(false);
-    const [isLike, setIsLike] = useState(false);
-
 
     const getComment = async () => { 
         try {
@@ -25,8 +21,6 @@ const Comment = () => {
           setListComment(response);
         } catch (error) {
           console.log("error get comment: ", error);
-        }finally{
-          
         }
       };
       
@@ -104,9 +98,6 @@ const Comment = () => {
                                     // isLike={false}
                                 />
                             )}
-                            {/* <CommentItem userName={'abc'} content={'bcd'} time={'5 day'}/>
-                            <CommentItem/>
-                            <CommentItem/> */}
                         </div>
                     </div>
 

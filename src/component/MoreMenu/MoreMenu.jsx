@@ -7,19 +7,17 @@ import Comment from '../Comment';
 
 import "./MoreMenu.scss"
 
-import { GiMicrophone } from 'react-icons/gi';
-import { FaWindowRestore, FaMicrophoneAlt } from 'react-icons/fa';
-import { FiMoreHorizontal } from 'react-icons/fi';
+import {  FaMicrophoneAlt } from 'react-icons/fa';
 import { AiFillHeart, AiOutlineDownload, AiOutlineStop, AiOutlinePlusCircle,AiOutlineComment, AiOutlineLink, AiOutlineRight  } from 'react-icons/ai';
 import { BsHeadphones } from 'react-icons/bs';
 import {MdQueueMusic} from 'react-icons/md';
 import { IoMdWifi } from 'react-icons/io';
 import {BiShare,BiMessageSquareAdd} from 'react-icons/bi';
-import {TbPlaylist,TbVolume} from 'react-icons/tb';
+import {TbPlaylist} from 'react-icons/tb';
 
 const MoreMenu = ({nameSong, imgSong}) => {
 
-    const {currentSong, playlistUser, setPlaylist,setShowAddSong,showAddSong,
+    const {currentSong, playlistUser, setPlaylist,setShowAddSong,
         ShowComment, setShowComment} = useMusic()
 
     const [List, setList] = useState([]);
@@ -49,14 +47,6 @@ const MoreMenu = ({nameSong, imgSong}) => {
             toastProperties = [];
         }
         setList([...List ,toastProperties])
-          // toastProperties = {
-          //     id: 1,
-          //     tittle: "Success",
-          //     description: "Saved Information",
-          //     color: "#7200a1"
-          // }
-  
-          // setList([toastProperties])
       }
 
 
@@ -97,7 +87,6 @@ const MoreMenu = ({nameSong, imgSong}) => {
         modal.classList.remove("open1");
     }
 
-    // const [Show, setShow] = useState(true);
     return (
         // onClick={handleHideMenuMore}
         // onClick={(e) => setShow(!Show)}

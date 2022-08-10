@@ -1,62 +1,26 @@
-import React, { useContext, useState } from "react";
-import { trackContext } from "../../App";
+import React from "react";
 
 import MediaItem from "../../component/MediaItem";
 import Controls from "../../component/Controls";
+import MoreMenu from "../../component/MoreMenu/MoreMenu";
 
-// import { TbVolume } from 'react-icons/tb';
 import { GiMicrophone } from "react-icons/gi";
-import { FaWindowRestore, FaMicrophoneAlt } from "react-icons/fa";
+import { FaWindowRestore } from "react-icons/fa";
 import { FiMoreHorizontal } from "react-icons/fi";
-import {
-  AiFillHeart,
-  AiOutlineDownload,
-  AiOutlineStop,
-  AiOutlinePlusCircle,
-  AiOutlineComment,
-  AiOutlineLink,
-  AiOutlineRight,
-} from "react-icons/ai";
-import { BsHeadphones } from "react-icons/bs";
-import { MdQueueMusic } from "react-icons/md";
-import { IoMdWifi } from "react-icons/io";
-// import {AiOutlineComment, AiOutlineLink, AiOutlineRight} from 'react-icons/ai';
-import { BiShare, BiMessageSquareAdd } from "react-icons/bi";
-import { TbPlaylist, TbVolume } from "react-icons/tb";
+import { TbVolume } from "react-icons/tb";
+
+import { useMusic } from "../../hooks/useMusic";
+import UseApi from "../../API/UseApi";
 
 import "./playerControl.scss";
-import { useMusic } from "../../hooks/useMusic";
-import Button from "../../component/Button/Button";
-import UseApi from "../../API/UseApi";
-import { Link } from "react-router-dom";
 
-// import imgf from "/.img/flexincirkleK.jpg"
-
-//import Toastmenu from "../../component/Toastmenu/Toast";
-import MoreMenu from "../../component/MoreMenu/MoreMenu";
 
 function PlayerControl() {
   const {
     currentSong,
-    playlistUser,
-    setPlaylist,
     setShowAddSong,
     showAddSong,
   } = useMusic();
-  const [Show, setShow] = useState(false);
-
-  const [List, setList] = useState([]);
-  let toastProperties = null;
-
-  const handleShowToastMenu = (songName, playlistName) => {
-    toastProperties = {
-      id: 1,
-      tittle: "Succes",
-      description: `${songName} added to playlist ${playlistName}`,
-    };
-
-    setList([toastProperties]);
-  };
 
   const addSong = async (id) => {
     try {
@@ -67,31 +31,6 @@ function PlayerControl() {
     } catch (error) {
       console.log("error post add song: ", error);
     }
-  };
-
-  const addSongtoplaylist = (id) => {
-    setPlaylist(id);
-    addSong(id);
-  };
-
-  const handleShowMenuMore = () => {
-    const modal = document.querySelector(".overlay");
-    modal.classList.add("open");
-  };
-
-  const handleHideMenuMore = () => {
-    const modal = document.querySelector(".overlay");
-    modal.classList.remove("open");
-  };
-
-  const handleShowAddPlaylist = () => {
-    const modal = document.querySelector(".choose-playlist-menu-container");
-    modal.classList.add("open1");
-  };
-
-  const handleHideAddPlaylist = () => {
-    const modal = document.querySelector(".choose-playlist-menu-container");
-    modal.classList.remove("open1");
   };
 
   return (
