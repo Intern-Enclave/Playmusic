@@ -2,11 +2,7 @@ import React, { useState, useEffect } from "react";
 import MediaItem from "../../component/MediaItem";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
 import { AiTwotoneHeart,  AiOutlinePlus} from "react-icons/ai";
-import { BsThreeDots,BsFillPlusCircleFill } from "react-icons/bs";
-import { FiEdit } from "react-icons/fi";
-// import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
-import img from './img/logo600.png'
-
+import { BsThreeDots } from "react-icons/bs";
 import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
 import UseApi from "../../API/UseApi";
@@ -19,17 +15,14 @@ import 'tippy.js/dist/tippy.css';
 
 function SingerId() {
   const { setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,playlistUser, listTrack, singername, 
-    setSingername,imga, setImga, setShowAddSong, ShowAddSong} =
+  imga, setShowAddSong, ShowAddSong} =
   useMusic();
 
   const [active, setActive] = useState("");
   const [listTrackId, setListTrackId] =useState([]);
   const [playlistName, setPlaylistName] = useState('')
-  const [singerslist, setSingerslist] =useState([]);
   const [play, setPlay] = useState(false);
   const [showBtn, setShowBtn] = useState(false);
-
-const kkk = {};
 
 
   const getPlaylistId = async () => {
@@ -85,43 +78,7 @@ const kkk = {};
     return minutes + ":" + seconds; // Return is HH : MM : SS
   }
 
-  const [List, setList] = useState([]);
-  let toastProperties = null;
-
-  const handleShowToastMenu = (type, songName, playlistName) => {
-    switch(type) {
-      case 'success':
-        toastProperties = {
-          id: List.length + 1,
-          tittle: "Success",
-          description: `${songName} is deleted from playlist ${playlistName}`,
-          color: "#7200a1"
-      }
-      break;
-
-      case 'pass-success':
-        toastProperties = {
-          id: List.length + 1,
-          tittle: "Success",
-          description: "Change password complete",
-          color: "#7200a1"
-      }
-      break;
-
-      default:
-        toastProperties = [];
-    }
-    setList([...List ,toastProperties])
-      // toastProperties = {
-      //     id: 1,
-      //     tittle: "Success",
-      //     description: "Saved Information",
-      //     color: "#7200a1"
-      // }
-
-      // setList([toastProperties])
-  }
-
+  
   return (
     <div className="singerid-container">
       <div className="singerid-content">
@@ -144,27 +101,15 @@ const kkk = {};
 
             <div className="singerid-music-cd">
               <img
-                // src={currentSong.artist?.picture}
                 src ={imga}
-                // src="https://api.deezer.com/artist/13/image"
                 alt=""
                 className={`playlist-music-img ${isPlay && play ? "play" : ""}`}
               />
-              {/* <div className="singerid_id-cd-title">
-                <div className="singerid_id-cd-title-name">
-                    {playlistName}
-                </div>
-                <span className="singerid_id-cd-title-icon">
-                  <FiEdit />
-                </span>
-              </div> */}
+              
             </div>
             <div className="singerid-music-info">
               <h2 className="singerid-music-info-name">{play ? currentSong?.title: `Title of music`}</h2>
-              {/* <h3 className="singerid-music-info-singer">
-              currentSong?.artist?.name
-                Singer: {'1111111111111111111'}
-              </h3> */}
+             
              
               <h3 className="singerid-music-info-album">
                 Album: {play ?currentSong?.album?.title : `Album of ${singername}` }
@@ -181,7 +126,6 @@ const kkk = {};
                 >
                   {isPlay ? "Pause" : "Play"}
                 </Button>}
-                {/* <Button onClick={pause.togglePlay()} primary leftIcon={pause?.isPlay ? <TbPlayerPause /> : <TbPlayerPlay />} >{pause?.isPlay ? 'Pause' : 'Play'}</Button> */}
                 <div className="singerid-more-btn">
                   <div className="singerid-music-control-icon">
                     <AiTwotoneHeart />

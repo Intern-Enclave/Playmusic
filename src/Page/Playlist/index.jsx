@@ -60,11 +60,6 @@ function Playlist() {
                             Everyone can see this playlist
                           </h3>
                         </div>
-                        {/* <div className='option-button1' onClick={option1}>
-                            <span>
-                                <ImSwitch/>
-                            </span>
-                        </div> */}
                       </div>
                       <div className="option">
                         <div>
@@ -73,11 +68,7 @@ function Playlist() {
                             Always random paly all music
                           </h3>
                         </div>
-                        {/* <div className='option-button2' onClick={option2} >
-                            <span>
-                                <ImSwitch/>
-                            </span>
-                        </div> */}
+                       
                       </div>
                       <div className="create-button" onClick={onsubmit}>
                         <span>Create new</span>

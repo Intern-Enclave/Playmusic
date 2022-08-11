@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import MediaItem from "../../component/MediaItem";
-import { ImMusic } from "react-icons/im";
 import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
 import { AiTwotoneHeart, AiOutlinePlus } from "react-icons/ai";
 import { BsThreeDots } from "react-icons/bs";
@@ -9,7 +8,6 @@ import { BsThreeDots } from "react-icons/bs";
 import "./newsong.scss";
 import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
-import UseApi from "../../API/UseApi";
 
 import Tippy from "@tippyjs/react";
 import "tippy.js/dist/tippy.css";
@@ -17,8 +15,6 @@ import "tippy.js/dist/tippy.css";
 function AlbumId() {
   const {
     listTrackInAlbum,
-    setListTrackInAlbum,
-    album,
     currentSong,
     togglePlay,
     isPlay,
@@ -26,8 +22,7 @@ function AlbumId() {
     handlePlayAnotherSong,
   } = useMusic();
   const [active, setActive] = useState("");
-  const [play, setPlay] = useState(false)
-
+  const [play, setPlay] = useState(false);
 
   function convertHMS(value) {
     const sec = parseInt(value, 10); // convert value to number if it's string
@@ -52,30 +47,19 @@ function AlbumId() {
       <div className="playlist-info">
         <div className="playlist-music">
           <div className="playlist-music-cd">
-            {/* {console.log(currentSong?.artist.picture)} */}
             <img
               src={
-                play ?
-                currentSong.artist?.picture :
-                listTrackInAlbum[0]?.artist.picture_medium
+                play
+                  ? currentSong.artist?.picture
+                  : listTrackInAlbum[0]?.artist.picture_medium
               }
-              // src="https://api.deezer.com/artist/13/image"
               alt=""
               className={`playlist-music-img ${isPlay ? "play" : ""}`}
             />
           </div>
           <div className="playlist-music-info container">
             <h2 className="playlist-music-info-name">{currentSong?.title}</h2>
-            {/* <h3 className="playlist-music-info-singer">
-              Singer: {currentSong?.artist?.name}
-            </h3>
-            <h3 className="playlist-music-info-album">
-              Album: {currentSong?.album?.title}
-            </h3>
-            <h3 className="playlist-music-info-time">
-              Time: {convertHMS(currentSong?.duration)}
-            </h3> */}
-  
+
             <div className="playlist-music-control">
               <Button
                 onClick={togglePlay}
@@ -84,7 +68,6 @@ function AlbumId() {
               >
                 {isPlay ? "Pause" : "Play"}
               </Button>
-              {/* <Button onClick={pause.togglePlay()} primary leftIcon={pause?.isPlay ? <TbPlayerPause /> : <TbPlayerPlay />} >{pause?.isPlay ? 'Pause' : 'Play'}</Button> */}
               <div className="playlist-music-control-icons">
                 <div className="playlist-music-control-icon">
                   <AiTwotoneHeart />
@@ -122,14 +105,16 @@ function AlbumId() {
                     <AiOutlinePlus />
                   </button>
                 </Tippy>
-    
+
                 <MediaItem
                   singer={val.artist.name}
                   SongName={val.title}
                   img={val.artist.picture}
                 />
                 <div className="playlist-item-album">{val.album.title}</div>
-                <div className="playlist-item-time">{convertHMS(val.duration)}</div>
+                <div className="playlist-item-time">
+                  {convertHMS(val.duration)}
+                </div>
               </div>
             ))
           ) : (

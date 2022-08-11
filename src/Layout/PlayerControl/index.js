@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 
 import MediaItem from '../../component/MediaItem';
 import Controls from '../../component/Controls';
