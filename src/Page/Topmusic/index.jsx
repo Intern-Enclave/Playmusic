@@ -48,6 +48,10 @@ function Topmusic() {
   const [playlistName, setPlaylistName] = useState("");
   const [NumOfTop, setNumOfTop] = useState(10);
 
+  // const top100Totop10 = () => {
+  //   if
+  // }
+
   const show100Song = () => {
     const mod = document.querySelector(".show-top-100-btn");
     mod.classList.add("close");
@@ -57,10 +61,10 @@ function Topmusic() {
   };
 
   const hide100Song = () => {
-    const mod = document.querySelector(".show-top-100-btn");
-    mod.classList.remove("close");
-    const mod1 = document.querySelector(".hide-top-100-btn");
-    mod1.classList.remove("open");
+    const mod3 = document.querySelector(".show-top-100-btn");
+    mod3.classList.remove("close");
+    const mod4 = document.querySelector(".hide-top-100-btn");
+    mod4.classList.remove("open");
     setNumOfTop(10);
   };
 
@@ -122,8 +126,8 @@ function Topmusic() {
               <div className="playlist-title ">
                 <div className="playlist-title-song">Tittle</div>
                 <div
-                  className="playlist-title-album"
-                  style={{ width: 40, paddingLeft: 25 }}
+                  className="playlist-title-album "
+                  style={{ width: 40, paddingLeft: 40 }}
                 >
                   Album
                 </div>
@@ -163,7 +167,7 @@ function Topmusic() {
                     <MediaItem
                       singer={val.artist.name}
                       SongName={val.title}
-                      img={val.artist.picture}
+                      img={val.artist.picture_xl}
                     />
                     <div className="playlist-item-album">{val.album.title}</div>
                     <div className="playlist-item-time">
@@ -176,13 +180,13 @@ function Topmusic() {
               )}
             </div>
           )}
-          <div className="show-top-100">
-            <div className="show-top-100-btn">
-              <p onClick={show100Song}>Show Top 100</p>
+          <div className="show-top-100" >
+            <div className="show-top-100-btn" onClick={show100Song}>
+              <p>Show Top 100</p>
             </div>
 
-            <div className="hide-top-100-btn">
-              <p onClick={hide100Song}>Back to Top 10</p>
+            <div className="hide-top-100-btn" onClick={hide100Song}>
+              <p>Back to Top 10</p>
             </div>
           </div>
         </div>

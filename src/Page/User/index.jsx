@@ -68,8 +68,8 @@ const User = () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formchangepass);
       updatePass();
-      alert('success');
       handleHideChangePass();
+      handleShowToastMenu("pass-success");
     }
   }, [formErrors]);
 

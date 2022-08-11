@@ -92,10 +92,10 @@ function Singer() {
                         Key = {val.id}      
                   >
                       <div className="singer-like-img"
-                        onClick={()=>{setSingername(val.name);setImga(val.picture)}}
+                        onClick={()=>{setSingername(val.name);setImga(val.picture_xl)}}
                       >
                         <Link to={'/singerId'}>
-                          <img src = {val.picture}></img>
+                          <img src = {val.picture_xl}></img>
                         </Link>
                         <span><BsDiscFill/></span>
                       </div>
@@ -120,10 +120,10 @@ function Singer() {
                         Key = {val.id}
                     > 
                       <div className="orther-singer-img"
-                            onClick={()=>{setSingername(val.name);setImga(val.picture)}}
+                            onClick={()=>{setSingername(val.name);setImga(val.picture_xl)}}
                       >
                       <Link to={'/singerId'}>
-                        <img src = {val.picture}></img>
+                        <img src = {val.picture_xl}></img>
                       </Link>
                         <span><BsDiscFill/></span>
                       </div>
@@ -142,10 +142,10 @@ function Singer() {
                         Key = {val.id}
                     > 
                       <div className="orther-singer-img"
-                            onClick={()=>{setSingername(val.artist.name);setImga(val.artist.picture)}}
+                            onClick={()=>{setSingername(val.artist.name);setImga(val.artist.picture_xl)}}
                       >
                       <Link to={'/singerId'}>
-                        <img src = {val.artist.picture}></img>
+                        <img src = {val.artist.picture_xl}></img>
                       </Link>
                         <span><BsDiscFill/></span>
                       </div>

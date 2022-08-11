@@ -73,7 +73,7 @@ const Home = () => {
           </Link>
         </div>
         <div className="playlists-music-box">
-          {listTrack.slice(0, 5).map((val) => (
+          {listTrack.slice(9, 14).map((val) => (
             <Link
               to={"/newsong"}
               className="playlist-music-item"
@@ -81,7 +81,7 @@ const Home = () => {
               onClick={() => handleChooseSong(val, listTrack)}
             >
               <div className="playlist-music-item-img">
-                <img src={val.artist.picture} alt="placeholder"></img>
+                <img src={val.artist.picture_xl} alt="placeholder"></img>
                 <div className="playlist-music-item-img-hov">
                   <Tippy delay={[0, 200]} content="Add to playlist">
                     <div className="hov-heart">
@@ -127,7 +127,7 @@ const Home = () => {
             <Link to={"/topmusic"} className="top-music-item" key={val.id}>
               <div className="top-music-item-content">
                 <div className="top-music-item-img">
-                  <img src={val.artist.picture} alt="placeholder"></img>
+                  <img src={val.artist.picture_xl} alt="placeholder"></img>
                   <div className="top-music-item-img-hov">
                     <div className="hov-play">
                       <span>
@@ -159,11 +159,11 @@ const Home = () => {
               </Link>
             </div>
             <div className="singer-box">
-              {listTrack.slice(0, 5).map((val) => (
+              {listTrack.slice(20, 25).map((val) => (
                 <div
                   className="singer-item"
                   onClick={() => {
-                    setImga(val.artist.picture);
+                    setImga(val.artist.picture_xl);
                     setSingername(val.artist.name);
                   }}
                   key={val.id}
@@ -171,7 +171,7 @@ const Home = () => {
                   <Link to={"/singerId"}>
                     <div className="singer-item-content">
                       <div className="singer-item-img">
-                        <img src={val.artist.picture} alt="placeholder"></img>
+                        <img src={val.artist.picture_xl} alt="placeholder"></img>
                       </div>
                       <div className="singer-item-status">
                         <div className="singer-item-desc">

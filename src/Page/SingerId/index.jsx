@@ -167,7 +167,7 @@ function SingerId() {
                 <MediaItem
                   singer={val.artist.name}
                   SongName={val.title}
-                  img={val.artist.picture}
+                  img={val.artist.picture_xl}
                 />
                 <div className="playlist-item-album">{val.album.title}</div>
                 <div className="playlist-item-time">{convertHMS(val.duration)}</div>

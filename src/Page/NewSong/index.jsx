@@ -48,7 +48,7 @@ function NewSong() {
         <div className="playlist-music">
           <div className="playlist-music-cd">
             <img
-              src={currentSong.artist?.picture}
+              src={currentSong.artist?.picture_xl}
               alt=""
               className={`playlist-music-img ${isPlay ? "play" : ""}`}
             />
@@ -108,7 +108,7 @@ function NewSong() {
                 <MediaItem
                   singer={val.artist.name}
                   SongName={val.title}
-                  img={val.artist.picture}
+                  img={val.artist.picture_xl}
                 />
                 <div className="playlist-item-album">{val.album.title}</div>
                 <div className="playlist-item-time">

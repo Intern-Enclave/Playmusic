@@ -172,8 +172,8 @@ function PlaylistId() {
               <img
                 src={
                   play
-                    ? currentSong.artist?.picture
-                    : listTrackId[0]?.artist?.picture 
+                    ? currentSong.artist?.picture_xl
+                    : listTrackId[0]?.artist?.picture_xl
                 }
                 alt=""
                 className={`playlist_id-music-img ${
@@ -243,7 +243,7 @@ function PlaylistId() {
                   <MediaItem
                     singer={val.artist.name}
                     SongName={val.title}
-                    img={val.artist.picture}
+                    img={val.artist.picture_xl}
                   />
                   <div className="playlist-item-album">{val.album.title}</div>
                   <div className="playlist-item-time">
