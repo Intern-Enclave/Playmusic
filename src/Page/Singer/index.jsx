@@ -1,26 +1,20 @@
 import React, { useState, useEffect } from "react";
-import MediaItem from "../../component/MediaItem";
-import { TbPlayerPlay, TbPlayerPause } from "react-icons/tb";
-import { AiTwotoneHeart, AiFillDelete } from "react-icons/ai";
-import { BsThreeDots,BsFillPlusCircleFill } from "react-icons/bs";
+
 import { BsDiscFill } from "react-icons/bs";
-// import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 import img from './img/istockphoto-1144987755-170667a.jpg'
 
-import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
 import UseApi from "../../API/UseApi";
 import { Link } from "react-router-dom";
 
 import "./singer.scss";
-import Tippy from '@tippyjs/react';
-import 'tippy.js/dist/tippy.css'; 
+
 
 
 
 function Singer() {
-  const {  listTrack ,setPlaylist, playlist_Id, currentSong, togglePlay, isPlay, handleChooseSong ,handlePlayAnotherSong,playlistUser, singername, 
-    setSingername,imga, setImga,} =
+  const {  listTrack ,setPlaylist, playlist_Id,playlistUser, 
+    setSingername, setImga,} =
   useMusic();
 
  
@@ -57,7 +51,6 @@ function Singer() {
     list5artists();
   }, []);
 
-  // console.log(localStorage.getItem('playlistId'))
   const getPlaylistId = async () => {
     try {
       setPlaylist(localStorage.getItem('playlistId'));
@@ -77,10 +70,6 @@ function Singer() {
     getPlaylistId();
   }, [playlist_Id]);
 
-
-  
-
-  
 
   return (
     <div className="singer-container">

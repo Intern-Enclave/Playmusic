@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import MediaItem from "../../component/MediaItem";
-import { AiTwotoneHeart, AiFillDelete, AiOutlineClose } from "react-icons/ai";
+import { AiFillDelete, AiOutlineClose } from "react-icons/ai";
 import { FaMusic } from "react-icons/fa";
 import { FiEdit } from "react-icons/fi";
-// import { PlayingMusicContext } from "../../Context/PlayingMusicContext";
 
 import "./playlist.scss";
-import Button from "../../component/Button/Button";
 import { useMusic } from "../../hooks/useMusic";
 import UseApi from "../../API/UseApi";
 import Toastmenu from "../../component/Toast";
@@ -16,19 +14,15 @@ import "tippy.js/dist/tippy.css";
 
 function PlaylistId() {
   const {
-    setPlaylist,
     playlist_Id,
     currentSong,
-    togglePlay,
     isPlay,
     handleChooseSong,
     handlePlayAnotherSong,
     playlistUser,
     setIsFetchingData,
-    isFetchingData,
     listTrackId,
     currentUser,
-    ShowAddSong ,setShowAddSong 
   } = useMusic();
 
   const [List, setList] = useState([]);
@@ -58,14 +52,7 @@ function PlaylistId() {
         toastProperties = [];
     }
     setList([...List ,toastProperties])
-      // toastProperties = {
-      //     id: 1,
-      //     tittle: "Success",
-      //     description: "Saved Information",
-      //     color: "#7200a1"
-      // }
-
-      // setList([toastProperties])
+      
   }
 
 
@@ -93,7 +80,6 @@ function PlaylistId() {
       const newPlaylistId = listTrackId.filter((playlist) => {
         return playlist.id !== i;
       });
-      // setListTrackId(newPlaylistId)
     } catch (error) {
       console.log("error post playlist: ", error);
     } finally {
@@ -189,7 +175,6 @@ function PlaylistId() {
                     ? currentSong.artist?.picture
                     : listTrackId[0]?.artist?.picture 
                 }
-                // src="https://api.deezer.com/artist/13/image"
                 alt=""
                 className={`playlist_id-music-img ${
                   isPlay && play ? "play" : ""
@@ -197,7 +182,6 @@ function PlaylistId() {
               /> :
               <img
                 src='https://img.freepik.com/free-vector/note-music-logo-design_93835-645.jpg?w=2000'
-                // src="https://api.deezer.com/artist/13/image"
                 alt=""
                 className={`playlist_id-music-img ${
                   isPlay && play ? "play" : ""
