@@ -68,7 +68,6 @@ const User = () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       console.log(formchangepass);
       updatePass();
-      // console.log(username);
       alert('success');
       handleHideChangePass();
     }
@@ -101,9 +100,7 @@ const User = () => {
         const temp = {username: currentUser?.username, new_password: formchangepass.newpass};
         const resp = await UseApi.updatePassword(temp)
 
-        // setCurrentUser(localStorage.getItem("currentUser"));
-        // setCurrentUser(temp)
-
+       
         console.log(currentUser)
     }catch(error){
         console.log("error change password: ", error);
@@ -414,9 +411,7 @@ const User = () => {
               <div className="change-avatar-img">
                 <Image src = {currentUser?.image} />
               </div>
-            {/* <form onSubmit={handleSubmit2} className='form-upload-image'>  */}
-              {/* <input type="file" name="file_upload" onChange={handleFileSelect} /> */}
-              {/* <input type="submit" value="Upload File" /> */}
+           
               <Button className={"change-avatar-button"} onClick={()=>setFormRequest(true)}>Change Avatar</Button>
             {/* </form> */}
             </div>
