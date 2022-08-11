@@ -92,6 +92,10 @@
     z-index: 5;
 }
 
+.active > .icon-de{
+  display: block;
+}
+
 .Song-Thumbnail {
     width: 150px;
     height: 150px;
@@ -289,17 +293,33 @@
   }
 }
 
+.icon-de {
+    color: $text-primary;
+    margin: auto;
+    display: none;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 15px;
+    background-color: $alpha-bg;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 1 !important;
+}
 
 .playlist-item-wraper{
   position: relative;
   align-items: center;
+  z-index: 0;
   // background-color: ;
   
   &:hover{
     background-color: $alpha-bg;
   }
   
-  &:hover > .playlist-item-icon{
+  &:hover > .icon-de{
     display: block;
     cursor: pointer;
   }

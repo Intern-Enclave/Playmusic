@@ -103,7 +103,7 @@ function Singer() {
                         Key = {val.id}      
                   >
                       <div className="singer-like-img"
-                        onClick={()=>setSingername(val.name)}
+                        onClick={()=>{setSingername(val.name);setImga(val.picture)}}
                       >
                         <Link to={'/singerId'}>
                           <img src = {val.picture}></img>
@@ -125,7 +125,29 @@ function Singer() {
             <h3>Other Singers</h3>
           </div>
           <div className="orther-singer-content">
-            {listTrack ? (
+            {Listartists ? (
+                  Listartists.map((val, index) => (
+                    <div className="orther-singer-item"
+                        Key = {val.id}
+                    > 
+                      <div className="orther-singer-img"
+                            onClick={()=>{setSingername(val.name);setImga(val.picture)}}
+                      >
+                      <Link to={'/singerId'}>
+                        <img src = {val.picture}></img>
+                      </Link>
+                        <span><BsDiscFill/></span>
+                      </div>
+                      <div className="orther-singer-desc">
+                        <p>{val.name}</p>
+                      </div> 
+                    </div>
+                  ))
+              ) : (
+              <div></div>
+            )}
+
+                {listTrack ? (
                   listTrack.map((val, index) => (
                     <div className="orther-singer-item"
                         Key = {val.id}

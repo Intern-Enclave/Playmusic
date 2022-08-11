@@ -99,7 +99,7 @@ function AlbumId() {
       </div>
       <div>
         <div className="playlist-title">
-          <div className="playlist-title-song">Title</div>
+          <div className="playlist-title-song">Tittle</div>
           <div className="playlist-title-album">Album</div>
           <div className="playlist-title-time">Time</div>
         </div>

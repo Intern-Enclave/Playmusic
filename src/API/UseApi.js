@@ -86,7 +86,7 @@ const UseApi = {
         return axiosClient.post(url,{formData});
     },
 
-
+    //artist
     getAllArtist: (params) => {
         // const url = 'data';
         const url = 'artist/get_page';
@@ -97,6 +97,12 @@ const UseApi = {
         // const url = 'data';
         const url = 'artist';
         return axiosClient.get(url)
+    },
+
+    getTrackOfArtist: (params) => {
+        // const url = 'data';
+        const url = 'artist/get_track';
+        return axiosClient.get(url,{params})
     },
 
     //comment
