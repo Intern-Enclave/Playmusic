@@ -137,7 +137,7 @@ function Singer() {
             )}
 
                 {listTrack ? (
-                  listTrack.map((val, index) => (
+                  listTrack.slice(0,94).map((val, index) => (
                     <div className="orther-singer-item"
                         Key = {val.id}
                     > 
