@@ -180,7 +180,7 @@ const MoreMenu = ({nameSong, imgSong}) => {
                                                 {playlistUser && playlistUser.map(val => (
                                                     <Link to={'/playlist/playlist_id'} 
                                                         className="playlist-add-item " key={val.id} 
-                                                        onClick={() => {addSongtoplaylist(val.id); handleShowToastMenu('success',currentSong?.title, val.name)}}
+                                                        onClick={() => {addSongtoplaylist(val.id)}}
                                                     >
                                                     <span><TbPlaylist/></span>
                                                     <p>{val.name}</p>

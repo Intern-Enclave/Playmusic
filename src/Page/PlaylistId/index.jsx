@@ -226,7 +226,7 @@ function PlaylistId() {
                 <Tippy delay={[0, 200]} content="Delete">
                   <button
                     className="icon-de"
-                    onClick={() => {delSong(val.id);handleShowToastMenu('success',val.title,playlistName)}}
+                    onClick={() => {delSong(val.id)}}
                   >
                     <AiFillDelete />
                   </button>

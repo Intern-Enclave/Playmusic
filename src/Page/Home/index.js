@@ -15,7 +15,13 @@ const Home = () => {
 
   const [top, setTop] = useState([]);
   const [listAlbum, setListAlbum] = useState([]);
+  const [randomNum, setRandomNum] = useState(1
+    );
 
+  
+    
+    const num2 = Math.floor(Math.random() * (listTrack.length - 5))
+  
   //topMusic
   useEffect(() => {
     const topMusic = async () => {
@@ -73,7 +79,7 @@ const Home = () => {
           </Link>
         </div>
         <div className="playlists-music-box">
-          {listTrack.slice(9, 14).map((val) => (
+          {listTrack.slice(19,24).map((val) => (
             <Link
               to={"/newsong"}
               className="playlist-music-item"
@@ -159,7 +165,7 @@ const Home = () => {
               </Link>
             </div>
             <div className="singer-box">
-              {listTrack.slice(20, 25).map((val) => (
+              {listTrack.slice(num2, num2+5).map((val) => (
                 <div
                   className="singer-item"
                   onClick={() => {
