@@ -318,7 +318,7 @@ const User = () => {
                     className="input-dsg"
                     name="fullName"
                     id="user-name-input"
-                    placeholder="default"
+                    placeholder="Full Name"
                     value={formValues.fullName}
                     onChange={handleChange}
                   ></input>
@@ -327,7 +327,7 @@ const User = () => {
                     className="input-dsg"
                     name="fullName"
                     id="user-name-input"
-                    placeholder="default"
+                    placeholder="Full Name"
                     value={formValues.fullName}
                     readOnly
                   ></input>
@@ -340,7 +340,7 @@ const User = () => {
                   <input
                     className="input-dsg"
                     name="email"
-                    placeholder="default"
+                    placeholder="Email"
                     value={formValues.email}
                     onChange={handleChange}
                   ></input>
@@ -348,7 +348,7 @@ const User = () => {
                   <input
                     className="input-dsg"
                     name="email"
-                    placeholder="default"
+                    placeholder="Email"
                     value={formValues.email}
                     readOnly
                   ></input>
@@ -360,7 +360,7 @@ const User = () => {
                   <input
                     className="input-dsg"
                     name="country"
-                    placeholder="default"
+                    placeholder="Country"
                     value={formValues.country}
                     onChange={handleChange}
                   ></input>
@@ -368,7 +368,7 @@ const User = () => {
                   <input
                     className="input-dsg"
                     name="country"
-                    placeholder="default"
+                    placeholder="Country"
                     value={formValues.country}
                     readOnly
                   ></input>
@@ -382,7 +382,7 @@ const User = () => {
                     className="input-dsg"
                     type="date"
                     name="birthday"
-                    placeholder="default"
+                    placeholder="Birthday"
                     value={formValues.birthday ? formValues.birthday : "Null"}
                     onChange={handleChange}
                   ></input>
@@ -391,7 +391,7 @@ const User = () => {
                     className="input-dsg"
                     type="date"
                     name="birthday"
-                    placeholder="default"
+                    placeholder="Birthday"
                     value={formValues.birthday ? formValues.birthday : "Null"}
                     readOnly
                   ></input>

@@ -6,16 +6,47 @@ import { useMusic } from '../../hooks/useMusic';
 import { useEffect, useState } from 'react';
 import { AiFillCloseCircle } from 'react-icons/ai';
 import UseApi from '../../API/UseApi';
+import Toastmenu from '../Toast';
 
 
 function Register() {
 //login
     const {unRegisterRequest,listUser,setListUser,loginRequest,setIsFetchingData} = useMusic()
+    const [List, setList] = useState([]);
 
     // const register = () => {
     //     unLoginRequest();
     //     registerRequest();
     // }
+
+    
+    let toastProperties = null;
+
+    const handleShowToastMenu = type => {
+      switch(type) {
+        case 'success':
+          toastProperties = {
+            id: List.length + 1,
+            tittle: "Success",
+            description: "Saved Information",
+            color: "#7200a1"
+        }
+        break;
+
+        case 'pass-success':
+          toastProperties = {
+            id: List.length + 1,
+            tittle: "Success",
+            description: "Change password complete",
+            color: "#7200a1"
+        }
+        break;
+
+        default:
+          toastProperties = [];
+      }
+      setList([...List ,toastProperties])
+    }
 
 
     //valid
@@ -40,7 +71,8 @@ function Register() {
         console.log(formValues);
         addUserr();
         unRegisterRequest();   
-        alert('success')     
+        // alert('success')    
+        handleShowToastMenu("success"); 
     }
     }, [formErrors]);
 
@@ -102,9 +134,9 @@ function Register() {
     return (
         <div className="modal">
             <div className="modal__overlay"></div>
-
+            
             <div className="modal__body">
-
+            
             {/* {Object.keys(formErrors).length === 0 && isSubmit ? (
                 <div className="ui message success">Signed in successfully</div>
             ) : (
@@ -164,6 +196,7 @@ function Register() {
                             {/* <div className="login-button" > */}
                                 <Button primary className={'login-button-btn'}>Register</Button>
                             </div>
+                            <Toastmenu toastlist={List} setList= {setList}/>
                         </div>
                 </div>
                 </form> 

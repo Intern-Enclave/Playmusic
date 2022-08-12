@@ -20,7 +20,7 @@ const Home = () => {
 
   
     
-    const num2 = Math.floor(Math.random() * (listTrack.length - 5))
+    const num2 = Math.floor(Math.random() * (listTrack.length - 30))
   
   //topMusic
   useEffect(() => {
