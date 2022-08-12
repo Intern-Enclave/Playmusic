@@ -10,7 +10,7 @@ import apiConfig from '../../API/apiConfig';
 import "./comment.scss";
 
 const Comment = () => {
-    const { setShowComment, currentSong, currentUser,isFetchingData, setIsFetchingData} = useMusic()
+    const { setShowComment, currentSong, currentUser,isFetchingData, setIsFetchingData, loginRequest} = useMusic()
 
     const [listComment, setListComment] = useState([]);
     const [comment, setComment] = useState('');
@@ -110,7 +110,7 @@ const Comment = () => {
                             >
                             </textarea>
                         </div>
-                        <div className='send-button' onClick={()=> {postComment()}}>Send  <span><AiOutlineSend/></span>                    
+                        <div className='send-button' onClick={()=> {!currentUser ? loginRequest() : postComment()}}>Send  <span><AiOutlineSend/></span>                    
                         </div>
                     </div>
                 </div>

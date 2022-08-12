@@ -18,7 +18,7 @@ TimeAgo.addLocale(ru)
 
 const CommentItem = ({id,userName, time, content, like, dislike, src}) => {
 
-    const { currentUser,isFetchingData, setIsFetchingData } = useMusic();
+    const { currentUser,isFetchingData, setIsFetchingData,loginRequest } = useMusic();
     const [isLike, setIslike] = useState(false);
     const [isDisLike, setIsDisklike] = useState(false);
     const [isLoading, setIsLoading] = useState(false); 
@@ -114,11 +114,11 @@ const CommentItem = ({id,userName, time, content, like, dislike, src}) => {
                 <div className='cmt-text'>{content}</div>
                     <div className='comment-react'>
                         <div className={`commetn-react-item like ${isLike ? 'likeActive' : ''}`}>
-                            <span onClick={()=>postLike()}>{like}<AiOutlineLike /></span>
+                            <span onClick={()=>{ !currentUser ? loginRequest() : postLike()}}>{like}<AiOutlineLike /></span>
                             
                         </div>
                         <div className= {`commetn-react-item dislie ${isDisLike ? 'likeActive' : ''}`}>
-                            <span onClick={()=>postDisLike()}>{dislike}<AiOutlineDislike /></span>
+                            <span onClick={()=>{!currentUser ? loginRequest() : postDisLike()}}>{dislike}<AiOutlineDislike /></span>
                            
                         </div>
                         <div className='commetn-react-item reply'>
